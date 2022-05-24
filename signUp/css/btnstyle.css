@@ -1,0 +1,14 @@
+/*
+    Define the style of id=submitBtn
+*/
+
+/*
+    min width: 480px;, max width: 960px;
+*/
+footer.footer p {
+    font-size: 0.8em;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}

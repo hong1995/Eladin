@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+<!--    <link rel="stylesheet"-->
+<!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"-->
+<!--          crossorigin="anonymous">-->
+    <link rel="stylesheet" href="signUp/css/signup.css">
+    <link rel="stylesheet" href="signUp/css/btnstyle.css">
+
+    <style>
+        .header {
+            padding: 20px;
+        }
+
+        .container #greeting {
+            font-family: "Nanum Gothic", sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #6667AB;
+            text-align: center;
+        }
+
+        .container {
+            font-family: "nanum gothic", sans-serif;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        #nameInput {
+            min-width: 480px;
+            max-width: 960px;
+        }
+
+        #emailInput {
+            min-width: 480px;
+            max-width: 960px;
+        }
+
+        #passwordInput {
+            min-width: 480px;
+            max-width: 960px;
+        }
+
+        #passwordCheckInput {
+            min-width: 480px;
+            max-width: 960px;
+        }
+
+        #submitBtn {
+            min-width: 480px;
+            max-width: 960px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div id="greeting">환영합니다!</div>
+        </header>
+
+        <main class="main">
+            <div id="name">이름</div>
+            <input type="text" name="name" id="nameInput" placeholder="이름을 입력해 주세요. 예: 홍길동">
+
+            <div id="email">이메일</div>
+            <input type="text" name="email" id="emailInput" placeholder="이메일을 입력해 주세요. 예: whiterabbit@elice.io">
+
+            <div id="password">비밀번호</div>
+            <input type="password" name="password" id="passwordInput" placeholder="비밀번호를 입력해 주세요. 예: abc123!@#">
+
+            <div id="passwordCheck">비밀번호 확인</div>
+            <input type="password" name="passwordCheck" id="passwordCheckInput" placeholder="비밀번호를 한 번 더 입력해 주세요. 예: abc123!@#">
+        </main>
+
+        <footer class="footer">
+            <button type="submit" id="submitBtn">제출하기</button>
+        </footer>
+    </div>
+</body>
+</html>
