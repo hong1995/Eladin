@@ -1,0 +1,22 @@
+.list-container {
+  width: 960px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px 20px;
+}
+
+.book-container {
+  text-align: center;
+  cursor: pointer;
+}
+
+.book-img {
+  width: 100%;
+  box-shadow: 1px 1px 8px 0px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
