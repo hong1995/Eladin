@@ -23,7 +23,7 @@
           crossorigin="anonymous"
         ></script>
         <!-- 커스텀 css, js -->
-        <link rel="stylesheet" href="orderComplete.css" />
+        <link rel="stylesheet" href="deleteAccount.css" />
         <script src="cart.js" type="module" defer></script>
       </head>
 
@@ -71,28 +71,22 @@
      <section>
         <div class = "container">
             <!-- header 현재 페이지-->
-            <div class = "header">
-                <div>
-                    <p class = is-size-7>장바구니&nbsp; &gt; &nbsp;주문결제&nbsp; &gt; &nbsp;</p>
-                </div>
-                <div class = cartTitle>
-                    <p class="title is-4 is-spaced">주문완료</p>
-                </div>
-            </div>
             <div class="orderComplete">
                 <!-- 배송지정보 박스 -->
                 <div class = "orderCompleteBox box">
-                    <div class = "iconBox">
-                        <span class = icon>
-                            <i class="fa-solid fa-circle-check"></i>
-                        </span>
-                        <span>주문이 완료되었습니다!</span>
+                    <div class = "titleBox">       
+                        <p class = "title is-5">삭제를 진행합니다.</p>
                     </div>
                     <div class = "buttonBox">
-                        <button class = "orderButton" id = "orderListButton">주문 내역 보기</button>
+                        <div class = "fieldLabel">
+                            <label for="receiverName">현재 비밀번호</label>
+                        </div>
+                        <div class = "fieldForm">
+                            <input class="input" type="text" id="receiverName" placeholder="kakao 로그인인 경우 'kakao'를 입력해주세요.">
+                        </div>
                     </div>
                     <div class = "buttonBox">
-                        <button class = "orderButton" id = "continueButton">쇼핑 계속하기</button>
+                        <button class = "orderButton" id = "continueButton">회원 정보를 안전하게 삭제하기</button>
                     </div>
                 </div>
             </div>
