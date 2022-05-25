@@ -15,8 +15,6 @@ section {
 }
 /* 장바구니 ( 담은 품목들) */
 
-
-
 .orderComplete {
     padding-top: 100px;
     display: flex;
@@ -46,6 +44,12 @@ section {
 .fieldLabel{
     margin-top: 10px
 }
+
+.normalText{
+    color: #363636;
+    font-weight: 700;
+}
+
 .fieldForm {
     margin: 10px 0 5px 0;
 }
