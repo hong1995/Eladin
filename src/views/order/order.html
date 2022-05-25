@@ -83,16 +83,16 @@
                 </div>
             </div>
             <div class="buy">
-                <!-- 선택된 장바구니 제품 -->
+                <!-- 배송지정보 박스 -->
                 <div class = "box formBox">
                     <form action="" method = "post">
-                        <p class = "subtitle is-4">배송지정보</p>
+                        <p class = "subtitle is-5">배송지정보</p>
                         <div class = "inputBox">
                             <div class = "fieldLabel">
                                 <label for="receiverName">이름</label>
                             </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="Text input">
+                                <input class="input" type="text" id="receiverName" placeholder="받는분 이름을 입력해주세요.">
                             </div>
                         </div>
                         <div class = "inputBox">
@@ -100,7 +100,7 @@
                                 <label for="receiverPhoneNuber">연락처</label>
                             </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverPhoneNuber" placeholder="Text input">
+                                <input class="input" type="text" id="receiverPhoneNuber" placeholder="-없이 입력해주세요.">
                             </div>
                         </div>
                         <div class = "inputBox">
@@ -108,8 +108,8 @@
                                 <label for="receiverAddress">주소</label>
                             </div>
                             
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverAddress" placeholder="Text input">
+                            <div class = "fieldForm addressInputBox">
+                                <input class="input" type="text" id="receiverAddress">
                                 <div class = "find">
                                     <button class = "findButton">주소찾기</button>
                                 </div>
@@ -117,25 +117,26 @@
                             
                         </div>
                         <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="receiverName"></label>
-                            </div>
+                            <div class = "fieldLabel"></div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="Text input">
+                                <input class="input" type="text" id="addressDetail">
                             </div>
                         </div>
                         <div class = "inputBox">
                             <div class = "fieldLabel"></div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="Text input">
+                                <input class="input" type="text" id="addressDetail">
                             </div>
                         </div>
                         <div class = "inputBox">
-                            <div class = "fieldLabel">요청사항</div>
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="Text input">
+                            <div class = "fieldLabel">
+                                <label for="receiverName">요청사항</label>
                             </div>
-                        </div>                       
+                            <div class = "fieldForm">
+                                <input class="input" type="text" id="receiverName" placeholder="최대 50자 입력이 가능합니다..">
+                            </div>
+                        </div>
+                                              
                     </form>
                 </div>
                 <!-- 결제정보 -->

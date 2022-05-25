@@ -42,7 +42,7 @@ section {
     width: 100%
 }
 
-.inputBox {
+.inputBox{
     display: flex;
     justify-content: space-between;
     margin: 0.4rem 0 0.4rem 0;
@@ -56,24 +56,26 @@ section {
     height: 3rem;
 }
 
-.fieldForm {
+.fieldForm{
     display: flex;
     align-items: center;
     width: 80%;
     height: 3rem;
 }
 
-#receiverAddress {
-    width: 80%;
+.addressInputBox {
+    
     display: flex;
     justify-content: space-between;
-    margin: 0.4rem 0 0.4rem 0;
-    padding: 0 0.5rem 0 0.5rem; 
+}
+
+#receiverAddress{
+  width: 90%;   
 }
 
 .find {
     display: flex;
-    align-items: center;
+    justify-content: right;
     width: 15%;
 }
 
