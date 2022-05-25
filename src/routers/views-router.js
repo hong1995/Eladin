@@ -10,7 +10,8 @@ viewsRouter.use('/', serveStatic('main'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/category', serveStatic('category'));
-viewsRouter.use('/list', serveStatic('list'));
+viewsRouter.use('/domesticList', serveStatic('domesticList'));
+viewsRouter.use('/foreignList', serveStatic('foreignList'));
 viewsRouter.use('/detail', serveStatic('detail'));
 viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
 
