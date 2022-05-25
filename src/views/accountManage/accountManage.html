@@ -72,102 +72,77 @@
         <div class = "container">
             <!-- header 현재 페이지-->
             <div class = "header">
-                <div>
-                    <p class = is-size-7>장바구니&nbsp; &gt; &nbsp;</p>
-                </div>
+                
                 <div class = cartTitle>
-                    <p class="title is-4 is-spaced">주문결제</p>
+                    <p class="title is-4 is-spaced">제품판매</p>
                 </div>
-                <div>
-                    <p class = is-size-7>&nbsp; &gt; &nbsp;주문완료</p>
-                </div>
+                
             </div>
             <div class="buy">
                 <!-- 배송지정보 박스 -->
                 <div class = "box formBox">
                     <form action="" method = "post">
-                        <p class = "subtitle is-5">배송지정보</p>
                         <div class = "inputBox">
                             <div class = "fieldLabel">
-                                <label for="receiverName">이름</label>
+                                <label for="productName" class="normalText">이름</label>
                             </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="받는분 이름을 입력해주세요.">
+                                <input class="input" type="text" id="productName">
                             </div>
                         </div>
                         <div class = "inputBox">
                             <div class = "fieldLabel">
-                                <label for="receiverPhoneNuber">연락처</label>
+                                <label for="category" class = "normalText">비밀번호</label>
                             </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverPhoneNuber" placeholder="-없이 입력해주세요.">
+                                <input class="input" type="password" id="category">
                             </div>
                         </div>
                         <div class = "inputBox">
                             <div class = "fieldLabel">
-                                <label for="receiverAddress">주소</label>
+                                <label for="company" class = "normalText">비밀번호 확인</label>
                             </div>
-                            
+                            <div class = "fieldForm">
+                                <input class="input" type="password" id="company">
+                            </div>
+                        </div>
+                        <div class = "inputBox">
+                            <div class = "fieldLabel">
+                                <label for="photo" class = "normalText">전화번호</label>
+                            </div>
+                            <div class = "fieldForm">
+                                <input class="input" type="text" id="photo">
+                            </div>
+                        </div>
+                        <div class = "inputBox">
+                            <div class = "fieldLabel">
+                                <label for="receiverAddress" class = "normalText">주소</label>
+                            </div>
                             <div class = "fieldForm addressInputBox">
                                 <input class="input" type="text" id="receiverAddress">
                                 <div class = "find">
                                     <button class = "findButton">주소찾기</button>
                                 </div>
                             </div>
-                            
                         </div>
                         <div class = "inputBox">
-                            <div class = "fieldLabel"></div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="addressDetail">
+                                <input class="input" type="password" id="company">
                             </div>
                         </div>
                         <div class = "inputBox">
-                            <div class = "fieldLabel"></div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="addressDetail">
+                                <input class="input" type="password" id="company">
                             </div>
                         </div>
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="receiverName">요청사항</label>
-                            </div>
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="최대 50자 입력이 가능합니다..">
-                            </div>
+                        <div class = "buttonBox">
+                           <button id="purchaseButton">제품 판매하기</button>
                         </div>
-                                              
+                                                                      
                     </form>
                 </div>
                 <!-- 결제정보 -->
-                <div class="orderSummaryContainer">
-                    <div class = "box orderSummary">
-                        <div class = "header">
-                             <p>결제정보</p>
-                        </div>
-                        <div class = "orderInfo">
-                            <div class = "info">
-                                <p>상품수</p>
-                                <p>1개</p>
-                            </div>
-                            <div class = "info">
-                                <p>상품금액</p>
-                                <p>19000원</p>
-                            </div>
-                            <div class = "info">
-                                <p>배송비</p>
-                                <p>3000원</p>
-                            </div>
-                        </div>
-                        <div class = "total">
-                            <p>총 결제금액</p>
-                            <p>22,000원</p>
-                        </div>
-                        <div class = "purchase">
-                            <button id = "purchaseButton">구매하기</button>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
      </section>
