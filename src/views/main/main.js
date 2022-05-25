@@ -14,7 +14,7 @@ setInterval(function () {
       marginLeft: [from + 'px', to + 'px'],
     },
     {
-      duration: 500,
+      duration: 1000,
       easing: 'ease',
       iterations: 1,
       fill: 'both',
@@ -25,4 +25,4 @@ setInterval(function () {
     currentSlide = -1;
   }
   console.log(currentSlide, slide.length);
-}, 3000);
+}, 4000);
