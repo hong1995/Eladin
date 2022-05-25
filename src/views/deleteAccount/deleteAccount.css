@@ -1,0 +1,75 @@
+body {
+    color: #4a4a4a
+}
+
+section {
+    padding: 3rem, 1.5rem;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 960px;
+}
+/* 장바구니 ( 담은 품목들) */
+
+.orderComplete {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+
+/* 배송지정보 박스 */
+.orderCompleteBox {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 5rem;
+}
+
+.titleBox, .deleteAccountBox {
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    color: #6a5acd;
+}
+.fieldLabel{
+    margin-top: 10px
+}
+
+.normalText{
+    color: #363636;
+    font-weight: 700;
+}
+
+.fieldForm {
+    margin: 10px 0 5px 0;
+}
+
+.orderButton{
+    width: 100%;
+    border-color: transparent;
+    font-size: 0.9rem;
+    font-weight: 800;
+    height: 2.5rem;
+    border-radius: 4px;
+}
+
+#orderListButton {
+    background-color: #E6E6FA;
+    color: rgba(0, 0, 0, 0.628);
+    margin: 12px 0 4px 0;
+}
+
+#continueButton{
+    background-color: #6a5acd;
+    color: #fff;
+}
