@@ -1,3 +1,4 @@
+import { productModel } from '../db'; 
 class ProductService {
     constructor(productModel) {
         this.productModel = productModel;
@@ -30,9 +31,7 @@ class ProductService {
     }
     
     // 특정 상품 조회
-
     // 상품 정보 수정
-
     // 상품 정보 삭제
 }
 

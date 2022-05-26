@@ -30,7 +30,18 @@ class CategoryService {
 
         return category;
     }
-    // 카테고리명 수정, 삭제
+    // 카테고리명 수정
+    async setCategory(categoryId, update) {
+        const category = await this.categoryModel.update({ categoryId, update })
+
+        return category
+    }
+    // 카테고리명 삭제
+    async deleteCategory(categoryId) {
+        const category = await this.categoryModel.delete(categoryId)
+
+        return category
+    }
 }
 
 const categoryService = new CategoryService(categoryModel);

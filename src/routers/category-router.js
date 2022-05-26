@@ -54,14 +54,37 @@ categoryRouter.get('/:categoryName', async (req, res, next) => {
     }
 })
 
-// 카테고리명 수정
-categoryRouter.post('/update/:categoryId', async (req, res, next) => {
+// 수정
+categoryRouter.post('/setcategory/:categoryId', async (req, res, next) => {
+    try {
+        // req의 params과 body에서 데이터 가져옴
+        const { categoryId } = req.params;
+        const { categoryName } = req.body;
 
+        // 위 데이터로 카테고리 정보 수정
+        const category = await categoryService.setCategory(categoryId, {
+            categoryName
+        });
+
+        res.send(200).json(category);
+    } catch (error) {
+        next(error);
+    }
 })
 
-// 카테고리 삭제
-categoryRouter.delete('/delete/:categoryId', async (req, res, next) => {
-    
+// 삭제
+categoryRouter.delete('/deletecategory/:categoryId', async (req, res, next) => {
+    try {
+        // req의 params에서 데이터 가져옴
+        const { categoryId } = req.params;
+
+        // 카테고리 정보 삭제
+        const category = await categoryService.deleteCategory(categoryId);
+
+        res.send(200).json(category);
+    } catch (error) {
+        next(error);
+    }
 })
 
 export { categoryRouter };
