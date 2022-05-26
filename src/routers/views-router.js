@@ -22,7 +22,7 @@ viewsRouter.use('/order', serveStatic('order'));
 viewsRouter.use('/orderComplete', serveStatic('orderComplete'));
 viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
 viewsRouter.use('/sellProduct', serveStatic('sellProduct'));
-//
+
 //로그아웃 한 경우만 필요한 페이지
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/register', serveStatic('register'));
