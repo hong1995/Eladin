@@ -8,19 +8,14 @@ const viewsRouter = express.Router();
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
 viewsRouter.use('/', serveStatic('main'));
-viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/category', serveStatic('category'));
 viewsRouter.use('/list', serveStatic('list'));
-
 viewsRouter.use('/detail', serveStatic('detail'));
-viewsRouter.use('/', serveStatic('main'));
+viewsRouter.use('/accountManagement', serveStatic('accountManagement'));
 
 //로그인 한 경우만 필요한 페이지
 viewsRouter.use('/cart', serveStatic('cart'));
-viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
-viewsRouter.use('/deleteAccount', serveStatic('deleteAccount'));
-
 viewsRouter.use('/userInfo', serveStatic('userInfo'));
 viewsRouter.use('/deleteAccount', serveStatic('deleteAccount'));
 viewsRouter.use('/order', serveStatic('order'));

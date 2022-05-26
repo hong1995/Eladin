@@ -72,9 +72,11 @@ section {
     background-color: #E6E6FA;
     color: rgba(0, 0, 0, 0.628);
     margin: 12px 0 4px 0;
+    cursor: pointer;
 }
 
 #continueButton{
     background-color: #6a5acd;
     color: #fff;
+    cursor: pointer;
 }
