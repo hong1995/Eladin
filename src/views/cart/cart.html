@@ -96,66 +96,7 @@
                             </label>
                         </div>
                         <!-- 선택된 품목들, 추후 동적으로 할당 -->
-                        <div class="cartProductsItem">
-                          <div class="leftSpacer">
-                            <label class="checkbox">
-                                <input type="checkbox">
-                            </label>
-                          </div>
-                            <figure class="image is-96x96">
-                                <img src="https://bulma.io/images/placeholders/96x96.png">
-                            </figure>
-                            <div class="content">
-                              <!-- 책 제목 12글자 넘어가면 ... 처리 -->
-                                <p>코어 자바스크립트</p>
-                                <p>정재남</p>
-                                <div class = "quantity">
-                                    <button class = "button">-</button>
-                                    <input class = "quantityInput" type="text">
-                                    <button class = "button">+</button>
-                                </div>
-                            </div>
-                            <div class = "calculation">
-                                <p>19000원</p>
-                                <p>X</p>
-                                <p>1</p>
-                                <p>=</p>
-                                <p>19000원</p>
-                            </div>
-                            <div class="rightSpacer">
-                              <button class="delete deleteButton"></button>
-                            </div>
-                        </div>
-                        <div class="cartProductsItem">
-                          <div class="leftSpacer">
-                            <label class="checkbox">
-                                <input type="checkbox">
-                            </label>
-                          </div>
-                            <figure class="image is-96x96">
-                                <img src="https://bulma.io/images/placeholders/96x96.png">
-                            </figure>
-                            <div class="content">
-                              <!-- 책 제목 12글자 넘어가면 ... 처리 -->
-                                <p>코어 자바스크립트</p>
-                                <p>정재남</p>
-                                <div class = "quantity">
-                                    <button class = "button">-</button>
-                                    <input class = "quantityInput" type="text">
-                                    <button class = "button">+</button>
-                                </div>
-                            </div>
-                            <div class = "calculation">
-                                <p>19000원</p>
-                                <p>X</p>
-                                <p>1</p>
-                                <p>=</p>
-                                <p>19000원</p>
-                            </div>
-                            <div class="rightSpacer">
-                              <button class="delete deleteButton"></button>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!-- 결제정보 -->
@@ -167,11 +108,11 @@
                         <div class = "orderInfo">
                             <div class = "info">
                                 <p>상품수</p>
-                                <p>1개</p>
+                                <p id = 'bookCount'></p>
                             </div>
                             <div class = "info">
                                 <p>상품금액</p>
-                                <p>19000원</p>
+                                <p id = 'bookPrice'>19000원</p>
                             </div>
                             <div class = "info">
                                 <p>배송비</p>
@@ -180,10 +121,10 @@
                         </div>
                         <div class = "total">
                             <p>총 결제금액</p>
-                            <p>22,000원</p>
+                            <p id = 'bookTotalPrice'>22,000원</p>
                         </div>
                         <div class = "purchase">
-                            <button id = "purchaseButton">구매하기</button>
+                            <button id = "purchaseButton" onclick="location.href='/order'"">구매하기</button>
                         </div>
                     </div>
                 </div>

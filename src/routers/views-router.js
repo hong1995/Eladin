@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { loginRequired, errorHandler } from '../middlewares';
 
 const viewsRouter = express.Router();
 
@@ -11,9 +12,24 @@ viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/category', serveStatic('category'));
 viewsRouter.use('/list', serveStatic('list'));
+
 viewsRouter.use('/detail', serveStatic('detail'));
-viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
+viewsRouter.use('/', serveStatic('main'));
+
+//로그인 한 경우만 필요한 페이지
 viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
+
+viewsRouter.use('/userInfo', serveStatic('userInfo'));
+viewsRouter.use('/deleteAccount', serveStatic('deleteAccount'));
+viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/orderComplete', serveStatic('orderComplete'));
+viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
+viewsRouter.use('/sellProduct', serveStatic('sellProduct'));
+//
+//로그아웃 한 경우만 필요한 페이지
+viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/register', serveStatic('register'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
