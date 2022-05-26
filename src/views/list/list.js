@@ -20,11 +20,11 @@ async function getAllBooks() {
   const datas = await res.json();
 
   datas.data.forEach((book) => {
-    const { bookName, author, publisher, price, imageUrl } = book;
+    const { id, bookName, author, publisher, price, imageUrl } = book;
 
     // ** onclick 시 쿼리 (id?) 넘겨서 상세페이지로 이동시키기 **
     const element = `
-      <div class="book-container" onclick="location.href='/detail'">
+      <div class="book-container" onclick="location.href='/detail?${id}'">
           <div class="book-info">
               <img src=${imageUrl} class="book-img" alt=${bookName}>
               <p class="name">${bookName}</p>
@@ -47,12 +47,13 @@ async function getCategoryBooks(selectCategory) {
   const datas = await res.json();
 
   const books = datas.data.filter((book) => book.category === selectCategory);
+  console.log(books);
 
   books.forEach((book) => {
-    const { bookName, author, publisher, price, imageUrl } = book;
+    const { id, bookName, author, publisher, price, imageUrl } = book;
 
     const element = `
-      <div class="book-container" onclick="location.href='/detail'">
+      <div class="book-container" onclick="location.href='/detail?${id}'">
           <div class="book-info">
               <img src=${imageUrl} class="book-img" alt=${bookName}>
               <p class="name">${bookName}</p>
