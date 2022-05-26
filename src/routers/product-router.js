@@ -28,8 +28,8 @@ productRouter.post('/register', async (req, res, next) => {
             author,
             publisher,
             price,
-            info,
-            category,
+            info
+            //category,
         });
 
         // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
