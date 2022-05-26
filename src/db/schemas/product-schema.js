@@ -21,15 +21,16 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
-  imageUrl: {
+  /*imageUrl: {
       type: [String],
       require : true,
-  },
-  category: {
+  },*/
+  /*category: {
       type: Schema.Types.ObjectId,
       ref: 'categoryModel',
       required: true,
   },
+  */
 }, {
   collection: 'products',
   timestamps: true,

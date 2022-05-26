@@ -8,8 +8,6 @@ const productRouter = Router();
 // 상품 등록 api
 productRouter.post('/register', async (req, res, next) => {
     try {
-        // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-        // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
         if (is.emptyObject(req.body)) {
             throw new Error(
                 'headers의 Content-Type을 application/json으로 설정해주세요'
@@ -42,7 +40,7 @@ productRouter.post('/register', async (req, res, next) => {
 });
 
 // 전체 상품 목록 가져옴
-productRouter.get('/productlist', async (req, res, next) => {
+productRouter.get('/list', async (req, res, next) => {
     try {
         const products = await productService.getProducts();
 

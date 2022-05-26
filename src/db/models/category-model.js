@@ -6,7 +6,7 @@ const Category = model('categories', CategorySchema);
 export class CategoryModel {
     // 카테고리 추가
     async create(categoryName) {
-        const createdNewCategory = await Category.create({ categoryName });
+        const createdNewCategory = await Category.create(categoryName );
         return createdNewCategory;
     }
 

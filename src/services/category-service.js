@@ -5,7 +5,7 @@ class CategoryService {
         this.categoryModel = categoryModel;
     }
 
-    // 카테고리 추가
+    // 카테고리추가
     async addCategory(categoryName) {
         const createdNewCategory = await this.categoryModel.create(categoryName);
 
