@@ -16,6 +16,12 @@ export class OrderModel {
     return order;
   }
 
+  // 유저Id로 주문 찾기
+  async findByUserId(userId) {
+    const orders = await Order.find({ userId });
+    return orders;
+  }
+
   async create(orderInfo) {
     const createdNewOrder = await Order.create(orderInfo);
     return createdNewOrder;
