@@ -161,4 +161,5 @@ section {
     font-weight: 800;
     height: 3rem;
     border-radius: 8px;
+    cursor: pointer;
 }

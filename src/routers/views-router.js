@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { loginRequired, errorHandler } from '../middlewares';
 
 const viewsRouter = express.Router();
 
@@ -7,14 +8,24 @@ const viewsRouter = express.Router();
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
 viewsRouter.use('/', serveStatic('main'));
-viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/category', serveStatic('category'));
-viewsRouter.use('/domesticList', serveStatic('domesticList'));
-viewsRouter.use('/foreignList', serveStatic('foreignList'));
+viewsRouter.use('/list', serveStatic('list'));
 viewsRouter.use('/detail', serveStatic('detail'));
+viewsRouter.use('/accountManagement', serveStatic('accountManagement'));
+
+//로그인 한 경우만 필요한 페이지
+viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/userInfo', serveStatic('userInfo'));
+viewsRouter.use('/deleteAccount', serveStatic('deleteAccount'));
+viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/orderComplete', serveStatic('orderComplete'));
 viewsRouter.use('/orderHistory', serveStatic('orderHistory'));
 viewsRouter.use('/sellProduct', serveStatic('sellProduct'));
+
+//로그아웃 한 경우만 필요한 페이지
+viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/register', serveStatic('register'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));

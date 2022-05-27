@@ -106,7 +106,7 @@ section {
     padding: 0 0.5rem 0 0.5rem;
 }
 
-#purchaseButton{
+#editButton{
 
     width: 80%;
     background-color: #6a5acd;
@@ -117,4 +117,5 @@ section {
     height: 3rem;
     border-radius: 8px;
     margin-top: 10px;
+    cursor: pointer;
 }
