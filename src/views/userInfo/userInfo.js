@@ -18,7 +18,10 @@ async function submitUserInfo(e) {
     const currentPassword = currentPasswordInput.value;
     const password = newPasswordInput.value;
     const phoneNumber = phoneNumberInput.value;
-    const address = `receiverAddressInput.value detailAddressInput.value restAddress.value`;
+    const postalCode = receiverAddressInput.value;
+    const address1 = detailAddressInput.value
+    const address2 = restAddress.value
+    const address = {postalCode, address1, address2};
     
 
     try {

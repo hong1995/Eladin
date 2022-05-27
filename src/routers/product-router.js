@@ -13,11 +13,18 @@ productRouter.post('/register', async (req, res, next) => {
                 'headers의 Content-Type을 application/json으로 설정해주세요'
             );
         }
-        console.log('inside post router')
+        let category;
+        if(req.body.category){
+         const findCategory = await categoryService.getCategoryByName(req.body.category);
+         category = findCategory;
+        }
+        // DB에 없다면 카테고리를 등록해줌
+        else{
+          const newCategory = await categoryService.addCategory(categoryName);
+          category = newCategory;
+        }
         // 입력된 카테고리를 카테고리 DB에서 검색 후 변수에 할당
-        const findCategory = await categoryService.getCategoryByName(req.body.category);
-        const category = findCategory;
-        console.log(category);
+       
         // req에서 데이터 가져와 변수에 할당
         const { bookName, author, publisher, price, info } = req.body;
         // const imageUrl = req.files.map(image => image.location);
