@@ -1,6 +1,13 @@
-.list-container {
+.container {
   width: 960px;
   margin: 50px auto;
+}
+
+.select-box {
+  margin-bottom: 30px;
+}
+
+.list-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px 20px;

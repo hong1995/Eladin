@@ -161,10 +161,8 @@ userRouter.delete('/del', loginRequired, async function (req, res, next) {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
     const userId = jwtDecoded.userId;
-
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-    const currentPassword = req.body.currentPassword;
-
+    const currentPassword = req.body.data;  
     // currentPassword 없을 시, 진행 불가
     if (!currentPassword) {
       throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
