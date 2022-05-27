@@ -93,6 +93,21 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
   }
 });
 
+// 사용자 정보 조회
+userRouter.get('/user', loginRequired, async (req, res, next) => {
+  try {
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const userId = jwtDecoded.userId;
+
+    const getUserInfo = await userService.getUser(userId);
+    res.status(200).json(getUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch('/update', loginRequired, async function (req, res, next) {
