@@ -30,10 +30,19 @@ bookContainer.insertAdjacentHTML('beforeend', element);
 // 장바구니, 바로구매 - indexedDB에 현재 상품 데이터 추가
 const addCartBtn = document.querySelector('.add-cart');
 const buyBtn = document.querySelector('.buy');
-addCartBtn.addEventListener('click', addCart);
-buyBtn.addEventListener('click', addCart);
+addCartBtn.addEventListener('click', addDB);
+buyBtn.addEventListener('click', addDB);
 
-function addCart(e) {
+function addDB(e) {
+  let dbName;
+
+  if (e.target.className.split(' ')[0] === 'add-cart') {
+    dbName = 'cartDB';
+  } else {
+    dbName = 'buyDB';
+    location.href = '/order';
+  }
+
   // 1. indexedDB 객체 가져오기
   const indexedDB = window.indexedDB;
 
@@ -41,7 +50,7 @@ function addCart(e) {
   if (!indexedDB) {
     window.alert('해당 브라우저에서는 indexedDB를 지원하지 않습니다.');
   } else {
-    const request = indexedDB.open('cartDB');
+    const request = indexedDB.open(dbName);
 
     // objectStore 새로 만들거나 수정할 때 발생하는 이벤트
     request.onupgradeneeded = (e) => {
@@ -78,9 +87,5 @@ function addCart(e) {
     request.onerror = (e) => {
       console.error('indexedDB : ', e.target.errorCode);
     };
-  }
-
-  if (e.target.className.split(' ')[0] === 'buy') {
-    location.href = '/order';
   }
 }
