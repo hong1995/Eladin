@@ -1,28 +1,30 @@
-const fullNameInput = document.querySelector('#fullNameInput');
-const currentPasswordInput = document.querySelector('#currentPasswordInput');
-const newPasswordInput = document.querySelector('#newPasswordInput');
-const phoneNumberInput = document.querySelector('#phoneNumberInput');
-const receiverAddressInput = document.querySelector('#receiverAddressInput');
-const detailAddressInput = document.querySelector('#detailAddressInput');
+import * as Api from '/api.js';
+
+const fullNameInput = document.querySelector('#fullName');
+const currentPasswordInput = document.querySelector('#currentPassword');
+const newPasswordInput = document.querySelector('#newPassword');
+const phoneNumberInput = document.querySelector('#phoneNumber');
+const receiverAddressInput = document.querySelector('#receiverAddress');
+const detailAddressInput = document.querySelector('#detailAddress');
 const restAddress = document.querySelector('#restAddress');
 const editButton = document.querySelector('#editButton')
 
-purchaseButton.addEventListener('click', submituserInfo);
+editButton.addEventListener('click', submitUserInfo);
 
-async function submituserInfo(e) {
+async function submitUserInfo(e) {
     e.preventDefault();
 
-    const fullNameInput = fullNameInput.value;
-    const currentPasswordInput = currentPasswordInput.value;
-    const newPasswordInput = newPasswordInput.value;
-    const phoneNumberInput = phoneNumberInput.value;
-    const receiverAddressInput = `receiverAddressInput.value detailAddressInput.value restAddress.value;`;
+    const fullName = fullNameInput.value;
+    const currentPassword = currentPasswordInput.value;
+    const password = newPasswordInput.value;
+    const phoneNumber = phoneNumberInput.value;
+    const address = `receiverAddressInput.value detailAddressInput.value restAddress.value`;
     
 
     try {
-        console.log(price)
-        const data = {bookName, author, category, publisher, price, info }
-        const result = await Api.post('/product/register',data);
+        console.log(fullName);
+        const data = {fullName, password, phoneNumber, address, currentPassword }
+        const result = await Api.patch('/api/update','',data);
         console.log(result);
     } catch (e) {
         console.error(err.stack);
