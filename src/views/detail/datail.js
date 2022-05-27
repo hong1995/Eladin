@@ -7,6 +7,7 @@ const datas = await res.json();
 
 const book = datas.data.filter((book) => book.id === receivedId)[0];
 const { bookName, author, publisher, price, info, imageUrl } = book;
+book.bookNum = 1;
 
 const element = `
   <img src=${imageUrl} class="book-img" alt=${bookName}>
