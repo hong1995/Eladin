@@ -25,6 +25,7 @@
         <!-- 커스텀 css, js -->
         <link rel="stylesheet" href="sellProduct.css" />
         <script src="sellProduct.js" type="module" defer></script>
+        <script src="./../navBar.js" type="module" defer></script>
       </head>
 
 <body>
@@ -82,81 +83,79 @@
                 <!-- 배송지정보 박스 -->
                 <div class = "box formBox">
                     <p>책을 판매해 보세요</p>
-                    <form action="/sellProduct" method = "post">
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="title" class="normalText" >제목</label>
-                            </div>
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="title" name = "bookTitle">
-                            </div>
-                        </div>
-                        <div class = "inputBox">
+                  
+                      <div class = "inputBox">
                           <div class = "fieldLabel">
-                              <label for="author" class = "normalText">작가</label>
+                              <label for="bookName" class="normalText" >제목</label>
                           </div>
                           <div class = "fieldForm">
-                              <input class="input" type="text" id="author" name = "bookAuthor">
+                              <input class="input" type="text" id="bookName" name = "bookTitle">
                           </div>
+                      </div>
+                      <div class = "inputBox">
+                        <div class = "fieldLabel">
+                            <label for="author" class = "normalText">작가</label>
                         </div>
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="category" class = "normalText">카테고리</label>
-                            </div>
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="category" placeholder="카테고리를 입력해주세요." name = "bookCategory">
-                            </div>
+                        <div class = "fieldForm">
+                            <input class="input" type="text" id="author" name = "bookAuthor">
                         </div>
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="company" class = "normalText">출판사</label>
-                            </div>
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="company" placeholder="OO출판" name = "bookCompany">
-                            </div>
-                        </div>
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="info" class = "normalText">책 설명</label>
-                            </div>
-                            <div class = "textareaForm">
-                                <textarea class="textarea" id = "info" placeholder="제품에 대한 설명을 적어주세요" name="bookInfo"></textarea>
-                            </div>
-                        </div>
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label class = "normalText">제품 사진</label>
-                            </div>
-                            <div class="file has-name is-fullwidth">
-                              <label class="file-label">
-                                <input class="file-input" type="file" name="bookPhoto">
-                                <span class="file-cta">
-                                  <span class="file-icon">
-                                    <i class="fas fa-upload"></i>
-                                  </span>
-                                  <span class="file-label">
-                                    Choose a file…
-                                  </span>
+                      </div>
+                      <div class = "inputBox">
+                          <div class = "fieldLabel">
+                              <label for="category" class = "normalText">카테고리</label>
+                          </div>
+                          <div class = "fieldForm">
+                              <input class="input" type="text" id="category" placeholder="카테고리를 입력해주세요." name = "bookCategory">
+                          </div>
+                      </div>
+                      <div class = "inputBox">
+                          <div class = "fieldLabel">
+                              <label for="publisher" class = "normalText">출판사</label>
+                          </div>
+                          <div class = "fieldForm">
+                              <input class="input" type="text" id="publisher" placeholder="OO출판" name = "bookCompany">
+                          </div>
+                      </div>
+                      <div class = "inputBox">
+                          <div class = "fieldLabel">
+                              <label for="info" class = "normalText">책 설명</label>
+                          </div>
+                          <div class = "textareaForm">
+                              <textarea class="textarea" id = "info" placeholder="제품에 대한 설명을 적어주세요" name="bookInfo"></textarea>
+                          </div>
+                      </div>
+                      <div class = "inputBox">
+                          <div class = "fieldLabel">
+                              <label class = "normalText">제품 사진</label>
+                          </div>
+                          <div class="file has-name is-fullwidth">
+                            <label class="file-label">
+                              <input class="file-input" type="file" name="bookPhoto" id = "#photo">
+                              <span class="file-cta">
+                                <span class="file-icon">
+                                  <i class="fas fa-upload"></i>
                                 </span>
-                                <span class="file-name">
-                                  will be update soon...
+                                <span class="file-label">
+                                  Choose a file…
                                 </span>
-                              </label>
-                            </div>
-                        </div>
-                        <div class = "inputBox">
-                            <div class = "fieldLabel">
-                                <label for="price" class = "normalText">가격</label>
-                            </div>
-                            <div class = "fieldForm">
-                                <input class="input" type="text" id="price" name = "bookPrice" placeholder="10000">
-                            </div>
-                        </div>
-                        <div class = "buttonBox">
-                           <button id="purchaseButton" type="submit">제품 판매하기</button>
-                        </div>
-                                                                      
-                    </form>
+                              </span>
+                              <span class="file-name">
+                                will be update soon...
+                              </span>
+                            </label>
+                          </div>
+                      </div>
+                      <div class = "inputBox">
+                          <div class = "fieldLabel">
+                              <label for="price" class = "normalText">가격</label>
+                          </div>
+                          <div class = "fieldForm">
+                              <input class="input" type="text" id="price" name = "bookPrice" placeholder="10000">
+                          </div>
+                      </div>
+                      <div class = "buttonBox">
+                          <button id="purchaseButton">제품 판매하기</button>
+                      </div>
                 </div>
                 <!-- 결제정보 -->
                
