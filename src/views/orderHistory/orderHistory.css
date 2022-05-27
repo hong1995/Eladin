@@ -11,7 +11,7 @@
 
 .orders-top {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   align-items: center;
   background-color: #6667ab;
   color: whitesmoke;
@@ -22,7 +22,7 @@
 
 .order-item {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   align-items: center;
   border-bottom: 1px solid #6667ab;
   height: 60px;

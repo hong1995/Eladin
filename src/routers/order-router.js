@@ -17,7 +17,6 @@ orderRouter.post('/register', async (req, res, next) => {
     const postalCode = req.body.postalCode;
     const address1 = req.body.address1;
     const address2 = req.body.address2;
-    const postalCode = req.body.address2;
     const address = { postalCode, address1, address2 };
 
     // 위 데이터를 유저 db에 추가하기

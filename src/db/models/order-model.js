@@ -6,7 +6,7 @@ const Order = model('orders', OrderSchema);
 export class OrderModel {
   //email을 이용해 특정 주문 출력
   async findByEmail(email) {
-    const order = await Order.findOne({ email });
+    const order = await Order.find({ email });
     return order;
   }
 

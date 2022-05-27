@@ -1,9 +1,22 @@
 import * as Api from '../api.js';
+import { getAllDB, clearAllDB } from '../indexedDB.js';
 
+// indexedDB에 담아놓은 책들 가져오기
+const books = await getAllDB('buy');
+console.log(books);
+
+// 결제 정보 표시
+const priceText = document.querySelector('#price');
+const totalPriceText = document.querySelector('#total-price');
+
+const booksPrice = books.reduce((acc, cur) => acc + cur.price, 0);
+priceText.innerText = `${booksPrice}원`;
+totalPriceText.innerText = `${booksPrice + 3000}원`;
+
+// 구매하기 버튼 클릭 시
 const purchaseButton = document.querySelector('#purchaseButton');
 purchaseButton.addEventListener('click', purchase);
 
-// 구매하기 버튼 클릭 시
 async function purchase() {
   const receiverName = document.querySelector('#receiverName').value;
   const receiverPhoneNumber = document.querySelector(
@@ -14,11 +27,23 @@ async function purchase() {
   const receiverPostalCode = document.querySelector(
     '#receiverPostalCode'
   ).value;
-  const receiverRequest = document.querySelector('#receiverRequest').value;
+
+  const user = await Api.get('/api/user');
+  const orderList = [];
+
+  books.forEach((book) => {
+    const obj = {
+      bookName: book.bookName,
+      quantity: 1,
+      price: book.price,
+    };
+
+    orderList.push(obj);
+  });
 
   const info = {
-    orderList: [],
-    email: 'abc@abc.com',
+    orderList: orderList,
+    email: user.email,
     fullName: receiverName,
     phoneNumber: receiverPhoneNumber,
     address1: receiverAddress1,
@@ -28,42 +53,5 @@ async function purchase() {
 
   await Api.post('/order/register', info);
 
-  location.href = '/orderComplete';
+  location.href = `/orderComplete`;
 }
-
-// indexedDB에서 구매할 상품 정보 가져오기
-const indexedDB = window.indexedDB;
-const request = indexedDB.open('buyDB');
-
-request.onsuccess = (e) => {
-  let db = e.target.result;
-  console.log('success is called');
-
-  let transaction = db.transaction('product');
-
-  transaction.oncomplete = (e) => {
-    console.log('done');
-  };
-
-  transaction.onerror = (e) => {
-    console.log('fail');
-  };
-
-  let objectStore = transaction.objectStore('product');
-  const request = objectStore.getAll();
-  request.onsuccess = (e) => {
-    let item = e.target.result[0];
-
-    const name = document.querySelector('#name');
-    const price = document.querySelector('#price');
-    const totalPrice = document.querySelector('#total-price');
-
-    name.innerText = item.bookName;
-    price.innerText = `${item.price}원`;
-    totalPrice.innerText = `${item.price + 3000}원`;
-  };
-};
-
-request.onerror = (e) => {
-  console.error('indexedDB : ', e.target.errorCode);
-};
