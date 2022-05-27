@@ -13,7 +13,7 @@ const purchaseButton = document.querySelector('#purchaseButton');
 purchaseButton.addEventListener('click', sell);
 
 
-  async function sell(e) {
+async function sell(e) {
     e.preventDefault();
 
     const bookName = bookNameInput.value;

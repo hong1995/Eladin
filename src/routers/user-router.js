@@ -115,7 +115,6 @@ userRouter.patch('/update', loginRequired, async function (req, res, next) {
     const password = req.body.password;
     const address = req.body.address;
     const phoneNumber = req.body.phoneNumber;
-    const role = req.body.role;
 
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
     const currentPassword = req.body.currentPassword;
@@ -134,7 +133,6 @@ userRouter.patch('/update', loginRequired, async function (req, res, next) {
       ...(password && { password }),
       ...(address && { address }),
       ...(phoneNumber && { phoneNumber }),
-      ...(role && { role }),
     };
 
     // 사용자 정보를 업데이트함.
