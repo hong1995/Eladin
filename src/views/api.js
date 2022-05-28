@@ -56,6 +56,7 @@ async function post(endpoint, data) {
 
 // api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)
 async function patch(endpoint, params = '', data) {
+  console.log('data in');
   const apiUrl = `${endpoint}/${params}`;
 
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
@@ -63,7 +64,7 @@ async function patch(endpoint, params = '', data) {
   const bodyData = JSON.stringify(data);
   console.log(`%cPATCH 요청: ${apiUrl}`, 'color: #059c4b;');
   console.log(`%cPATCH 요청 데이터: ${bodyData}`, 'color: #059c4b;');
-
+  
   const res = await fetch(apiUrl, {
     method: 'PATCH',
     headers: {
@@ -103,6 +104,7 @@ async function del(endpoint, params = '', data = {}) {
     },
     body: bodyData,
   });
+  console.log(res);
 
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
   if (!res.ok) {
