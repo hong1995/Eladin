@@ -15,9 +15,8 @@ orders.forEach((order) => {
 
     nameText = bookName;
     quantityText = String(quantity);
-  });
 
-  const element = `
+    const element = `
     <div class="order-item">
         <div class="item-date">${dateText}</div>
         <div class="item-book">${nameText}</div>
@@ -29,5 +28,6 @@ orders.forEach((order) => {
     </div>
   `;
 
-  historyContainer.insertAdjacentHTML('beforeend', element);
+    historyContainer.insertAdjacentHTML('beforeend', element);
+  });
 });

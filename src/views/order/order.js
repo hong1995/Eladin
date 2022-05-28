@@ -1,9 +1,8 @@
 import * as Api from '../api.js';
-import { getAllDB, clearAllDB } from '../indexedDB.js';
+import { clearAllDB, getAllDB } from '../indexedDB.js';
 
 // indexedDB에 담아놓은 책들 가져오기
 const books = await getAllDB('buy');
-console.log(books);
 
 // 결제 정보 표시
 const priceText = document.querySelector('#price');

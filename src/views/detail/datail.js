@@ -34,9 +34,13 @@ const buyBtn = document.querySelector('.buy');
 addCartBtn.addEventListener('click', addDB);
 buyBtn.addEventListener('click', addDB);
 
-function addDB(e) {
+async function addDB(e) {
   const dbName = e.target.className.split(' ')[0];
 
-  createDB(dbName);
-  writeDB(dbName, book);
+  await createDB(dbName);
+  await writeDB(dbName, book);
+
+  if (e.target.className.split(' ')[0] === 'buy') {
+    location.href = '/order';
+  }
 }
