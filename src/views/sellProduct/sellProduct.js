@@ -21,11 +21,12 @@ async function sell(e) {
     const category = categoryInput.value;
     const publisher = publisherInput.value;
     const info = infoInput.value;
-    const price = priceInput.value;
+    const price = Number(priceInput.value);
+    const imageUrl = 'https://www.google.com/url?'
 
     try {
         console.log(price)
-        const data = {bookName, author, category, publisher, price, info }
+        const data = {bookName, author, category, publisher, price, info, imageUrl }
         const result = await Api.post('/product/register',data);
         console.log(result);
     } catch (e) {
