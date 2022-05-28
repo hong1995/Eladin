@@ -45,3 +45,56 @@ bookPrice.innerHTML = '10000원';
 
 const bookTotalPrice = document.querySelector('#bookTotalPrice');
 bookTotalPrice.innerHTML = '100000원';
+
+
+async function getAllCart() {
+  removeAllchild();
+
+  const res = await fetch('./data.json');
+  const datas = await res.json();
+
+  datas.data.forEach((book) => {
+    const { id, bookName, author, publisher, price, imageUrl } = book;
+
+    // ** onclick 시 쿼리 (id?) 넘겨서 상세페이지로 이동시키기 **
+    const element = `
+      <div class="book-container" onclick="location.href='/detail?${id}'">
+          <div class="book-info">
+              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <p class="name">${bookName}</p>
+              <p class="author">저자: ${author}</p>
+              <p class="publisher">출판사: ${publisher}</p>
+              <p class="price">판매가: ${price}</p>
+          </div>
+      </div>
+    `;
+
+    listContainer.insertAdjacentHTML('beforeend', element);
+  });
+}
+
+async function deleteCart() {
+  removeAllchild();
+
+  const res = await fetch('./data.json');
+  const datas = await res.json();
+
+  datas.data.forEach((book) => {
+    const { id, bookName, author, publisher, price, imageUrl } = book;
+
+    // ** onclick 시 쿼리 (id?) 넘겨서 상세페이지로 이동시키기 **
+    const element = `
+      <div class="book-container" onclick="location.href='/detail?${id}'">
+          <div class="book-info">
+              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <p class="name">${bookName}</p>
+              <p class="author">저자: ${author}</p>
+              <p class="publisher">출판사: ${publisher}</p>
+              <p class="price">판매가: ${price}</p>
+          </div>
+      </div>
+    `;
+
+    listContainer.insertAdjacentHTML('beforeend', element);
+  });
+}
