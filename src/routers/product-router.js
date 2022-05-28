@@ -1,13 +1,15 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { productService, categoryService } from '../services';
-import { imageUpload } from '../middlewares';
-import { categoryModel } from '../db';
+const multer = require("multer");
+const fs = require("fs");
+
 
 const productRouter = Router();
 
 // 상품 등록 api
-productRouter.post('/register', async (req, res, next) => {
+
+productRouter.post('/register',async (req, res, next) => {
     try {
         if (is.emptyObject(req.body)) {
             throw new Error(
@@ -21,9 +23,9 @@ productRouter.post('/register', async (req, res, next) => {
             const category = findCategory;
 
         // req에서 데이터 가져와 변수에 할당
-        const { bookName, author, publisher, price, info } = req.body;
-        // const imageUrl = req.files.map(image => image.location);
-        console.log(bookName);
+        const { bookName, author, publisher, price, info, imageUrl} = req.body;
+        //const imageUrl = req.files.map(img => img.location);
+
         // 위 데이터를 상품 db에 추가하기
         const newProduct = await productService.addProduct({
             bookName,
@@ -31,7 +33,8 @@ productRouter.post('/register', async (req, res, next) => {
             publisher,
             price,
             info,
-            category,
+            imageUrl,
+            category
         });
 
         // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
