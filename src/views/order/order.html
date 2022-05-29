@@ -100,16 +100,16 @@
                                 <label for="receiverPhoneNuber">연락처</label>
                             </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverPhoneNuber" placeholder="-없이 입력해주세요.">
+                                <input class="input" type="text" id="receiverPhoneNumber" placeholder="-없이 입력해주세요.">
                             </div>
                         </div>
                         <div class = "inputBox">
                             <div class = "fieldLabel">
-                                <label for="receiverAddress">주소</label>
+                                <label for="receiverAddress1">주소1</label>
                             </div>
                             
                             <div class = "fieldForm addressInputBox">
-                                <input class="input" type="text" id="receiverAddress">
+                                <input class="input" type="text" id="receiverAddress1">
                                 <div class = "find">
                                     <button class = "findButton">주소찾기</button>
                                 </div>
@@ -117,15 +117,19 @@
                             
                         </div>
                         <div class = "inputBox">
-                            <div class = "fieldLabel"></div>
+                            <div class = "fieldLabel">
+                                <label for="receiverAddress2">주소2</label>
+                            </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="addressDetail">
+                                <input class="input" type="text" id="receiverAddress2">
                             </div>
                         </div>
                         <div class = "inputBox">
-                            <div class = "fieldLabel"></div>
+                            <div class = "fieldLabel">
+                                <label for="receiverPostalCode">우편번호</label>
+                            </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="addressDetail">
+                                <input class="input" type="text" id="receiverPostalCode">
                             </div>
                         </div>
                         <div class = "inputBox">
@@ -133,7 +137,7 @@
                                 <label for="receiverName">요청사항</label>
                             </div>
                             <div class = "fieldForm">
-                                <input class="input" type="text" id="receiverName" placeholder="최대 50자 입력이 가능합니다..">
+                                <input class="input" type="text" id="receiverRequest" placeholder="최대 50자 입력이 가능합니다..">
                             </div>
                         </div>
                                               
@@ -152,7 +156,7 @@
                             </div>
                             <div class = "info">
                                 <p>상품금액</p>
-                                <p>19000원</p>
+                                <p id="price"></p>
                             </div>
                             <div class = "info">
                                 <p>배송비</p>
@@ -161,10 +165,10 @@
                         </div>
                         <div class = "total">
                             <p>총 결제금액</p>
-                            <p>22,000원</p>
+                            <p id="total-price">22,000원</p>
                         </div>
                         <div class = "purchase">
-                            <button id = "purchaseButton" onclick="location.href='/orderComplete'" >구매하기</button>
+                            <button id = "purchaseButton">구매하기</button>
                         </div>
                     </div>
                 </div>

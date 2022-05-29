@@ -93,6 +93,21 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
   }
 });
 
+// 사용자 정보 조회
+userRouter.get('/user', loginRequired, async (req, res, next) => {
+  try {
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const userId = jwtDecoded.userId;
+
+    const getUserInfo = await userService.getUser(userId);
+    res.status(200).json(getUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch('/update', loginRequired, async function (req, res, next) {
@@ -115,8 +130,7 @@ userRouter.patch('/update', loginRequired, async function (req, res, next) {
     const password = req.body.password;
     const address = req.body.address;
     const phoneNumber = req.body.phoneNumber;
-    const role = req.body.role;
-
+    
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
     const currentPassword = req.body.currentPassword;
 
@@ -134,7 +148,6 @@ userRouter.patch('/update', loginRequired, async function (req, res, next) {
       ...(password && { password }),
       ...(address && { address }),
       ...(phoneNumber && { phoneNumber }),
-      ...(role && { role }),
     };
 
     // 사용자 정보를 업데이트함.

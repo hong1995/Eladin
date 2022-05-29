@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import { loginRequired } from '../middlewares';
+import { loginRequired, adminRequired } from '../middlewares';
 import { orderService, userService } from '../services';
+import jwt from 'jsonwebtoken';
 
 const orderRouter = Router();
 
@@ -13,6 +14,7 @@ orderRouter.post('/register', async (req, res, next) => {
     const email = req.body.email;
     const fullName = req.body.fullName;
     const phoneNumber = req.body.phoneNumber;
+    const postalCode = req.body.postalCode;
     const address1 = req.body.address1;
     const address2 = req.body.address2;
     const address = { postalCode, address1, address2 };
@@ -34,8 +36,8 @@ orderRouter.post('/register', async (req, res, next) => {
   }
 });
 
-//전체 주문 목록 가져오기
-orderRouter.get('/orderlist', loginRequired, async (req, res, next) => {
+//전체 주문 목록 가져오기(관리자용)
+orderRouter.get('/orderlist', adminRequired, async (req, res, next) => {
   try {
     //전체 주문 목록을 얻음
     const orders = await orderService.getOrders();
@@ -46,12 +48,16 @@ orderRouter.get('/orderlist', loginRequired, async (req, res, next) => {
   }
 });
 
-//특정 사용자 주문 정보 가져오기
-orderRouter.get('/orders/:email', loginRequired, async (req, res, next) => {
+//현재 사용자 주문 정보 가져오기
+orderRouter.get('/orders', loginRequired, async (req, res, next) => {
   try {
-    // params로부터 id를 가져옴
-    const email = req.params.email;
-    const userOrder = await orderService.getUserOrder(email);
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const userId = jwtDecoded.userId;
+    const email = await userService.getUserEmail(userId);
+    const currentEmail = email.email;
+    const userOrder = await orderService.getUserOrder(currentEmail);
     res.status(200).json(userOrder);
   } catch (error) {
     next(error);

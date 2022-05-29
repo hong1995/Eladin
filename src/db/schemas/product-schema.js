@@ -1,5 +1,4 @@
 import { Schema } from 'mongoose';
-
 const ProductSchema = new Schema({
   bookName: {
     type: String,
@@ -29,10 +28,12 @@ const ProductSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'categoryModel',
       required: true,
+    },
   },
-}, {
-  collection: 'products',
-  timestamps: true,
-});
+  {
+    collection: 'products',
+    timestamps: true,
+  }
+);
 
 export { ProductSchema };
