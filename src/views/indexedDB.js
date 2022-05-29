@@ -21,7 +21,7 @@ function createDB(dbName) {
       };
 
       request.onerror = (e) => {
-        console.error('indexedDB : ', e.target.errorCode);
+        console.log(e.target.error);
       };
     }
   });
@@ -40,10 +40,11 @@ function writeDB(dbName, book) {
 
       transaction.oncomplete = (e) => {
         console.log('done');
+        resolve();
       };
 
       transaction.onerror = (e) => {
-        console.log('fail');
+        console.log(e.target.error);
       };
 
       const objectStore = transaction.objectStore('product');
@@ -51,12 +52,11 @@ function writeDB(dbName, book) {
 
       request.onsuccess = (e) => {
         console.log(e.target.result);
-        resolve();
       };
     };
 
     request.onerror = (e) => {
-      console.error('indexedDB : ', e.target.errorCode);
+      console.log(e.target.error);
     };
   });
 }
@@ -78,7 +78,7 @@ function getAllDB(dbName) {
       };
 
       transaction.onerror = (e) => {
-        console.log('fail');
+        console.log(e.target.error);
       };
 
       const objectStore = transaction.objectStore('product');
@@ -90,12 +90,79 @@ function getAllDB(dbName) {
     };
 
     request.onerror = (e) => {
-      console.error('indexedDB : ', e.target.errorCode);
+      console.log(e.target.error);
     };
   });
 }
 
-// 데이터 모두 삭제
+// 데이터 수정
+function updateDB(dbName, key, value) {
+  return new Promise(function (resolve, reject) {
+    const request = indexedDB.open(dbName);
+
+    request.onsuccess = (e) => {
+      const db = e.target.result;
+      const transaction = db.transaction('product', 'readwrite');
+
+      transaction.oncomplete = (e) => {
+        console.log('done');
+        resolve();
+      };
+
+      transaction.onerror = (e) => {
+        console.log(e.target.error);
+      };
+
+      const objectStore = transaction.objectStore('product');
+      const request = objectStore.get(key);
+
+      request.onsuccess = (e) => {
+        const updateRequest = objectStore.put(value);
+
+        updateRequest.onerror = (e) => console.log(e.target.error);
+        updateRequest.onsuccess = (e) => console.log('수정완료');
+      };
+    };
+
+    request.onerror = (e) => {
+      console.log(e.target.error);
+    };
+  });
+}
+
+// 데이터 삭제
+function deleteDB(dbName, key) {
+  return new Promise(function (resolve, reject) {
+    const request = indexedDB.open(dbName);
+
+    request.onsuccess = (e) => {
+      const db = e.target.result;
+      const transaction = db.transaction('product', 'readwrite');
+
+      transaction.oncomplete = (e) => {
+        console.log('done');
+        resolve();
+      };
+
+      transaction.onerror = (e) => {
+        console.log(e.target.error);
+      };
+
+      const objectStore = transaction.objectStore('product');
+      const request = objectStore.delete(key);
+
+      request.onsuccess = (e) => {
+        console.log('삭제완료');
+      };
+    };
+
+    request.onerror = (e) => {
+      console.log(e.target.error);
+    };
+  });
+}
+
+// 모든 데이터 삭제
 function clearAllDB(dbName) {
   return new Promise(function (resolve, reject) {
     const request = indexedDB.open(dbName);
@@ -106,10 +173,11 @@ function clearAllDB(dbName) {
 
       transaction.oncomplete = (e) => {
         console.log('done');
+        resolve();
       };
 
       transaction.onerror = (e) => {
-        console.log('fail');
+        console.log(e.target.error);
       };
 
       const objectStore = transaction.objectStore('product');
@@ -121,9 +189,9 @@ function clearAllDB(dbName) {
     };
 
     request.onerror = (e) => {
-      console.error('indexedDB : ', e.target.errorCode);
+      console.log(e.target.error);
     };
   });
 }
 
-export { createDB, writeDB, getAllDB, clearAllDB };
+export { createDB, writeDB, updateDB, getAllDB, deleteDB, clearAllDB };

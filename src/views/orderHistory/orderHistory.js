@@ -5,14 +5,12 @@ const historyContainer = document.querySelector('.history-container');
 const orders = await Api.get('/order/orders');
 
 orders.forEach((order) => {
-  console.log(order);
   const dateText = order.createdAt.split('T')[0];
   let nameText;
   let quantityText;
 
   order.orderList.forEach((order) => {
     const { bookName, quantity } = order;
-
     nameText = bookName;
     quantityText = String(quantity);
 

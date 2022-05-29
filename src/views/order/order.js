@@ -3,12 +3,16 @@ import { clearAllDB, getAllDB } from '../indexedDB.js';
 
 // indexedDB에 담아놓은 책들 가져오기
 const books = await getAllDB('buy');
+console.log(books);
 
 // 결제 정보 표시
 const priceText = document.querySelector('#price');
 const totalPriceText = document.querySelector('#total-price');
 
-const booksPrice = books.reduce((acc, cur) => acc + cur.price, 0);
+const booksPrice = books.reduce(
+  (acc, cur) => acc + cur.price * cur.quantity,
+  0
+);
 priceText.innerText = `${booksPrice}원`;
 totalPriceText.innerText = `${booksPrice + 3000}원`;
 
@@ -33,8 +37,9 @@ async function purchase() {
   books.forEach((book) => {
     const obj = {
       bookName: book.bookName,
-      quantity: 1,
+      quantity: book.quantity,
       price: book.price,
+      productId: book._id,
     };
 
     orderList.push(obj);
@@ -49,7 +54,7 @@ async function purchase() {
     address2: receiverAddress2,
     postalCode: receiverPostalCode,
   };
-
+  console.log(info);
   await Api.post('/order/register', info);
 
   location.href = `/orderComplete`;

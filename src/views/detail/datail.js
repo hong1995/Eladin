@@ -5,6 +5,7 @@ const receivedId = location.href.split('?')[1];
 const bookContainer = document.querySelector('.book-container');
 
 const book = await Api.get(`/product/${receivedId}`);
+book.quantity = 1;
 console.log(book);
 
 const { bookName, author, publisher, price, info, imageUrl } = book;
@@ -34,9 +35,15 @@ const buyBtn = document.querySelector('.buy');
 addCartBtn.addEventListener('click', addDB);
 buyBtn.addEventListener('click', addDB);
 
-function addDB(e) {
+async function addDB(e) {
   const dbName = e.target.className.split(' ')[0];
 
-  createDB(dbName);
-  writeDB(dbName, book);
+  await createDB(dbName);
+  await writeDB(dbName, book);
+
+  if (dbName === 'buy') {
+    location.href = '/order';
+  } else {
+    alert('장바구니에 추가되었습니다.');
+  }
 }

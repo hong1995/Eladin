@@ -7,6 +7,7 @@ const OrderSchema = new Schema(
         bookName: String,
         quantity: Number,
         price: Number,
+        productId: String,
       }),
     ],
     email: {
