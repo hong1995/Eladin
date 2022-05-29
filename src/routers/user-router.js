@@ -10,50 +10,35 @@ import jwt from 'jsonwebtoken';
 const userRouter = Router();
 
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
-userRouter.post(
-  '/register',
-  [
-    body('fullName')
-      .trim()
-      .isLength({ min: 2 })
-      .withMessage('2글자 이상의 이름을 입력해주세요.'),
-    body('email').isEmail().withMessage('이메일 형식이 맞지 않습니다.'),
-    body('password')
-      .trim()
-      .isLength({ min: 4 })
-      .withMessage('4자리 이상의 비밀번호를 입력해주세요.'),
-    validateError,
-  ],
-  async (req, res, next) => {
-    try {
-      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
-        );
-      }
-
-      // req (request)의 body 에서 데이터 가져오기
-      const fullName = req.body.fullName;
-      const email = req.body.email;
-      const password = req.body.password;
-
-      // 위 데이터를 유저 db에 추가하기
-      const newUser = await userService.addUser({
-        fullName,
-        email,
-        password,
-      });
-
-      // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
-      // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-      res.status(201).json(newUser);
-    } catch (error) {
-      next(error);
+userRouter.post('/register', async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
     }
+
+    // req (request)의 body 에서 데이터 가져오기
+    const fullName = req.body.fullName;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // 위 데이터를 유저 db에 추가하기
+    const newUser = await userService.addUser({
+      fullName,
+      email,
+      password,
+    });
+
+    // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
+    // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
+    res.status(201).json(newUser);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
 userRouter.post('/login', async function (req, res, next) {
