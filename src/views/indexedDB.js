@@ -61,6 +61,40 @@ function writeDB(dbName, book) {
   });
 }
 
+// 데이터 조회
+function getDB(dbName, key) {
+  let item;
+
+  return new Promise(function (resolve, reject) {
+    const request = indexedDB.open(dbName);
+
+    request.onsuccess = (e) => {
+      const db = e.target.result;
+      const transaction = db.transaction('product');
+
+      transaction.oncomplete = (e) => {
+        console.log('done');
+        resolve(item);
+      };
+
+      transaction.onerror = (e) => {
+        console.log(e.target.error);
+      };
+
+      const objectStore = transaction.objectStore('product');
+      const request = objectStore.get(key);
+
+      request.onsuccess = (e) => {
+        item = e.target.result;
+      };
+    };
+
+    request.onerror = (e) => {
+      console.log(e.target.error);
+    };
+  });
+}
+
 // 모든 데이터 조회
 function getAllDB(dbName) {
   let item;
@@ -194,4 +228,4 @@ function clearAllDB(dbName) {
   });
 }
 
-export { createDB, writeDB, updateDB, getAllDB, deleteDB, clearAllDB };
+export { createDB, writeDB, updateDB, getDB, getAllDB, deleteDB, clearAllDB };

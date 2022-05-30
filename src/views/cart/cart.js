@@ -3,6 +3,7 @@ import {
   getAllDB,
   writeDB,
   updateDB,
+  getDB,
   deleteDB,
   createDB,
 } from '../indexedDB.js';
@@ -26,13 +27,13 @@ books = await getAllDB('add-cart');
 // 상품 목록 표시
 const listContainer = document.querySelector('.listContainer');
 
-books.forEach((book) => {
-  const { bookName, author, price, quantity } = book;
+books.forEach(async (book) => {
+  const { _id, bookName, author, price, quantity } = book;
 
   let element = `
-    <div class="listItem">
+    <div class="listItem" data-id=${_id}>
       <div class="leftSpacer">
-        <input type="checkbox" class="checkbox">
+        <input type="checkbox" class="checkbox" checked="true">
       </div>
       <figure class="image is-96x96">
         <img src="https://bulma.io/images/placeholders/96x96.png">
@@ -60,6 +61,10 @@ books.forEach((book) => {
   `;
 
   listContainer.insertAdjacentHTML('beforeend', element);
+
+  // 체크박스 표시 여부 indexedDB에 저장
+  book.checked = true;
+  await updateDB('add-cart', _id, book);
 });
 
 const bookCount = document.querySelector('#bookCount');
@@ -69,25 +74,25 @@ const totalPriceText = document.querySelector('#bookTotalPrice');
 // 결제 정보 업데이트
 async function updatePaymentInfo() {
   const books = await getAllDB('add-cart');
+  let count = 0;
+  let booksPrice = 0;
 
-  bookCount.innerText = `${books.reduce(
-    (acc, cur) => acc + cur.quantity,
-    0
-  )}개`;
+  books.forEach((book) => {
+    console.log(book.checked);
+    if (book.checked) {
+      count += book.quantity;
+      booksPrice += book.price * book.quantity;
+      console.log(count, booksPrice);
+    }
+  });
 
-  let booksPrice = books.reduce(
-    (acc, cur) => acc + cur.price * cur.quantity,
-    0
-  );
+  bookCount.innerText = `${count}개`;
   priceText.innerText = `${booksPrice}원`;
-
-  let totalPrice = booksPrice + 3000;
-  totalPriceText.innerText = `${totalPrice}원`;
+  totalPriceText.innerText = `${booksPrice + 3000}원`;
 }
 
 updatePaymentInfo();
 
-// 수량 조정
 const quantityMinus = document.querySelectorAll('.quantityMinus');
 const quantityInput = document.querySelectorAll('.quantityInput');
 const quantityPlus = document.querySelectorAll('.quantityPlus');
@@ -102,7 +107,7 @@ function updateItemInfo(i, newBooks, quantity) {
   itemTotalPrice[i].innerText = `${newBooks[i].price * quantity}원`;
 }
 
-// 버튼으로 조정
+// 버튼으로 수량 변경
 quantityMinus.forEach((node, i) => {
   node.addEventListener('click', (e) => quantityBtnClick(e, i));
 });
@@ -131,7 +136,7 @@ async function quantityBtnClick(e, i) {
   updatePaymentInfo();
 }
 
-// 입력받아 조정
+// 입력받아 수량 변경
 quantityInput.forEach((node, i) => {
   node.addEventListener('change', (e) => quantityInputEvent(e, i));
 });
@@ -148,6 +153,63 @@ async function quantityInputEvent(e, i) {
   updatePaymentInfo();
 }
 
+// 개별 체크박스 이벤트
+const checkbox = document.querySelectorAll('.checkbox');
+
+checkbox.forEach((node) => {
+  node.addEventListener('click', async () => {
+    const key = node.closest('.listItem').dataset.id;
+    const newBook = await getDB('add-cart', key);
+
+    newBook.checked = node.checked;
+    await updateDB('add-cart', key, newBook);
+
+    updatePaymentInfo();
+  });
+});
+
+// 전체 선택
+const selectAll = document.querySelector('.selectAll');
+
+selectAll.addEventListener('click', (e) => {
+  if (Array.from(checkbox).filter((node) => !node.checked).length > 0) {
+    checkbox.forEach(async (node) => {
+      const key = node.closest('.listItem').dataset.id;
+      const newBook = await getDB('add-cart', key);
+
+      newBook.checked = true;
+      await updateDB('add-cart', key, newBook);
+
+      node.checked = true;
+
+      updatePaymentInfo();
+    });
+  } else {
+    checkbox.forEach(async (node) => {
+      const key = node.closest('.listItem').dataset.id;
+      const newBook = await getDB('add-cart', key);
+
+      newBook.checked = false;
+      await updateDB('add-cart', key, newBook);
+
+      node.checked = false;
+
+      updatePaymentInfo();
+    });
+  }
+});
+
+// 선택 삭제
+const selectDelete = document.querySelector('.selectDelete');
+
+selectDelete.addEventListener('click', async () => {
+  checkbox.forEach((node, i) => {
+    if (node.checked) {
+      deleteItem(node);
+    }
+  });
+});
+
 // 개별 삭제
 const deleteButton = document.querySelectorAll('.deleteButton');
 
@@ -156,43 +218,13 @@ deleteButton.forEach((node) => {
 });
 
 async function deleteItem(node) {
-  const listItem = document.querySelectorAll('.listItem');
+  const key = node.closest('.listItem').dataset.id;
 
-  const newBooks = await getAllDB('add-cart');
-  const key = newBooks.map((book) => book._id);
-
-  let index = Array.from(listItem).indexOf(node.closest('.listItem'));
-
+  await deleteDB('add-cart', key);
   node.closest('.listItem').remove();
-  await deleteDB('add-cart', key[index]);
-  key.splice(index, 1);
 
   updatePaymentInfo();
 }
-
-// 전체 선택
-const selectAll = document.querySelector('.selectAll');
-const checkbox = document.querySelectorAll('.checkbox');
-
-selectAll.addEventListener('click', () => {
-  checkbox.forEach((node) => (node.checked = !node.checked));
-});
-
-// 선택 삭제
-const selectDelete = document.querySelector('.selectDelete');
-
-selectDelete.addEventListener('click', () => {
-  checkbox.forEach((node, i) => {
-    const listItem = document.querySelectorAll('.listItem');
-
-    if (node.checked) {
-      deleteDB('add-cart', books[i]._id);
-      listItem[i].remove();
-
-      updatePaymentInfo();
-    }
-  });
-});
 
 // 구매하기 - 장바구니 정보 업데이트
 const purchaseButton = document.getElementById('purchaseButton');
@@ -200,11 +232,14 @@ purchaseButton.addEventListener('click', purchase);
 
 async function purchase() {
   // cartDB에 담았던 상품들 buyDB로 이동
+  const newBooks = await getAllDB('add-cart');
+  const selectedItem = newBooks.filter((book) => book.checked);
+
   await createDB('buy');
 
-  for (const book of books) {
-    await writeDB('buy', book);
-  }
+  selectedItem.forEach(async (item) => {
+    await writeDB('buy', item);
+  });
 
   location.href = '/order';
 }
