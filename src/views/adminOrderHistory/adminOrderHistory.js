@@ -1,8 +1,9 @@
 import * as Api from '../api.js';
 
 const historyContainer = document.querySelector('.history-container');
-
-const orders = await Api.get('/order/orders');
+readAllOrders();
+async function readAllOrders(){
+const orders = await Api.get('/order/orderlist');
 
 orders.forEach((order) => {
   console.log(order);
@@ -15,8 +16,9 @@ orders.forEach((order) => {
 
     nameText = bookName;
     quantityText = String(quantity);
+  });
 
-    const element = `
+  const element = `
     <div class="order-item">
         <div class="item-date">${dateText}</div>
         <div class="item-book">${nameText}</div>
@@ -28,6 +30,6 @@ orders.forEach((order) => {
     </div>
   `;
 
-    historyContainer.insertAdjacentHTML('beforeend', element);
+  historyContainer.insertAdjacentHTML('beforeend', element);
   });
-});
+}

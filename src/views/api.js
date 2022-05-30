@@ -91,17 +91,20 @@ async function patch(endpoint, params = '', data) {
 // 여기서는 우선 delete 대신 del로 쓰고 아래 export 시에 delete로 alias 함.
 async function del(endpoint, params = '', data = {}) {
   const apiUrl = `${endpoint}/${params}`;
-  const bodyData = JSON.stringify(data);
+  // const bodyData = JSON.stringify(data);
 
   console.log(`DELETE 요청 ${apiUrl}`);
-  console.log(`DELETE 요청 데이터: ${bodyData}`);
+  // console.log(`DELETE 요청 데이터: ${bodyData}`);
 
   const res = await fetch(apiUrl, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }  ,body: bodyData,
+    method: 'DELETE'
+    // ,
+    // headers: {
+    //   'Content-Type': 'application/json',
+    //   Authorization: `Bearer ${localStorage.getItem('token')}`,
+    // } 
+     ,
+    body: data,
   });
   console.log(res);
 

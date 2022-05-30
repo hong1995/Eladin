@@ -35,13 +35,14 @@ orderRouter.post('/register', async (req, res, next) => {
 });
 
 //전체 주문 목록 가져오기
-orderRouter.get('/orderlist', loginRequired, async (req, res, next) => {
+orderRouter.get('/order/orderlist', loginRequired, async (req, res, next) => {
   try {
     //전체 주문 목록을 얻음
     const orders = await orderService.getOrders();
 
     res.status(200).json(orders);
   } catch (error) {
+    console.log('innerAPI')
     next(error);
   }
 });

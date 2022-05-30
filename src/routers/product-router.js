@@ -119,6 +119,7 @@ productRouter.post('/setProduct/:productId', async (req, res, next) => {
 productRouter.delete('/deleteProduct/:productId', async (req, res, next) => {
     try {
         const { productId } = req.params;
+        console.log(productId);
 
         const deleteProduct = await productService.deleteProduct(productId);
 
