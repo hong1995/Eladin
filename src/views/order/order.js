@@ -1,18 +1,23 @@
 import * as Api from '../api.js';
-import { clearAllDB, getAllDB } from '../indexedDB.js';
+import { getAllDB } from '../indexedDB.js';
 
 // indexedDB에 담아놓은 책들 가져오기
 const books = await getAllDB('buy');
-console.log(books);
 
 // 결제 정보 표시
+const orderCount = document.querySelector('#orderCount');
 const priceText = document.querySelector('#price');
 const totalPriceText = document.querySelector('#total-price');
 
-const booksPrice = books.reduce(
-  (acc, cur) => acc + cur.price * cur.quantity,
-  0
-);
+let count = 0;
+let booksPrice = 0;
+
+books.forEach((book) => {
+  count += book.quantity;
+  booksPrice += book.price * book.quantity;
+});
+
+orderCount.innerText = `${count}개`;
 priceText.innerText = `${booksPrice}원`;
 totalPriceText.innerText = `${booksPrice + 3000}원`;
 
@@ -57,5 +62,5 @@ async function purchase() {
   console.log(info);
   await Api.post('/order/register', info);
 
-  location.href = `/orderComplete`;
+  location.href = '/orderComplete';
 }

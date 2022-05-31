@@ -1,4 +1,3 @@
-
 const loginNavBar = `<nav class="navbar">
   <a class="navbar-logo" href="/">BOOKSTORE</a>
   <ul class="navbar-menu">
@@ -10,7 +9,7 @@ const loginNavBar = `<nav class="navbar">
     <li><a href="/accountManagement">계정관리</a></li>
     <li><a href="/cart">장바구니</a></li>
   </ul>
-  </nav>`
+  </nav>`;
 
 const logoutNavBar = `<nav class="navbar">
 <a class="navbar-logo" href="/">BOOKSTORE</a>
@@ -25,19 +24,18 @@ const logoutNavBar = `<nav class="navbar">
 </ul>
 </nav>`;
 
-const e = document.createElement('div')
-if (localStorage.getItem("token")){
+const e = document.createElement('div');
+if (localStorage.getItem('token')) {
   e.innerHTML = logoutNavBar;
-} else { 
+} else {
   e.innerHTML = loginNavBar;
 }
 
 document.body.insertBefore(e, document.body.firstChild);
 
-
-const out = document.querySelector('#logout')
+const out = document.querySelector('#logout');
 out.addEventListener('click', logout);
 
-function logout () {
+function logout() {
   localStorage.removeItem('token');
 }

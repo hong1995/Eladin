@@ -1,3 +1,5 @@
+let objectStore = null;
+
 // indexedDB 생성
 function createDB(dbName) {
   return new Promise(function (resolve, reject) {
@@ -12,7 +14,7 @@ function createDB(dbName) {
 
       request.onupgradeneeded = (e) => {
         let db = e.target.result;
-        let objectStore = db.createObjectStore('product', { keyPath: '_id' });
+        objectStore = db.createObjectStore('product', { keyPath: '_id' });
       };
 
       request.onsuccess = (e) => {

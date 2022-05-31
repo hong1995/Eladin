@@ -78,11 +78,9 @@ async function updatePaymentInfo() {
   let booksPrice = 0;
 
   books.forEach((book) => {
-    console.log(book.checked);
     if (book.checked) {
       count += book.quantity;
       booksPrice += book.price * book.quantity;
-      console.log(count, booksPrice);
     }
   });
 
@@ -101,7 +99,6 @@ const itemTotalPrice = document.querySelectorAll('.itemTotalPrice');
 
 // 상품 정보 업데이트
 function updateItemInfo(i, newBooks, quantity) {
-  console.log(quantityInput, i);
   quantityInput[i].value = quantity;
   itemQuantity[i].innerText = quantity;
   itemTotalPrice[i].innerText = `${newBooks[i].price * quantity}원`;
@@ -226,19 +223,20 @@ async function deleteItem(node) {
   updatePaymentInfo();
 }
 
-// 구매하기 - 장바구니 정보 업데이트
+// 구매하기
 const purchaseButton = document.getElementById('purchaseButton');
 purchaseButton.addEventListener('click', purchase);
 
-async function purchase() {
+async function purchase(e) {
+  e.preventDefault();
   // cartDB에 담았던 상품들 buyDB로 이동
   const newBooks = await getAllDB('add-cart');
   const selectedItem = newBooks.filter((book) => book.checked);
 
   await createDB('buy');
 
-  selectedItem.forEach(async (item) => {
-    await writeDB('buy', item);
+  selectedItem.forEach((item) => {
+    writeDB('buy', item);
   });
 
   location.href = '/order';
