@@ -44,6 +44,7 @@ orderRouter.get('/orderlist', adminRequired, async (req, res, next) => {
 
     res.status(200).json(orders);
   } catch (error) {
+    console.log('innerAPI');
     next(error);
   }
 });
