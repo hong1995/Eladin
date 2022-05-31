@@ -45,8 +45,34 @@ async function updateCategory () {
 async function deleteCategory () {
     const categoryId = select.value;
     const categoryName = rename.value;
-    const result = await Api.delete('/category/deletecategory', categoryId, {categoryName});
+    const apiUrl = `/category/deletecategory/${categoryId}`;
+    const bodyData = JSON.stringify({categoryName});
+
+    const res = await fetch(apiUrl, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: bodyData,
+      });
+      console.log(res);
+    
+      // 응답 코드가 4XX 계열일 때 (400, 403 등)
+      if (!res.ok) {
+        const errorContent = await res.json();
+        const { reason } = errorContent;
+    
+        throw new Error(reason);
+      }
+    
+      const result = await res.json();
+    
+      console.log(result)
+    
 }
+
+
 
 async function getAllCategories () {
   const dropDownCategories = await Api.get('/category/list');
