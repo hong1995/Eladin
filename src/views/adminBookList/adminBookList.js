@@ -6,7 +6,6 @@ const select = document.querySelector('.select');
 async function getAllCategories () {
   const dropDownCategories = await Api.get('/category/list');
   dropDownCategories.forEach(( category ) => {
-    console.log(category);
     const {categoryName} = category;
     const element = `<option value="${categoryName}">${categoryName}</option>`;
 
@@ -16,7 +15,6 @@ async function getAllCategories () {
 
 function onChnage(e) {
   const selected = e.target.value;
-  console.log(selected);
   if (selected === 'all') {
     getAllBooks();
   } else {
@@ -29,8 +27,9 @@ async function getAllBooks() {
   removeAllchild();
 
   const datas = await Api.get('/product/list');
-  console.log(datas);
 
+
+  
   datas.forEach((book) => {
     const { _id, bookName, author, publisher, price } = book;
 
@@ -55,7 +54,6 @@ async function getCategoryBooks(selectCategory) {
   removeAllchild();
 
   const books = await Api.get(`/product/category/${selectCategory}`);
-  console.log(books);
 
   books.forEach((book) => {
     const { _id, bookName, author, publisher, price } = book;

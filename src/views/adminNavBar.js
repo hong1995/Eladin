@@ -4,7 +4,7 @@ const logoutNavBar = `<nav class="navbar">
   <li><a href="/adminBookList">도서목록</a></li>
 </ul>
 <ul class="navbar-user">
-  <li><a href = "/adminMain" id = 'logout'>로그아웃</a></li>
+  <li><a href = "/" id = 'logout'>로그아웃</a></li>
   <li><a href="/adminPageManage">웹서비스 관리</a></li>
 </ul>
 </nav>`;

@@ -17,6 +17,7 @@ viewsRouter.use('/adminBookDetail', serveStatic('adminBookDetail'));
 viewsRouter.use('/detail', serveStatic('detail'));
 viewsRouter.use('/accountManagement', serveStatic('accountManagement'));
 viewsRouter.use('/adminPageManage', serveStatic('adminPageManage'));
+viewsRouter.use('/adminBookUpdate', serveStatic('adminBookUpdate'));
 
 
 //로그인 한 경우만 필요한 페이지

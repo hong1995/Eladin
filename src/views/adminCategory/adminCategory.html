@@ -81,20 +81,30 @@
                         <div class = "fieldLabel">
                             <label for="password" class = "normalText">현재 비밀번호</label>
                         </div>
-                        <div class = "fieldForm">
-                            <input class="input" type="text" id="password" placeholder="kakao 로그인인 경우 'kakao'를 입력해주세요.">
+                        <!-- 카테고리 콤보박스-->
+                        <div class="select-box">
+                          <select class="selectWork" name="category">
+                            <option value="addCategory">추가하기</option>
+                            <option value="updateCategory">수정하기</option>
+                            <option value="deleteCategory">삭제하기</option>
+                          </select>
                         </div>
+                        <div class="select-box">
+                          <select class="select" name="category">
+                          </select>
+                        </div>
+                        
                     </div>
                     <div class = "buttonBox">
                         <div class = "fieldLabel">
-                            <label for="password" class = "normalText">현재 비밀번호</label>
+                            <label for="password" class = "normalText">추가/수정될 카테고리 이름</label>
                         </div>
                         <div class = "fieldForm">
-                            <input class="input" type="text" id="password" placeholder="kakao 로그인인 경우 'kakao'를 입력해주세요.">
+                            <input class="input" type="text" id="rename">
                         </div>
                     </div>
                     <div class = "buttonBox">
-                        <button class = "orderButton" id = "continueButton">회원 정보를 안전하게 삭제하기</button>
+                        <button class = "orderButton" id = "continueButton">확인</button>
                     </div>
                 </div>
             </div>

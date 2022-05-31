@@ -42,7 +42,7 @@ async function deleteProduct () {
 allFunc();
 const addCartBtn = document.querySelector('.add-cart');
 const buyBtn = document.querySelector('.buy');
-//addCartBtn.addEventListener('click', addDB);
+addCartBtn.addEventListener('click', () => location.href = `/adminBookUpdate?${receivedId}`);
 buyBtn.addEventListener('click', deleteProduct);
 
 // function addDB(e) {
