@@ -27,3 +27,33 @@ export const convertToNumber = (string) => {
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
+// input 유효성 검사
+export function validator(arr, num) {
+  if (!validateNull(arr)) {
+    console.log('빈값');
+    return false;
+  }
+
+  if (!validateNumber(num)) {
+    console.log('숫자');
+    return false;
+  }
+}
+
+export const validateNull = (arr) => {
+  for (const element of arr) {
+    if (!element) {
+      alert('빈 값이 있습니다.');
+      return false;
+    }
+  }
+};
+
+export const validateNumber = (value) => {
+  console.log('숫자체크 ' + value.replace(/[^-0-9]/g, ''));
+  if (!value.replace(/[^-0-9]/g, '')) {
+    alert('숫자만 입력해주세요.');
+    return false;
+  }
+};

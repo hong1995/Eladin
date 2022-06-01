@@ -20,7 +20,20 @@ class CategoryService {
 
     // 카테고리명으로 조회
     async getCategoryByName(categoryName) {
-        // 우선 해당 이름의 카테고리가 db에 존재하는지 확인 존재하지 않으면 생성
+        const category = await this.categoryModel.findByCategory(categoryName);
+        if (!category) {
+            throw new Error(
+                '해당 카테고리가 없습니다. 다시 한 번 확인해 주세요.'
+                
+            );
+
+        }
+
+        return category;
+    }
+    // 해당 이름의 카테고리가 db에 존재하는지 확인 존재하지 않으면 생성
+    async addEmptyCategory(categoryName) {
+        
         const category = await this.categoryModel.findByCategory(categoryName);
         if (!category) {
             const createdNewCategory = await this.categoryModel.create(categoryName);
@@ -29,6 +42,7 @@ class CategoryService {
 
         return category;
     }
+
 
     // 카테고리명 수정
     async setCategory(categoryId, update) {

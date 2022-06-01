@@ -1,11 +1,10 @@
 import * as Api from '../api.js';
 
-const historyContainer = document.querySelector('.history-container');
+const ordersItemContainer = document.querySelector('.orders-item-container');
 
 const orders = await Api.get('/order/orders');
 
 orders.forEach((order) => {
-  console.log(order);
   const dateText = order.createdAt.split('T')[0];
   let nameText;
   let quantityText;
@@ -15,9 +14,8 @@ orders.forEach((order) => {
 
     nameText = bookName;
     quantityText = String(quantity);
-  });
 
-  const element = `
+    const element = `
     <div class="order-item">
         <div class="item-date">${dateText}</div>
         <div class="item-book">${nameText}</div>
@@ -29,5 +27,19 @@ orders.forEach((order) => {
     </div>
   `;
 
-  historyContainer.insertAdjacentHTML('beforeend', element);
+    ordersItemContainer.insertAdjacentHTML('beforeend', element);
+  });
+});
+
+// 주문 취소
+const orderItem = document.querySelectorAll('.order-item');
+const deleteBtn = document.querySelectorAll('.delete-btn');
+
+deleteBtn.forEach((node, i) => {
+  node.addEventListener('click', async () => {
+    const res = await Api.delete(`/order/orders/${orders[i]._id}`);
+    alert('주문이 취소되었습니다.');
+
+    orderItem[i].remove();
+  });
 });

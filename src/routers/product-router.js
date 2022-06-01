@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { productService, categoryService } from '../services';
-const multer = require("multer");
-const fs = require("fs");
+const multer = require('multer');
+const fs = require('fs');
 const productRouter = Router();
 
 // 상품 등록 api
-
 
 productRouter.post('/register',async (req, res, next) => {
     try {
@@ -15,11 +14,9 @@ productRouter.post('/register',async (req, res, next) => {
                 'headers의 Content-Type을 application/json으로 설정해주세요'
             );
         }
-
-        // 입력된 카테고리를 카테고리 DB에서 검색 후 변수에 할당
-        
-        const findCategory = await categoryService.getCategoryByName(req.body.category);
-            const category = findCategory;
+        // req에서 입력했거나 이미 등록된 카테고리를 가져와 변수에 할당
+        const findCategory = await categoryService.addEmptyCategory(req.body.category);
+        const category = findCategory;
 
 
         // req에서 데이터 가져와 변수에 할당
@@ -41,8 +38,6 @@ productRouter.post('/register',async (req, res, next) => {
         res.status(200).json(newProduct);
     } catch (error) {
         next(error);
-
-
   }
 });
 
