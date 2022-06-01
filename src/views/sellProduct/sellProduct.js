@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { validator } from '../useful-functions.js';
 
 const bookNameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
@@ -34,42 +35,51 @@ async function sell(e) {
   const img = new FormData();
   img.append('img', photo.files[0]);
   console.log(photo.files[0]);
-  try {
-    const urlResult = await fetch('/upload/register/', {
-      method: 'POST',
-      body: img,
-    });
-    console.log(urlResult);
-    const imageJson = await urlResult.json();
 
-    const imageUrl = imageJson.url;
-    
-    console.log(price);
-    const data = {
-      bookName,
-      author,
-      category,
-      publisher,
-      price,
-      info,
-      imageUrl,
-    };
-    const result = await Api.post('/product/register', data);
-    console.log(result);
-  } catch (e) {
-    console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  const arr = [bookName, author, category, publisher, price, info, photo.value];
+
+  if (validator(arr, priceInput.value)) {
+    try {
+      const urlResult = await fetch('/upload/register/', {
+        method: 'POST',
+        body: img,
+      });
+      console.log(urlResult);
+      const imageJson = await urlResult.json();
+
+      const imageUrl = imageJson.url;
+
+      console.log(price);
+      const data = {
+        bookName,
+        author,
+        category,
+        publisher,
+        price,
+        info,
+        imageUrl,
+      };
+      const result = await Api.post('/product/register', data);
+
+      location.href = '/adminBookList';
+      console.log(result);
+    } catch (e) {
+      console.error(err.stack);
+      alert(
+        `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`
+      );
+    }
   }
 }
 
-async function getAllCategories () {
+async function getAllCategories() {
   const dropDownCategories = await Api.get('/category/list');
-  dropDownCategories.forEach(( category ) => {
-    const {_id, categoryName} = category;
+  dropDownCategories.forEach((category) => {
+    const { _id, categoryName } = category;
     const element = `<option value="${categoryName}">${categoryName}</option>`;
 
     select.insertAdjacentHTML('beforeend', element);
-  })
+  });
 }
 
 getAllCategories();

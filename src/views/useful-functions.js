@@ -39,15 +39,19 @@ export function validator(arr, num) {
     console.log('숫자');
     return false;
   }
+
+  return true;
 }
 
 export const validateNull = (arr) => {
   for (const element of arr) {
     if (!element) {
       alert('빈 값이 있습니다.');
+      console.log(element);
       return false;
     }
   }
+  return true;
 };
 
 export const validateNumber = (value) => {
@@ -56,4 +60,5 @@ export const validateNumber = (value) => {
     alert('숫자만 입력해주세요.');
     return false;
   }
+  return true;
 };
