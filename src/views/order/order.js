@@ -45,6 +45,7 @@ async function purchase() {
     receiverPostalCode,
   ];
 
+  console.log(validator(arr, receiverPhoneNumber));
   if (validator(arr, receiverPhoneNumber)) {
     const user = await Api.get('/api/user');
     const orderList = [];
@@ -69,9 +70,9 @@ async function purchase() {
       address2: receiverAddress2,
       postalCode: receiverPostalCode,
     };
-    console.log(info);
+
     await Api.post('/order/register', info);
 
-    // location.href = '/orderComplete';
+    location.href = '/orderComplete';
   }
 }
