@@ -28,7 +28,7 @@ books = await getAllDB('add-cart');
 const listContainer = document.querySelector('.listContainer');
 
 books.forEach(async (book) => {
-  const { _id, bookName, author, price, quantity } = book;
+  const { _id, bookName, author, price, quantity, imageUrl } = book;
 
   let element = `
     <div class="listItem" data-id=${_id}>
@@ -36,7 +36,7 @@ books.forEach(async (book) => {
         <input type="checkbox" class="checkbox" checked="true">
       </div>
       <figure class="image is-96x96">
-        <img src="https://bulma.io/images/placeholders/96x96.png">
+        <img src="${imageUrl}">
       </figure>
       <div class="contents">
         <p>${bookName}</p>
@@ -227,11 +227,15 @@ async function deleteItem(node) {
 const purchaseButton = document.getElementById('purchaseButton');
 purchaseButton.addEventListener('click', purchase);
 
-async function purchase(e) {
-  e.preventDefault();
+async function purchase() {
   // cartDB에 담았던 상품들 buyDB로 이동
   const newBooks = await getAllDB('add-cart');
   const selectedItem = newBooks.filter((book) => book.checked);
+
+  if (!selectedItem.length) {
+    alert('선택된 상품이 없습니다.');
+    return;
+  }
 
   await createDB('buy');
 

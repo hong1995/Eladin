@@ -38,11 +38,14 @@ async function addDB(e) {
   const dbName = e.target.className.split(' ')[0];
 
   await createDB(dbName);
-  await writeDB(dbName, book);
 
-  if (dbName === 'buy') {
-    location.href = '/order';
+  if (dbName === 'add-cart') {
+    writeDB(dbName, book)
+      .then((res) => alert('장바구니에 추가되었습니다.'))
+      .catch((err) => alert('이미 장바구니에 추가된 상품입니다.'));
   } else {
-    alert('장바구니에 추가되었습니다.');
+    writeDB(dbName, book);
+
+    location.href = '/order';
   }
 }
