@@ -43,7 +43,7 @@ async function sell(e) {
     const imageJson = await urlResult.json();
 
     const imageUrl = imageJson.url;
-
+    
     console.log(price);
     const data = {
       bookName,

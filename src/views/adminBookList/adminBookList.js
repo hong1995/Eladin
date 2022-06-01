@@ -1,7 +1,7 @@
 import * as Api from '../api.js';
 
 const listContainer = document.querySelector('.list-container');
-const select = document.querySelector('.select');
+const select = document.querySelector('.selectCategory');
 
 async function getAllCategories () {
   const dropDownCategories = await Api.get('/category/list');
