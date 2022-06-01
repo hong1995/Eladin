@@ -16,10 +16,9 @@ productRouter.post('/register',async (req, res, next) => {
             );
         }
 
-        // 입력된 카테고리를 카테고리 DB에서 검색 후 변수에 할당
-        
-        const findCategory = await categoryService.getCategoryByName(req.body.category);
-            const category = findCategory;
+        // req에서 입력했거나 이미 등록된 카테고리를 가져와 변수에 할당
+        const findCategory = await categoryService.addEmptyCategory(req.body.category);
+        const category = findCategory;
 
 
         // req에서 데이터 가져와 변수에 할당
