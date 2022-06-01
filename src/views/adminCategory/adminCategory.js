@@ -2,7 +2,7 @@ import * as Api from '/api.js';
 
 const rename = document.querySelector('#rename');
 const continueButton = document.querySelector('#continueButton');
-const select = document.querySelector('.select');
+const select = document.querySelector('.selectCategory');
 const selectWork = document.querySelector('.selectWork');
 
 
