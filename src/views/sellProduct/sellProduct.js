@@ -43,7 +43,7 @@ async function sell(e) {
     const imageJson = await urlResult.json();
 
     const imageUrl = imageJson.url;
-
+    
     console.log(price);
     const data = {
       bookName,
@@ -62,14 +62,14 @@ async function sell(e) {
   }
 }
 
-async function getAllCategories() {
+async function getAllCategories () {
   const dropDownCategories = await Api.get('/category/list');
-  dropDownCategories.forEach((category) => {
-    const { _id, categoryName } = category;
+  dropDownCategories.forEach(( category ) => {
+    const {_id, categoryName} = category;
     const element = `<option value="${categoryName}">${categoryName}</option>`;
 
     select.insertAdjacentHTML('beforeend', element);
-  });
+  })
 }
 
 getAllCategories();
