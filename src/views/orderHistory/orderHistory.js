@@ -5,6 +5,7 @@ const contentContainer = document.querySelector('.content-container');
 const orders = await Api.get('/order/orders');
 
 orders.forEach((order) => {
+  console.log(order);
   const dateText = order.createdAt.split('T')[0];
   let element = null;
 

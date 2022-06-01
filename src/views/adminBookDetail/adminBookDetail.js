@@ -2,14 +2,14 @@ import * as Api from '../api.js';
 // import { createDB, writeDB } from '../indexedDB.js';
 const receivedId = location.href.split('?')[1];
 
-async function allFunc (){
-    const bookContainer = document.querySelector('.book-container');
-    const book = await Api.get(`/product/${receivedId}`);
-    console.log(book);
+async function allFunc() {
+  const bookContainer = document.querySelector('.book-container');
+  const book = await Api.get(`/product/${receivedId}`);
+  console.log(book);
 
-    const { bookName, author, publisher, price, info, imageUrl } = book;
+  const { bookName, author, publisher, price, info, imageUrl } = book;
 
-    const element = `
+  const element = `
     <img src=${imageUrl} class="book-img" alt=${bookName}>
     <div class="book-info">
         <div>
@@ -26,23 +26,32 @@ async function allFunc (){
     </div>
     `;
 
-    bookContainer.insertAdjacentHTML('beforeend', element);
+  bookContainer.insertAdjacentHTML('beforeend', element);
 }
 
+async function deleteProduct() {
+  console.log(receivedId);
 
+  const res = await fetch(`/product/deleteProduct/${receivedId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
 
-async function deleteProduct () {
-    console.log(receivedId);
-    const result = await Api.delete(`/product/deleteProduct`,receivedId, '');
-    alert(`${result.bookName}이 삭제됐습니다.`);
-    location.href='/adminBookList';
+  alert(`${res.bookName}이 삭제됐습니다.`);
+  location.href = '/adminBookList';
 }
 
 // 장바구니, 바로구매 - indexedDB에 현재 상품 데이터 추가
 allFunc();
 const addCartBtn = document.querySelector('.add-cart');
 const buyBtn = document.querySelector('.buy');
-addCartBtn.addEventListener('click', () => location.href = `/adminBookUpdate?${receivedId}`);
+addCartBtn.addEventListener(
+  'click',
+  () => (location.href = `/adminBookUpdate?${receivedId}`)
+);
 buyBtn.addEventListener('click', deleteProduct);
 
 // function addDB(e) {
