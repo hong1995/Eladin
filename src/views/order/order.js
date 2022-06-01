@@ -1,6 +1,5 @@
 import * as Api from '../api.js';
 import { getAllDB } from '../indexedDB.js';
-import { validator } from '.././useful-functions.js';
 
 // indexedDB에 담아놓은 책들 가져오기
 const books = await getAllDB('buy');
@@ -37,42 +36,31 @@ async function purchase() {
     '#receiverPostalCode'
   ).value;
 
-  const arr = [
-    receiverName,
-    receiverPhoneNumber,
-    receiverAddress1,
-    receiverAddress2,
-    receiverPostalCode,
-  ];
+  const user = await Api.get('/api/user');
+  const orderList = [];
 
-  console.log(validator(arr, receiverPhoneNumber));
-  if (validator(arr, receiverPhoneNumber)) {
-    const user = await Api.get('/api/user');
-    const orderList = [];
-
-    books.forEach((book) => {
-      const obj = {
-        bookName: book.bookName,
-        quantity: book.quantity,
-        price: book.price,
-        productId: book._id,
-      };
-
-      orderList.push(obj);
-    });
-
-    const info = {
-      orderList: orderList,
-      email: user.email,
-      fullName: receiverName,
-      phoneNumber: receiverPhoneNumber,
-      address1: receiverAddress1,
-      address2: receiverAddress2,
-      postalCode: receiverPostalCode,
+  books.forEach((book) => {
+    const obj = {
+      bookName: book.bookName,
+      quantity: book.quantity,
+      price: book.price,
+      productId: book._id,
     };
 
-    await Api.post('/order/register', info);
+    orderList.push(obj);
+  });
 
-    location.href = '/orderComplete';
-  }
+  const info = {
+    orderList: orderList,
+    email: user.email,
+    fullName: receiverName,
+    phoneNumber: receiverPhoneNumber,
+    address1: receiverAddress1,
+    address2: receiverAddress2,
+    postalCode: receiverPostalCode,
+  };
+  console.log(info);
+  await Api.post('/order/register', info);
+
+  location.href = '/orderComplete';
 }
