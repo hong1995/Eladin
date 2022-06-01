@@ -84,6 +84,20 @@ async function getAllCategories () {
   })
 }
 
-  getAllCategories();
+function onChnage(e) {
+    const selected = e.target.value;
+    if (selected === 'addCategory') {
+      select.disabled = true;
+      rename.disabled = false;
+    } else if (selected === 'updateCategory') {
+      select.disabled = false;
+      rename.disabled = false;
+    } else {
+      select.disabled = false;
+      rename.disabled = true;
+    }
+}
 
-  continueButton.addEventListener('click', categoryWork);
+getAllCategories();
+selectWork.addEventListener('change', onChnage);
+continueButton.addEventListener('click', categoryWork);

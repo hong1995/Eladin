@@ -50,7 +50,7 @@ section {
     font-weight: 700;
 }
 
-.fieldForm {
+.fieldForm, .select-box {
     margin: 10px 0 5px 0;
 }
 
@@ -59,6 +59,14 @@ section {
     border-color: transparent;
     font-size: 0.9rem;
     font-weight: 800;
+    height: 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select {
+    width: 100%;
+    border-color: #E6E6FA;
     height: 2.5rem;
     border-radius: 4px;
     cursor: pointer;

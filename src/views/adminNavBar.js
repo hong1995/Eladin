@@ -1,5 +1,5 @@
 const logoutNavBar = `<nav class="navbar">
-<a class="navbar-logo" href="/">BOOKSTORE - Admin</a>
+<a class="navbar-logo" href="/adminMain">BOOKSTORE - Admin</a>
 <ul class="navbar-menu">
   <li><a href="/adminBookList">도서목록</a></li>
 </ul>

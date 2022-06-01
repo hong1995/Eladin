@@ -11,7 +11,7 @@ console.log(book);
 const { bookName, author, publisher, price, info, imageUrl } = book;
 
 const element = `
-  <img src=${imageUrl} class="book-img" alt=${bookName}>
+  <img src='${imageUrl}' class="book-img" alt=${bookName}>
   <div class="book-info">
     <div>
       <p class="title">${bookName}</p>
