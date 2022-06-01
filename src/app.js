@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import { viewsRouter, userRouter, productRouter, categoryRouter,orderRouter, uploadRouter} from './routers';
+import { viewsRouter, userRouter, productRouter, categoryRouter,orderRouter, uploadRouter, authRouter} from './routers';
 
 import { errorHandler } from './middlewares';
 

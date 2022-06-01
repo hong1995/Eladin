@@ -14,32 +14,30 @@ productRouter.post('/register', async (req, res, next) => {
         'headers의 Content-Type을 application/json으로 설정해주세요'
       );
     }
+        // req에서 입력했거나 이미 등록된 카테고리를 가져와 변수에 할당
+        const findCategory = await categoryService.addEmptyCategory(req.body.category);
+        const category = findCategory;
 
-    // 입력된 카테고리를 카테고리 DB에서 검색 후 변수에 할당
-    const findCategory = await categoryService.getCategoryByName(
-      req.body.category
-    );
-    const category = findCategory;
 
-    // req에서 데이터 가져와 변수에 할당
-    const { bookName, author, publisher, price, info, imageUrl } = req.body;
-    //const imageUrl = req.files.map(img => img.location);
+        // req에서 데이터 가져와 변수에 할당
+        const { bookName, author, publisher, price, info, imageUrl} = req.body;
+        //const imageUrl = req.files.map(img => img.location);
 
-    // 위 데이터를 상품 db에 추가하기
-    const newProduct = await productService.addProduct({
-      bookName,
-      author,
-      publisher,
-      price,
-      info,
-      imageUrl,
-      category,
-    });
+        // 위 데이터를 상품 db에 추가하기
+        const newProduct = await productService.addProduct({
+            bookName,
+            author,
+            publisher,
+            price,
+            info,
+            imageUrl,
+            category
+        });
 
-    // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
-    res.status(200).json(newProduct);
-  } catch (error) {
-    next(error);
+        // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
+        res.status(200).json(newProduct);
+    } catch (error) {
+        next(error);
   }
 });
 
