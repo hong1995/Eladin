@@ -6,7 +6,6 @@ const bookContainer = document.querySelector('.book-container');
 
 const book = await Api.get(`/product/${receivedId}`);
 book.quantity = 1;
-console.log(book);
 
 const { bookName, author, publisher, price, info, imageUrl } = book;
 
