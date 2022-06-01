@@ -9,6 +9,7 @@ const priceInput = document.querySelector('#price');
 const photo = document.querySelector('#photo');
 const file = document.querySelector('.file');
 const fileName = document.querySelector('.file-name');
+const select = document.querySelector('.select');
 const purchaseButton = document.querySelector('#purchaseButton');
 
 photo.addEventListener('change', changeName);
@@ -60,3 +61,15 @@ async function sell(e) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 }
+
+async function getAllCategories () {
+  const dropDownCategories = await Api.get('/category/list');
+  dropDownCategories.forEach(( category ) => {
+    const {_id, categoryName} = category;
+    const element = `<option value="${categoryName}">${categoryName}</option>`;
+
+    select.insertAdjacentHTML('beforeend', element);
+  })
+}
+
+getAllCategories();
