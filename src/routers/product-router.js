@@ -7,13 +7,13 @@ const productRouter = Router();
 
 // 상품 등록 api
 
-productRouter.post('/register', async (req, res, next) => {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
-      );
-    }
+productRouter.post('/register',async (req, res, next) => {
+    try {
+        if (is.emptyObject(req.body)) {
+            throw new Error(
+                'headers의 Content-Type을 application/json으로 설정해주세요'
+            );
+        }
         // req에서 입력했거나 이미 등록된 카테고리를 가져와 변수에 할당
         const findCategory = await categoryService.addEmptyCategory(req.body.category);
         const category = findCategory;
