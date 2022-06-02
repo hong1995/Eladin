@@ -27,7 +27,8 @@
   text-align: center;
 }
 
-.orders-top, .order-item {
+.orders-top,
+.order-item {
   padding: 10px 0 10px 0;
 }
 
@@ -37,4 +38,8 @@
   width: 100px;
   cursor: pointer;
   margin: 0 auto;
+}
+
+.pagination-link {
+  visibility: visible;
 }

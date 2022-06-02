@@ -61,6 +61,18 @@ export class ProductModel {
     const products = await Product.find({}).sort({ price: 1 });
     return products;
   }
+  async SortCategoryByLatest(category) {
+    const products = await Product.find({ category }).sort({ createdAt: -1 });
+    return products;
+  }
+  async SortCategoryByExpensive(category) {
+    const products = await Product.find({ category }).sort({ price: -1 });
+    return products;
+  }
+  async SortCategoryByCheap(category) {
+    const products = await Product.find({ category }).sort({ price: 1 });
+    return products;
+  }
 }
 
 const productModel = new ProductModel();

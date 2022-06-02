@@ -133,6 +133,91 @@ productRouter.get('/category/:categoryName', async (req, res, next) => {
   }
 });
 
+//카테고리별 상품  최신순 조회
+productRouter.get(
+  '/category/:categoryName/latestlist',
+  async (req, res, next) => {
+    try {
+      // req의 params에서 데이터 가져옴
+      const { categoryName } = req.params;
+
+      // 카테고리명을 기준으로 Categories DB 조회
+      const findCategory = await categoryService.getCategoryByName(
+        categoryName
+      );
+      const products = await productService.getLatestByCategory(findCategory);
+      var countPerPage = req.query.countperpage;
+      var pageNo = req.query.pageno;
+      var productsList = await productService.pagingProduct(
+        products,
+        countPerPage,
+        pageNo
+      );
+      res.json({ productsList });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// 카테고리별 상품 높은가격순 조회
+productRouter.get(
+  '/category/:categoryName/expensivelist',
+  async (req, res, next) => {
+    try {
+      // req의 params에서 데이터 가져옴
+      const { categoryName } = req.params;
+
+      // 카테고리명을 기준으로 Categories DB 조회
+      const findCategory = await categoryService.getCategoryByName(
+        categoryName
+      );
+      // 조회된 데이터(categoryModel)를 기준으로 Products DB 조회
+      const products = await productService.getExpensiveByCategory(
+        findCategory
+      );
+      var countPerPage = req.query.countperpage;
+      var pageNo = req.query.pageno;
+      var productsList = await productService.pagingProduct(
+        products,
+        countPerPage,
+        pageNo
+      );
+      res.json({ productsList });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// 카테고리별 상품 낮은가격순 조회
+productRouter.get(
+  '/category/:categoryName/cheaplist',
+  async (req, res, next) => {
+    try {
+      // req의 params에서 데이터 가져옴
+      const { categoryName } = req.params;
+
+      // 카테고리명을 기준으로 Categories DB 조회
+      const findCategory = await categoryService.getCategoryByName(
+        categoryName
+      );
+      // 조회된 데이터(categoryModel)를 기준으로 Products DB 조회
+      const products = await productService.getCheapByCategory(findCategory);
+      var countPerPage = req.query.countperpage;
+      var pageNo = req.query.pageno;
+      var productsList = await productService.pagingProduct(
+        products,
+        countPerPage,
+        pageNo
+      );
+      res.json({ productsList });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 // 특정 상품 조회
 productRouter.get('/:productId', async (req, res, next) => {
   try {
@@ -169,7 +254,7 @@ productRouter.post('/setProduct/:productId', async (req, res, next) => {
       price,
       info,
       category,
-      imageUrl
+      imageUrl,
     });
 
     res.status(200).json(updateProduct);

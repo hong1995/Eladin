@@ -7,12 +7,12 @@ const sortBox = document.querySelector('.sort-box');
 
 let totalPage = 0;
 
-categoryBox.addEventListener('change', categoryChange);
-sortBox.addEventListener('change', sortChange);
+categoryBox.addEventListener('change', dropDownChange);
+sortBox.addEventListener('change', dropDownChange);
 
 getAllCategories();
 await getAllBooks(1);
-createPaginationBtn(totalPage, 1);
+createPaginationBtn(totalPage, 6);
 
 // 전체 카테고리 가져오기
 async function getAllCategories() {
@@ -25,163 +25,157 @@ async function getAllCategories() {
   });
 }
 
-// 카테고리 선택 시
-async function categoryChange(e) {
-  const selected = e.target.value;
-
-  if (selected === 'all') {
-    await getAllBooks(1);
+// 카테고리 or 정렬 선택 시
+async function dropDownChange() {
+  if (categoryBox.value === 'all') {
+    if (sortBox.value === 'latest') {
+      await getAllBooks(1);
+    } else if (sortBox.value === 'expensive') {
+      await getExpensiveBooks(1);
+    } else {
+      await getCheapBooks(1);
+    }
   } else {
-    await getCategoryBooks(selected, 1);
+    if (sortBox.value === 'latest') {
+      await getCategoryBooks(categoryBox.value, 1);
+    } else if (sortBox.value === 'expensive') {
+      await getCategoryExpensiveBooks(categoryBox.value, 1);
+    } else {
+      await getCategoryCheapBooks(categoryBox.value, 1);
+    }
   }
-
+  console.log(totalPage);
   createPaginationBtn(totalPage);
 }
 
-// 정렬 선택 시
-async function sortChange(e) {
-  const selected = e.target.value;
-  console.log(e.target.value);
+function attachToContainer(books) {
+  listContainer.innerHTML = '';
 
-  if (selected === 'latest') {
-    await getAllBooks(1);
-  } else if (selected === 'expensive') {
-    await getExpensiveBooks(1);
-  } else {
-    await getCheapBooks(1);
-  }
+  books.productsList.productList.forEach((book) => {
+    const { _id, imageUrl, bookName, author, publisher, price } = book;
 
-  createPaginationBtn(totalPage);
+    const element = `
+      <div class="book-container" onclick="location.href='/detail?${_id}'">
+          <div class="book-info">
+              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <p class="name">${bookName}</p>
+              <p class="author">저자: ${author}</p>
+              <p class="publisher">출판사: ${publisher}</p>
+              <p class="price">판매가: ${price}</p>
+          </div>
+      </div>
+    `;
+
+    listContainer.insertAdjacentHTML('beforeend', element);
+  });
 }
 
 // 전체 도서 목록 가져오기 (기본 정렬: 최신순)
 async function getAllBooks(currentPage) {
-  listContainer.innerHTML = '';
-
   const datas = await Api.get(`/product/latestlist?pageno=${currentPage}`);
   totalPage = datas.productsList.totalPage;
 
-  datas.productsList.productList.forEach((book) => {
-    const { _id, imageUrl, bookName, author, publisher, price } = book;
-
-    const element = `
-      <div class="book-container" onclick="location.href='/detail?${_id}'">
-          <div class="book-info">
-              <img src=${imageUrl} class="book-img" alt=${bookName}>
-              <p class="name">${bookName}</p>
-              <p class="author">저자: ${author}</p>
-              <p class="publisher">출판사: ${publisher}</p>
-              <p class="price">판매가: ${price}</p>
-          </div>
-      </div>
-    `;
-
-    listContainer.insertAdjacentHTML('beforeend', element);
-  });
+  attachToContainer(datas);
 }
 
 async function getCheapBooks(currentPage) {
-  listContainer.innerHTML = '';
-
   const datas = await Api.get(`/product/cheaplist?pageno=${currentPage}`);
   totalPage = datas.productsList.totalPage;
 
-  datas.productsList.productList.forEach((book) => {
-    const { _id, imageUrl, bookName, author, publisher, price } = book;
-
-    const element = `
-      <div class="book-container" onclick="location.href='/detail?${_id}'">
-          <div class="book-info">
-              <img src=${imageUrl} class="book-img" alt=${bookName}>
-              <p class="name">${bookName}</p>
-              <p class="author">저자: ${author}</p>
-              <p class="publisher">출판사: ${publisher}</p>
-              <p class="price">판매가: ${price}</p>
-          </div>
-      </div>
-    `;
-
-    listContainer.insertAdjacentHTML('beforeend', element);
-  });
+  attachToContainer(datas);
 }
 
 async function getExpensiveBooks(currentPage) {
-  listContainer.innerHTML = '';
-
   const datas = await Api.get(`/product/expensivelist?pageno=${currentPage}`);
   totalPage = datas.productsList.totalPage;
 
-  datas.productsList.productList.forEach((book) => {
-    const { _id, imageUrl, bookName, author, publisher, price } = book;
-
-    const element = `
-      <div class="book-container" onclick="location.href='/detail?${_id}'">
-          <div class="book-info">
-              <img src=${imageUrl} class="book-img" alt=${bookName}>
-              <p class="name">${bookName}</p>
-              <p class="author">저자: ${author}</p>
-              <p class="publisher">출판사: ${publisher}</p>
-              <p class="price">판매가: ${price}</p>
-          </div>
-      </div>
-    `;
-
-    listContainer.insertAdjacentHTML('beforeend', element);
-  });
+  attachToContainer(datas);
 }
 
 // 카테고리별 목록 가져오기
 async function getCategoryBooks(selectCategory, currentPage) {
-  listContainer.innerHTML = '';
-
-  const books = await Api.get(
-    `/product/category/${selectCategory}?pageno=${currentPage}`
+  const datas = await Api.get(
+    `/product/category/${selectCategory}/latestlist?pageno=${currentPage}`
   );
-  totalPage = books.productsList.totalPage;
+  totalPage = datas.productsList.totalPage;
 
-  books.productsList.productList.forEach((book) => {
-    const { _id, bookName, author, publisher, price, imageUrl } = book;
+  attachToContainer(datas);
+}
 
-    const element = `
-      <div class="book-container" onclick="location.href='/detail?${_id}'">
-          <div class="book-info">
-              <img src="${imageUrl}" class="book-img" alt=${bookName}>
-              <p class="name">${bookName}</p>
-              <p class="author">저자: ${author}</p>
-              <p class="publisher">출판사: ${publisher}</p>
-              <p class="price">판매가: ${price}</p>
-          </div>
-      </div>
-    `;
+async function getCategoryCheapBooks(selectCategory, currentPage) {
+  const datas = await Api.get(
+    `/product/category/${selectCategory}/cheaplist?pageno=${currentPage}`
+  );
+  totalPage = datas.productsList.totalPage;
 
-    listContainer.insertAdjacentHTML('beforeend', element);
-  });
+  attachToContainer(datas);
+}
+
+async function getCategoryExpensiveBooks(selectCategory, currentPage) {
+  const datas = await Api.get(
+    `/product/category/${selectCategory}/expensivelist?pageno=${currentPage}`
+  );
+  totalPage = datas.productsList.totalPage;
+
+  attachToContainer(datas);
 }
 
 // pagination 버튼 생성
-function createPaginationBtn(totalPage) {
-  paginationList.innerHTML = '';
+// function createPaginationBtn(totalPage) {
+//   paginationList.innerHTML = '';
 
-  for (let i = 0; i < totalPage; i++) {
-    let btn = null;
+//   for (let i = 0; i < totalPage; i++) {
+//     let btn = null;
 
-    if (i === 0) {
-      btn = `
-      <li>
-        <a class="pagination-link Page 1 is-current">1</a>
-      </li>
-    `;
-    } else {
-      btn = `
-      <li>
-        <a class="pagination-link Page ${i + 1}">${i + 1}</a>
-      </li>
-    `;
-    }
+//     if (i === 0) {
+//       btn = `
+//       <li>
+//         <a class="pagination-link Page 1 is-current">1</a>
+//       </li>
+//     `;
+//     } else {
+//       btn = `
+//       <li>
+//         <a class="pagination-link Page ${i + 1}">${i + 1}</a>
+//       </li>
+//     `;
+//     }
 
-    paginationList.insertAdjacentHTML('beforeend', btn);
-  }
-}
+//     paginationList.insertAdjacentHTML('beforeend', btn);
+//   }
+// }
+
+const nextPageBtn = document.querySelector('.pagination-next');
+nextPageBtn.addEventListener('click', createPaginationBtn);
+
+// pagination 버튼 5개씩 생성
+// function createPaginationBtn(totalPage, currentPage) {
+//   const pageCount = 5;
+//   paginationList.innerHTML = '';
+
+//   const firstNum = currentPage - (currentPage % pageCount) + 1;
+//   const lastNum = currentPage - (currentPage % pageCount) + pageCount;
+
+//   for (let i = firstNum; i <= lastNum; i++) {
+//     let btn = null;
+
+//     if (i === currentPage) {
+//       btn = `
+//         <li>
+//           <a class="pagination-link Page ${i} is-current">${i}</a>
+//         </li>
+//       `;
+//     } else {
+//       btn = `
+//         <li>
+//           <a class="pagination-link Page ${i}">${i}</a>
+//         </li>
+//       `;
+//     }
+
+//     paginationList.insertAdjacentHTML('beforeend', btn);
+//   }
+// }
 
 // pagination 버튼 생성되면 이벤트 추가
 document.addEventListener('click', function (e) {
@@ -204,7 +198,14 @@ document.addEventListener('click', function (e) {
         getCheapBooks(pageNumber);
       }
     } else {
-      getCategoryBooks(categoryBox.value, pageNumber);
+      console.log(categoryBox.value, sortBox.value);
+      if (sortBox.value === 'latest') {
+        getCategoryBooks(categoryBox.value, pageNumber);
+      } else if (sortBox.value === 'expensive') {
+        getCategoryExpensiveBooks(categoryBox.value, pageNumber);
+      } else {
+        getCategoryCheapBooks(categoryBox.value, pageNumber);
+      }
     }
   }
 });

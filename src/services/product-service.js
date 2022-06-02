@@ -46,6 +46,36 @@ class ProductService {
     return product;
   }
 
+  // 카테고리별 상품 최신순 조회
+  async getLatestByCategory(categoryId) {
+    // 우선 해당 카테고리의 상품 정보가 db에 존재하는지 확인
+    const product = await this.productModel.SortCategoryByLatest(categoryId);
+    if (!product) {
+      throw new Error('해당 카테고리에 상품이 없습니다.');
+    }
+    return product;
+  }
+
+  //카테고리별 상품 높은 가격순 조회
+  async getExpensiveByCategory(categoryId) {
+    // 우선 해당 카테고리의 상품 정보가 db에 존재하는지 확인
+    const product = await this.productModel.SortCategoryByExpensive(categoryId);
+    if (!product) {
+      throw new Error('해당 카테고리에 상품이 없습니다.');
+    }
+    return product;
+  }
+
+  //카테고리별 상품 낮은 가격순 조회
+  async getCheapByCategory(categoryId) {
+    // 우선 해당 카테고리의 상품 정보가 db에 존재하는지 확인
+    const product = await this.productModel.SortCategoryByCheap(categoryId);
+    if (!product) {
+      throw new Error('해당 카테고리에 상품이 없습니다.');
+    }
+    return product;
+  }
+
   // 특정 상품 조회
   async getProductById(productId) {
     // 우선 해당 상품이 db에 존재하는지 확인
