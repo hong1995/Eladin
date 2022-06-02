@@ -27,8 +27,9 @@ async function getAllBooks() {
   removeAllchild();
 
   const datas = await Api.get('/product/list');
+  console.log(datas);
 
-  datas.forEach((book) => {
+  datas.productsList.forEach((book) => {
     const { _id, bookName, author, publisher, price, imageUrl } = book;
 
     const element = `
@@ -53,7 +54,7 @@ async function getCategoryBooks(selectCategory) {
 
   const books = await Api.get(`/product/category/${selectCategory}`);
 
-  books.forEach((book) => {
+  books.productsList.forEach((book) => {
     const { _id, bookName, author, publisher, price, imageUrl } = book;
 
     const element = `

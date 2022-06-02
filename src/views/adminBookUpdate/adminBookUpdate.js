@@ -58,7 +58,7 @@ async function sell(e) {
     };
     const result = await Api.postparam('/product/setProduct', receivedId, data);
     console.log(result);
-    location.href = `/adminBookDetail?${receivedId}`;
+    // location.href = `/adminBookDetail?${receivedId}`;
   } catch (e) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
