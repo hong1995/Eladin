@@ -43,3 +43,8 @@
 .pagination-link {
   visibility: visible;
 }
+
+.pagination-conatiner {
+  display: flex;
+  justify-content: center;
+}
