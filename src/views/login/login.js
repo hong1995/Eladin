@@ -5,6 +5,7 @@ import { validateEmail } from '/useful-functions.js';
 const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const submitButton = document.querySelector('#submitButton');
+const kakoLogin = document.querySelector('#kakaoLogin');
 
 addAllElements();
 addAllEvents();
@@ -15,6 +16,7 @@ async function addAllElements() {}
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
+  kakoLogin.addEventListener('click', kakoLoginFunction)
 }
 
 // 로그인 진행
