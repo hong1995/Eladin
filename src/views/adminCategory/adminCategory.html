@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>카트</title>
+        <!-- 아이콘 -->
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/elice-rabbit-favicon.png"
+        />
+        <!-- bulma css -->
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+        />
+        <!-- 폰트 어썸: 아이콘 -->
+        <script
+          defer
+          src="https://kit.fontawesome.com/7630448495.js"
+          crossorigin="anonymous"
+        ></script>
+        <!-- 커스텀 css, js -->
+        <link rel="stylesheet" href="adminCategory.css" />
+        <script src="adminCategory.js" type="module" defer></script>
+        <link rel="stylesheet" href="../navBar/navBar.css" />
+    <script src="../navBar/adminNavBar.js" type="module" defer></script>
+      </head>
+
+<body>
+    <!-- navbar -->
+    <!-- 장바구니 페이지-->
+     <section>
+        <div class = "container">
+            <!-- header 현재 페이지-->
+            <div class="orderComplete">
+                <!-- 배송지정보 박스 -->
+                <div class = "orderCompleteBox box">
+                    <div class = "titleBox">       
+                        <p class = "title is-5">삭제를 진행합니다.</p>
+                    </div>
+                    <div class = "buttonBox">
+                        <div class = "fieldLabel">
+                            <label for="password" class = "normalText">카테고리</label>
+                        </div>
+                        <!-- 카테고리 콤보박스-->
+                        <div class="select-box">
+                          <select class="selectWork" name="category">
+                            <option value="addCategory">추가하기</option>
+                            <option value="updateCategory">수정하기</option>
+                            <option value="deleteCategory">삭제하기</option>
+                          </select>
+                        </div>
+                        <div class="select-box">
+                          <select class="selectCategory" name="category" disabled>
+                          </select>
+                        </div>
+                        
+                    </div>
+                    <div class = "buttonBox">
+                        <div class = "fieldLabel">
+                            <label for="password" class = "normalText">추가/수정될 카테고리 이름</label>
+                        </div>
+                        <div class = "fieldForm">
+                            <input class="input" type="text" id="rename">
+                        </div>
+                    </div>
+                    <div class = "buttonBox">
+                        <button class = "orderButton" id = "continueButton">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+</body>
+</html>

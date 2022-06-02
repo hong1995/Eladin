@@ -65,3 +65,25 @@ body {
     float: left;
     width: 960px;
   }
+
+.main-container {
+  width: 960px;
+  margin: 50px auto;
+}
+
+.slider {
+  width: 960px;
+  height: 400px;
+  overflow: hidden;
+  border: 1px solid #6667ab3b;
+}
+
+.slider .slides {
+  display: block;
+  width: 1920px;
+}
+
+.slider .slide {
+  float: left;
+  width: 960px;
+}

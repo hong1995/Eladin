@@ -1,56 +1,110 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { productService, categoryService } from '../services';
-const multer = require("multer");
-const fs = require("fs");
+const multer = require('multer');
+const fs = require('fs');
 const productRouter = Router();
 
 // 상품 등록 api
 
+productRouter.post('/register', async (req, res, next) => {
+  try {
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+    // req에서 입력했거나 이미 등록된 카테고리를 가져와 변수에 할당
+    const findCategory = await categoryService.addEmptyCategory(
+      req.body.category
+    );
+    const category = findCategory;
 
-productRouter.post('/register',async (req, res, next) => {
-    try {
-        if (is.emptyObject(req.body)) {
-            throw new Error(
-                'headers의 Content-Type을 application/json으로 설정해주세요'
-            );
-        }
+    // req에서 데이터 가져와 변수에 할당
+    const { bookName, author, publisher, price, info, imageUrl } = req.body;
+    //const imageUrl = req.files.map(img => img.location);
 
-        // req에서 입력했거나 이미 등록된 카테고리를 가져와 변수에 할당
-        const findCategory = await categoryService.addEmptyCategory(req.body.category);
-        const category = findCategory;
+    // 위 데이터를 상품 db에 추가하기
+    const newProduct = await productService.addProduct({
+      bookName,
+      author,
+      publisher,
+      price,
+      info,
+      imageUrl,
+      category,
+    });
 
-
-        // req에서 데이터 가져와 변수에 할당
-        const { bookName, author, publisher, price, info, imageUrl} = req.body;
-        //const imageUrl = req.files.map(img => img.location);
-
-        // 위 데이터를 상품 db에 추가하기
-        const newProduct = await productService.addProduct({
-            bookName,
-            author,
-            publisher,
-            price,
-            info,
-            imageUrl,
-            category
-        });
-
-        // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
-        res.status(200).json(newProduct);
-    } catch (error) {
-        next(error);
-
-
+    // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
+    res.status(200).json(newProduct);
+  } catch (error) {
+    next(error);
   }
 });
 
-// 전체 상품 목록 가져옴
+// 전체 상품 목록 가져옴(default)
 productRouter.get('/list', async (req, res, next) => {
   try {
+    var countPerPage = req.query.countperpage;
+    var pageNo = req.query.pageno;
     const products = await productService.getProducts();
+    var productsList = await productService.pagingProduct(
+      products,
+      countPerPage,
+      pageNo
+    );
+    res.json({ productsList });
+  } catch (error) {
+    next(error);
+  }
+});
 
-    res.status(200).json(products);
+//전체 상품 목록 최신 등록순으로 가져오기
+productRouter.get('/latestlist', async (req, res, next) => {
+  try {
+    var countPerPage = req.query.countperpage;
+    var pageNo = req.query.pageno;
+    const products = await productService.getlatestProducts();
+    var productsList = await productService.pagingProduct(
+      products,
+      countPerPage,
+      pageNo
+    );
+    res.json({ productsList });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//전체 상품 목록 높은 가격순으로 가져오기
+productRouter.get('/expensivelist', async (req, res, next) => {
+  try {
+    var countPerPage = req.query.countperpage;
+    var pageNo = req.query.pageno;
+    const products = await productService.getExpensiveProducts();
+    var productsList = await productService.pagingProduct(
+      products,
+      countPerPage,
+      pageNo
+    );
+    res.json({ productsList });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//전체 상품 목록 높은 가격순으로 가져오기
+productRouter.get('/cheaplist', async (req, res, next) => {
+  try {
+    var countPerPage = req.query.countperpage;
+    var pageNo = req.query.pageno;
+    const products = await productService.getCheapProducts();
+    var productsList = await productService.pagingProduct(
+      products,
+      countPerPage,
+      pageNo
+    );
+    res.json({ productsList });
   } catch (error) {
     next(error);
   }
