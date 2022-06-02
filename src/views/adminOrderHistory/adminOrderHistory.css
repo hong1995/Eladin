@@ -38,3 +38,12 @@
   cursor: pointer;
   margin: 0 auto;
 }
+
+.pagination-link {
+  visibility: visible;
+}
+
+.pagination-conatiner {
+  display: flex;
+  justify-content: center;
+}
