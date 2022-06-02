@@ -1,20 +1,18 @@
-import fetch from 'cross-fetch';
 import { userService } from '../services/index';
+import { userModel } from '../db';
 import jwt from 'jsonwebtoken';
-class KakaoOAuthService{
-  constructor(inputUserService){
+import fetch from 'cross-fetch';
+class AuthService{
+  constructor(inputUserService, userModel){
     this.userService = inputUserService
-  }
-
-  async getUserByEmail(email){
-    return await this.userService.getUserByEmail(email);
+    this.userModel = userModel
   }
 
   // 카카오 토큰 요청 url 작성 함수
   makeUrlKakaoToken () {
     const REST_API_KEY = process.env.KAKAO_ID
-    const REDIRECT_URI = 'http://localhost:5030/api/auth/kakao/callback'
-    const url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+    const REDIRECT_URI = process.env.KAKAO_REDIRECTURL
+    const url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`
     return url
   }
 
@@ -50,14 +48,15 @@ class KakaoOAuthService{
   // 회원인지 검사 하는 함수
   async checkMember (userInfo) {
     const{email} = userInfo.kakao_account;
-    const getDBEmail = this.userService.getUserByEmail(email);
+    const getDBEmail = this.userModel.findByEmail(email);
     return getDBEmail;
   }
 
   //회원 우리db에 등록 하는 함수
   async signUp (userInfo){
-    const { email, profile } = userInfo.kakao_account;
-    const {nickname} = profile
+    
+    const email = userInfo.kakao_account.email;
+    const nickname = userInfo.kakao_account.profile.nickname;
     const userData = {
       email: email,
       fullName: nickname,
@@ -74,7 +73,7 @@ class KakaoOAuthService{
   }
 }
 
-const kakaoOAuthService = new KakaoOAuthService(userService)
+const authService = new AuthService(userService, userModel);
 
-export { kakaoOAuthService }
+export { authService }
 
