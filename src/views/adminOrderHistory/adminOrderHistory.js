@@ -6,21 +6,13 @@ paginationBtn.forEach((btn) => btn.addEventListener('click', pagination));
 const previous = document.querySelector('#previous');
 const nextBtn = document.querySelector('#nextBtn');
 
+nextBtn.addEventListener('click', plusPage);
+previous.addEventListener('click', minusPage);
+
 let currentButtonPageNum = 0;
 let totalPageNum = 0;
+let totalButtonPageNum = 0;
 await drawAdminOrderHistory(1);
-
-console.log(totalPageNum)
-let totalButtonPageNum = Math.floor(totalPageNum/5)
-console.log(totalButtonPageNum);
-
-if ( currentButtonPageNum === totalButtonPageNum ) {
-  paginationBtn.forEach((btn) => {
-    if (Number(btn.innerText) > totalPageNum) {
-      btn.style.visibility = 'hidden';
-    }
-  });
-}
 
 async function drawAdminOrderHistory(pageNo){
   const ordersItemContainer = document.querySelector('.orders-item-container');
@@ -73,6 +65,15 @@ async function drawAdminOrderHistory(pageNo){
   });
 
   totalPageNum = totalPage;
+  totalButtonPageNum = Math.floor(totalPageNum/5)
+
+  if ( currentButtonPageNum === totalButtonPageNum ) {
+    paginationBtn.forEach((btn) => {
+      if (Number(btn.innerText) > totalPageNum) {
+        btn.style.visibility = 'hidden';
+      }
+    });
+  }
 }
 
 // const paginationList = document.querySelector('.pagination-list');
@@ -103,41 +104,45 @@ async function currentButton(num) {
 
 
 //previous.addEventListener('click', minusPage);
-nextBtn.addEventListener('click', plusPage);
+
 
 async function plusPage() {
   if (currentButtonPageNum < totalButtonPageNum) {
     currentButtonPageNum += 1;
     
-    paginationBtn.forEach((btn) => {
-      btn.classList.remove('is-current');
+    paginationBtn.forEach((btn, i) => {
+      console.log(typeof(i));
+      if( i === 0 ){
+        console.log('working')
+        btn.classList.add('is-current');
+      } else {
+        btn.classList.remove('is-current');
+      }
+      
     });
     
   }
   
   currentButton(currentButtonPageNum);
+  drawAdminOrderHistory(currentButtonPageNum * 5 + 1);
   
-  if ( currentButtonPageNum === totalButtonPageNum ) {
-    paginationBtn.forEach((btn) => {
-      if (Number(btn.innerText) > totalPageNum) {
-        btn.style.visibility = 'hidden';
-      }
-    });
-  }
 }
-
-previous.addEventListener('click', minusPage);
 
 async function minusPage() {
   if (currentButtonPageNum > 0) {
     currentButtonPageNum -= 1;
     
-    paginationBtn.forEach((btn) => {
-      btn.classList.remove('is-current');
+    paginationBtn.forEach((btn, i) => {
+      if( i === 0 ){
+        console.log('working')
+        btn.classList.add('is-current');
+      } else {
+        btn.classList.remove('is-current');
+      }
       btn.style.visibility = 'visible';
     });
     
   } 
   currentButton(currentButtonPageNum); 
-
+  drawAdminOrderHistory(currentButtonPageNum * 5 + 1);
 }
