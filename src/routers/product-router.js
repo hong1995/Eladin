@@ -153,7 +153,7 @@ productRouter.post('/setProduct/:productId', async (req, res, next) => {
   try {
     // req의 params와 body에서 데이터 가져옴
     const { productId } = req.params;
-    const { bookName, author, publisher, price, info } = req.body;
+    const { bookName, author, publisher, price, info, imageUrl } = req.body;
 
     // 입력된 카테고리를 카테고리 DB에서 검색 후 변수에 할당
     const findCategory = await categoryService.getCategoryByName(
@@ -169,6 +169,7 @@ productRouter.post('/setProduct/:productId', async (req, res, next) => {
       price,
       info,
       category,
+      imageUrl
     });
 
     res.status(200).json(updateProduct);

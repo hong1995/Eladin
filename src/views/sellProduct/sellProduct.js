@@ -25,7 +25,6 @@ async function sell(e) {
   e.preventDefault();
 
   //upload router
-  console.log('fetch start');
   const bookName = bookNameInput.value;
   const author = authorInput.value;
   const category = categoryInput.value;
