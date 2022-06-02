@@ -39,12 +39,16 @@ orderRouter.post('/register', async (req, res, next) => {
 //전체 주문 목록 가져오기(관리자용)
 orderRouter.get('/orderlist', adminRequired, async (req, res, next) => {
   try {
-    //전체 주문 목록을 얻음
+    var countPerPage = req.query.countperpage;
+    var pageNo = req.query.pageno;
     const orders = await orderService.getOrders();
-
-    res.status(200).json(orders);
+    var ordersList = await orderService.pagingOrder(
+      orders,
+      countPerPage,
+      pageNo
+    );
+    res.json({ ordersList });
   } catch (error) {
-    console.log('innerAPI');
     next(error);
   }
 });
