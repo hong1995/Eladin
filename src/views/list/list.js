@@ -2,10 +2,13 @@ import * as Api from '../api.js';
 
 const listContainer = document.querySelector('.list-container');
 const paginationList = document.querySelector('.pagination-list');
-const select = document.querySelector('.select');
+const categoryBox = document.querySelector('.category-box');
+const sortBox = document.querySelector('.sort-box');
+
 let totalPage = 0;
 
-select.addEventListener('change', onChange);
+categoryBox.addEventListener('change', categoryChange);
+sortBox.addEventListener('change', sortChange);
 
 getAllCategories();
 await getAllBooks(1);
@@ -18,12 +21,12 @@ async function getAllCategories() {
     const { categoryName } = category;
     const element = `<option value="${categoryName}">${categoryName}</option>`;
 
-    select.insertAdjacentHTML('beforeend', element);
+    categoryBox.insertAdjacentHTML('beforeend', element);
   });
 }
 
 // 카테고리 선택 시
-async function onChange(e) {
+async function categoryChange(e) {
   const selected = e.target.value;
 
   if (selected === 'all') {
@@ -35,11 +38,77 @@ async function onChange(e) {
   createPaginationBtn(totalPage);
 }
 
-// 전체 도서 목록 가져오기
+// 정렬 선택 시
+async function sortChange(e) {
+  const selected = e.target.value;
+  console.log(e.target.value);
+
+  if (selected === 'latest') {
+    await getAllBooks(1);
+  } else if (selected === 'expensive') {
+    await getExpensiveBooks(1);
+  } else {
+    await getCheapBooks(1);
+  }
+
+  createPaginationBtn(totalPage);
+}
+
+// 전체 도서 목록 가져오기 (기본 정렬: 최신순)
 async function getAllBooks(currentPage) {
   listContainer.innerHTML = '';
 
-  const datas = await Api.get(`/product/list?pageno=${currentPage}`);
+  const datas = await Api.get(`/product/latestlist?pageno=${currentPage}`);
+  totalPage = datas.productsList.totalPage;
+
+  datas.productsList.productList.forEach((book) => {
+    const { _id, imageUrl, bookName, author, publisher, price } = book;
+
+    const element = `
+      <div class="book-container" onclick="location.href='/detail?${_id}'">
+          <div class="book-info">
+              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <p class="name">${bookName}</p>
+              <p class="author">저자: ${author}</p>
+              <p class="publisher">출판사: ${publisher}</p>
+              <p class="price">판매가: ${price}</p>
+          </div>
+      </div>
+    `;
+
+    listContainer.insertAdjacentHTML('beforeend', element);
+  });
+}
+
+async function getCheapBooks(currentPage) {
+  listContainer.innerHTML = '';
+
+  const datas = await Api.get(`/product/cheaplist?pageno=${currentPage}`);
+  totalPage = datas.productsList.totalPage;
+
+  datas.productsList.productList.forEach((book) => {
+    const { _id, imageUrl, bookName, author, publisher, price } = book;
+
+    const element = `
+      <div class="book-container" onclick="location.href='/detail?${_id}'">
+          <div class="book-info">
+              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <p class="name">${bookName}</p>
+              <p class="author">저자: ${author}</p>
+              <p class="publisher">출판사: ${publisher}</p>
+              <p class="price">판매가: ${price}</p>
+          </div>
+      </div>
+    `;
+
+    listContainer.insertAdjacentHTML('beforeend', element);
+  });
+}
+
+async function getExpensiveBooks(currentPage) {
+  listContainer.innerHTML = '';
+
+  const datas = await Api.get(`/product/expensivelist?pageno=${currentPage}`);
   totalPage = datas.productsList.totalPage;
 
   datas.productsList.productList.forEach((book) => {
@@ -126,10 +195,16 @@ document.addEventListener('click', function (e) {
 
     e.target.classList.add('is-current');
 
-    if (select.value === 'all') {
-      getAllBooks(pageNumber);
+    if (categoryBox.value === 'all') {
+      if (sortBox.value === 'latest') {
+        getAllBooks(pageNumber);
+      } else if (sortBox.value === 'expensive') {
+        getExpensiveBooks(pageNumber);
+      } else {
+        getCheapBooks(pageNumber);
+      }
     } else {
-      getCategoryBooks(select.value, pageNumber);
+      getCategoryBooks(categoryBox.value, pageNumber);
     }
   }
 });
