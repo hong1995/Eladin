@@ -61,7 +61,7 @@ async function sell(e) {
       };
       const result = await Api.post('/product/register', data);
 
-      location.href = '/adminBookList';
+      // location.href = '/adminBookList';
       console.log(result);
     } catch (e) {
       console.error(err.stack);

@@ -33,8 +33,11 @@ if (localStorage.getItem('token')) {
 document.body.insertBefore(e, document.body.firstChild);
 
 // 로그아웃
+
 const out = document.querySelector('#logout');
-out.addEventListener('click', logout);
+if (out) {
+  out.addEventListener('click', logout);
+}
 
 function logout() {
   localStorage.removeItem('token');

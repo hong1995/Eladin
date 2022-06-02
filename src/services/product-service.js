@@ -103,7 +103,8 @@ class ProductService {
           productList.push(products[index]);
         }
       }
-      return productList;
+      var totalPage = Math.ceil(totalCount / 9);
+      return { productList, totalPage };
     } else {
       return products;
     }

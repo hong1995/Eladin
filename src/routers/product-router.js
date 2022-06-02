@@ -120,8 +120,14 @@ productRouter.get('/category/:categoryName', async (req, res, next) => {
     const findCategory = await categoryService.getCategoryByName(categoryName);
     // 조회된 데이터(categoryModel)를 기준으로 Products DB 조회
     const products = await productService.getProductByCategory(findCategory);
-
-    res.status(200).json(products);
+    var countPerPage = req.query.countperpage;
+    var pageNo = req.query.pageno;
+    var productsList = await productService.pagingProduct(
+      products,
+      countPerPage,
+      pageNo
+    );
+    res.json({ productsList });
   } catch (error) {
     next(error);
   }

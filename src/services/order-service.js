@@ -59,7 +59,8 @@ class OrderService {
           orderList.push(orders[index]);
         }
       }
-      return orderList;
+      var totalPage = Math.ceil(totalCount / 9);
+      return { orderList, totalPage };
     } else {
       return orders;
     }
