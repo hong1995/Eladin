@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: 'Jua', sans-serif;
 }
@@ -49,4 +49,73 @@ body {
   height: 300px;
   object-fit: cover;
   box-shadow: 1px 1px 8px 0px #00000096;
+} */
+
+body {
+  margin: 0;
+  font-family: 'Jua', sans-serif;
+}
+
+.book-img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  box-shadow: 0.5px 0.5px 8px;
+}
+
+.newText {
+  color: red;
+  padding-right: 15px;
+}
+
+.container-title {
+  height: 80px;
+  line-height: 80px;
+  padding-left: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.main-container {
+  width: 1024px;
+  margin: 50px auto;
+}
+
+.container {
+  width: 1024px;
+  height: 450px;
+  background-color: #8687cc1f;
+  border-radius: 20px;
+  border: solid #eaeaea 3px;
+}
+
+.slider {
+  width: 1024px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.slider .slides {
+  display: block;
+  width: 8000px;
+  height: 100%;
+}
+
+.slider .slide {
+  float: left;
+  width: 1024px;
+  height: 450px;
+}
+
+.slide {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
 }
