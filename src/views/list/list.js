@@ -12,7 +12,7 @@ sortBox.addEventListener('change', dropDownChange);
 
 getAllCategories();
 await getAllBooks(1);
-createPaginationBtn(totalPage, 6);
+createPaginationBtn(totalPage, 1);
 
 // 전체 카테고리 가져오기
 async function getAllCategories() {
@@ -44,8 +44,7 @@ async function dropDownChange() {
       await getCategoryCheapBooks(categoryBox.value, 1);
     }
   }
-  console.log(totalPage);
-  createPaginationBtn(totalPage);
+  createPaginationBtn(totalPage, 1);
 }
 
 function attachToContainer(books) {
@@ -78,6 +77,7 @@ async function getAllBooks(currentPage) {
   attachToContainer(datas);
 }
 
+// 가격 낮은 순
 async function getCheapBooks(currentPage) {
   const datas = await Api.get(`/product/cheaplist?pageno=${currentPage}`);
   totalPage = datas.productsList.totalPage;
@@ -85,6 +85,7 @@ async function getCheapBooks(currentPage) {
   attachToContainer(datas);
 }
 
+// 가격 높은 순
 async function getExpensiveBooks(currentPage) {
   const datas = await Api.get(`/product/expensivelist?pageno=${currentPage}`);
   totalPage = datas.productsList.totalPage;
@@ -120,62 +121,82 @@ async function getCategoryExpensiveBooks(selectCategory, currentPage) {
   attachToContainer(datas);
 }
 
-// pagination 버튼 생성
-// function createPaginationBtn(totalPage) {
-//   paginationList.innerHTML = '';
-
-//   for (let i = 0; i < totalPage; i++) {
-//     let btn = null;
-
-//     if (i === 0) {
-//       btn = `
-//       <li>
-//         <a class="pagination-link Page 1 is-current">1</a>
-//       </li>
-//     `;
-//     } else {
-//       btn = `
-//       <li>
-//         <a class="pagination-link Page ${i + 1}">${i + 1}</a>
-//       </li>
-//     `;
-//     }
-
-//     paginationList.insertAdjacentHTML('beforeend', btn);
-//   }
-// }
-
+const previousPageBtn = document.querySelector('.pagination-previous');
 const nextPageBtn = document.querySelector('.pagination-next');
-nextPageBtn.addEventListener('click', createPaginationBtn);
+
+previousPageBtn.addEventListener('click', () => {
+  const pageBtn = document.querySelectorAll('.pagination-link');
+  const currentPage = Number(pageBtn[0].innerText - 5);
+
+  if (currentPage < 0) return;
+
+  createPaginationBtn(totalPage, currentPage);
+  pagination(currentPage);
+});
+
+nextPageBtn.addEventListener('click', () => {
+  const pageBtn = document.querySelectorAll('.pagination-link');
+  const currentPage = Number(pageBtn[pageBtn.length - 1].innerText) + 1;
+
+  if (currentPage > totalPage) return;
+
+  createPaginationBtn(totalPage, currentPage);
+  pagination(currentPage);
+});
 
 // pagination 버튼 5개씩 생성
-// function createPaginationBtn(totalPage, currentPage) {
-//   const pageCount = 5;
-//   paginationList.innerHTML = '';
+function createPaginationBtn(totalPage, currentPage) {
+  console.log(totalPage);
+  const pageCount = 5;
+  paginationList.innerHTML = '';
 
-//   const firstNum = currentPage - (currentPage % pageCount) + 1;
-//   const lastNum = currentPage - (currentPage % pageCount) + pageCount;
+  const firstNum = currentPage - (currentPage % pageCount) + 1;
+  let lastNum = currentPage - (currentPage % pageCount) + pageCount;
 
-//   for (let i = firstNum; i <= lastNum; i++) {
-//     let btn = null;
+  if (lastNum > totalPage) {
+    lastNum = totalPage;
+  }
 
-//     if (i === currentPage) {
-//       btn = `
-//         <li>
-//           <a class="pagination-link Page ${i} is-current">${i}</a>
-//         </li>
-//       `;
-//     } else {
-//       btn = `
-//         <li>
-//           <a class="pagination-link Page ${i}">${i}</a>
-//         </li>
-//       `;
-//     }
+  for (let i = firstNum; i <= lastNum; i++) {
+    let btn = null;
 
-//     paginationList.insertAdjacentHTML('beforeend', btn);
-//   }
-// }
+    if (i === currentPage) {
+      btn = `
+        <li>
+          <a class="pagination-link Page ${i} is-current">${i}</a>
+        </li>
+      `;
+    } else {
+      btn = `
+        <li>
+          <a class="pagination-link Page ${i}">${i}</a>
+        </li>
+      `;
+    }
+
+    paginationList.insertAdjacentHTML('beforeend', btn);
+  }
+}
+
+function pagination(pageNumber) {
+  if (categoryBox.value === 'all') {
+    if (sortBox.value === 'latest') {
+      getAllBooks(pageNumber);
+    } else if (sortBox.value === 'expensive') {
+      getExpensiveBooks(pageNumber);
+    } else {
+      getCheapBooks(pageNumber);
+    }
+  } else {
+    if (sortBox.value === 'latest') {
+      getCategoryBooks(categoryBox.value, pageNumber);
+    } else if (sortBox.value === 'expensive') {
+      getCategoryExpensiveBooks(categoryBox.value, pageNumber);
+    } else {
+      getCategoryCheapBooks(categoryBox.value, pageNumber);
+    }
+  }
+}
 
 // pagination 버튼 생성되면 이벤트 추가
 document.addEventListener('click', function (e) {
@@ -189,23 +210,6 @@ document.addEventListener('click', function (e) {
 
     e.target.classList.add('is-current');
 
-    if (categoryBox.value === 'all') {
-      if (sortBox.value === 'latest') {
-        getAllBooks(pageNumber);
-      } else if (sortBox.value === 'expensive') {
-        getExpensiveBooks(pageNumber);
-      } else {
-        getCheapBooks(pageNumber);
-      }
-    } else {
-      console.log(categoryBox.value, sortBox.value);
-      if (sortBox.value === 'latest') {
-        getCategoryBooks(categoryBox.value, pageNumber);
-      } else if (sortBox.value === 'expensive') {
-        getCategoryExpensiveBooks(categoryBox.value, pageNumber);
-      } else {
-        getCategoryCheapBooks(categoryBox.value, pageNumber);
-      }
-    }
+    pagination(pageNumber);
   }
 });
