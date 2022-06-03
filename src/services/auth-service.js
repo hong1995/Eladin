@@ -29,7 +29,7 @@ class AuthService{
       });
       const kakaoTokentRequestJson = await kakaoTokentRequest.json()
 
-      // 토큰이 있다면 정보 달라고 요청
+      // 토큰이 존재하면 정보 달라고 요청
       if("access_token" in kakaoTokentRequestJson){
         const { access_token } = kakaoTokentRequestJson;
         const userReuest = await fetch('https://kapi.kakao.com/v2/user/me', {
