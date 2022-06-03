@@ -1,6 +1,6 @@
 import * as Api from '../api.js';
 import { getAllDB } from '../indexedDB.js';
-import { validator } from '../useful-functions.js';
+import { validateNull, validateNumber } from '../useful-functions.js';
 
 // indexedDB에 담아놓은 책들 가져오기
 const books = await getAllDB('buy');
@@ -45,7 +45,26 @@ async function purchase() {
     receiverPostalCode,
   ];
 
-  if (validator(arr, receiverPhoneNumber)) {
+  function validationCheck() {
+    for (const value of arr) {
+      if (!validateNull(value)) break;
+      else {
+        if (!validateNumber(receiverPhoneNumber)) {
+          alert('연락처에 숫자만 입력해주세요.');
+          break;
+        }
+
+        if (!validateNumber(receiverPostalCode)) {
+          alert('우편번호에 숫자만 입력해주세요.');
+          break;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  if (validationCheck()) {
     const user = await Api.get('/api/user');
     const orderList = [];
 

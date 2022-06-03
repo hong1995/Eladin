@@ -4,8 +4,8 @@ const newBooksContainer = document.querySelector('.new-books-container');
 
 const datas = await Api.get(`/product/latestlist?pageno=1`);
 
-datas.productsList.productList.forEach((book) => {
-  const { _id, imageUrl, bookName, author } = book;
+datas.productsList.productList.forEach((data) => {
+  const { _id, imageUrl, bookName, author } = data;
 
   const element = `
       <div class="book-container" onclick="location.href='/detail?${_id}'">
