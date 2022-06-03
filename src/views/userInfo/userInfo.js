@@ -56,6 +56,7 @@ async function submitUserInfo(e) {
       };
       alert('수정이 완료됐습니다.');
       await Api.patch('/api/update', '', data);
+      location.href = '/accountManagement'
     } catch (e) {
       console.error(err.stack);
       alert(
