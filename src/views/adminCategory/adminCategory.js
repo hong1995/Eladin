@@ -23,7 +23,7 @@ async function categoryWork(e) {
       
       const result = await updateCategory();
       if(result){
-        alert(`${ result } 카테고리가 수정됐습니다.`);
+        alert(`카테고리가 수정됐습니다.`);
         location.href = '/adminCategory';
       }
 
@@ -58,8 +58,8 @@ async function updateCategory() {
     return false;
   }
 
-  const result = await Api.postparam('/category/setcategory', categoryId, { categoryName });
-  return result.categoryName;
+  await Api.postparam('/category/setcategory', categoryId, { categoryName });
+  return true;
 }
 
 async function deleteCategory() {
