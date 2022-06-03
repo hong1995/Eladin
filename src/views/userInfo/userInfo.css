@@ -79,24 +79,7 @@ section {
 }
 
 #receiverAddress {
-  width: 90%;
-}
-
-.find {
-  display: flex;
-  justify-content: right;
-  width: 10%;
-}
-
-.findButton {
-  background-color: #6a5acd;
-  border-color: transparent;
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 800;
-  height: 2.5rem;
-  border-radius: 4px;
-  cursor: pointer;
+  width: 100%;
 }
 /* 결제 정보 박스 */
 .buttonBox {

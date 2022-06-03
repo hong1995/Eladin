@@ -1,5 +1,4 @@
 import * as Api from '/api.js';
-import { validator } from '../useful-functions.js';
 
 const rename = document.querySelector('#rename');
 const continueButton = document.querySelector('#continueButton');
@@ -36,7 +35,7 @@ async function categoryWork(e) {
 
     }
   } catch (err) {
-    alert(err.message);
+    console.log(err);
   }
 }
 
@@ -59,9 +58,7 @@ async function updateCategory() {
     return false;
   }
 
-  const result = await Api.postparam('/category/setcategory', categoryId, {
-    categoryName,
-  });
+  const result = await Api.postparam('/category/setcategory', categoryId, { categoryName });
   return result.categoryName;
 }
 
