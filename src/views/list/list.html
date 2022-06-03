@@ -32,12 +32,29 @@
     <div class="container">
       <!-- 카테고리 콤보박스-->
       <div class="select-box">
-        <select class="select" name="category">
+        <select class="select category-box">
           <option value="all" selected>전체도서</option>
+        </select>
+        <select class="select sort-box">
+          <option value="latest" selected>최신등록순</option>
+          <option value="expensive">가격 높은순</option>
+          <option value="cheap">가격 낮은순</option>
         </select>
       </div>
       <!-- 카테고리별 도서 목록-->
       <div class="list-container"></div>
+      <!-- pagination 버튼 -->
+      <div class="pagination-conatiner">
+        <div>
+          <a class="pagination-previous"><</a>
+        </div>
+        <div class="pagination-list-container">
+          <ul class="pagination-list"></ul>
+        </div>
+        <div>
+          <a class="pagination-next">></a>
+        </div>
+      </div>
     </div>
   </body>
 </html>

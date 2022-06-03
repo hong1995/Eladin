@@ -8,21 +8,7 @@ import {
   createDB,
 } from '../indexedDB.js';
 
-// 주문한 상품은 indexedDB에서 제거 후 가져옴
-const orderedBook = await Api.get('/order/orders');
-const orderBookId = orderedBook
-  .map((order) => order.orderList.map((list) => list.productId))
-  .flat();
-
-let books = await getAllDB('add-cart');
-
-books.forEach((book) => {
-  if (orderBookId.includes(book._id)) {
-    deleteDB('add-cart', book._id);
-  }
-});
-
-books = await getAllDB('add-cart');
+const books = await getAllDB('add-cart');
 
 // 상품 목록 표시
 const listContainer = document.querySelector('.listContainer');
@@ -35,9 +21,7 @@ books.forEach(async (book) => {
       <div class="leftSpacer">
         <input type="checkbox" class="checkbox" checked="true">
       </div>
-      <figure class="image is-96x96">
-        <img src="${imageUrl}">
-      </figure>
+        <img src="${imageUrl}" class="itemImg">
       <div class="contents">
         <p>${bookName}</p>
         <p>${author}</p>

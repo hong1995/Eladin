@@ -4,7 +4,7 @@ body {
 
 .container {
   width: 960px;
-  margin: 50px auto;
+  margin: 100px auto;
 }
 
 .book-container {
@@ -14,7 +14,9 @@ body {
 }
 
 .book-img {
-  width: 400px;
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
   margin-right: 50px;
   box-shadow: 2px 2px 8px 0px;
 }

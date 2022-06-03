@@ -9,7 +9,6 @@ const publisherInput = document.querySelector('#publisher');
 const infoInput = document.querySelector('#info');
 const priceInput = document.querySelector('#price');
 const photo = document.querySelector('#photo');
-const file = document.querySelector('.file');
 const fileName = document.querySelector('.file-name');
 const select = document.querySelector('.select');
 const purchaseButton = document.querySelector('#purchaseButton');
@@ -57,7 +56,7 @@ async function sell(e) {
       imageUrl,
     };
     const result = await Api.postparam('/product/setProduct', receivedId, data);
-    console.log(result);
+    alert(`제품이 수정됐습니다.`);
     location.href = `/adminBookDetail?${receivedId}`;
   } catch (e) {
     console.error(err.stack);

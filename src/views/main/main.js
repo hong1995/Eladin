@@ -1,29 +1,21 @@
-// 2) Image Slider
+import * as Api from '../api.js';
 
-var slider = document.querySelector('.slider');
-var slides = document.querySelector('.slides');
-var slide = document.querySelectorAll('.slide');
+const newBooksContainer = document.querySelector('.new-books-container');
 
-var currentSlide = 0;
+const datas = await Api.get(`/product/latestlist?pageno=1`);
 
-setInterval(function () {
-  var from = -(960 * currentSlide);
-  var to = from - 960;
-  slides.animate(
-    {
-      marginLeft: [from + 'px', to + 'px'],
-    },
-    {
-      duration: 1000,
-      easing: 'ease',
-      iterations: 1,
-      fill: 'both',
-    }
-  );
+datas.productsList.productList.forEach((data) => {
+  const { _id, imageUrl, bookName, author } = data;
 
-  currentSlide++;
+  const element = `
+      <div class="book-container" onclick="location.href='/detail?${_id}'">
+          <div class="book-info">
+              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <p class="name">${bookName}</p>
+              <p class="author">${author}</p>
+          </div>
+      </div>
+    `;
 
-  if (currentSlide === slide.length - 1) {
-    currentSlide = -1;
-  }
-}, 4000);
+  newBooksContainer.insertAdjacentHTML('beforeend', element);
+});

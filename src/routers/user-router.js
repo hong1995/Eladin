@@ -151,11 +151,11 @@ userRouter.patch('/update', loginRequired, async function (req, res, next) {
 // 사용자 정보 삭제
 userRouter.delete('/del', loginRequired, async function (req, res, next) {
   try {
-    //const userId = req.params.userId;
     const userToken = req.headers['authorization']?.split(' ')[1];
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
     const userId = jwtDecoded.userId;
+    console.log(userId);
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
     const currentPassword = req.body.data;
     // currentPassword 없을 시, 진행 불가
