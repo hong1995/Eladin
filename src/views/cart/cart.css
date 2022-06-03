@@ -123,6 +123,13 @@ section {
   justify-content: center;
 }
 
+.itemImg {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  box-shadow: 1px 1px 5px 0px;
+}
+
 /* 결제정보 박스 */
 
 .orderSummaryContainer {

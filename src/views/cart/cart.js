@@ -21,9 +21,7 @@ books.forEach(async (book) => {
       <div class="leftSpacer">
         <input type="checkbox" class="checkbox" checked="true">
       </div>
-      <figure class="image is-96x96">
-        <img src="${imageUrl}">
-      </figure>
+        <img src="${imageUrl}" class="itemImg">
       <div class="contents">
         <p>${bookName}</p>
         <p>${author}</p>
