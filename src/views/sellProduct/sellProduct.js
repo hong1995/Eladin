@@ -1,5 +1,5 @@
 import * as Api from '/api.js';
-import { validator } from '../useful-functions.js';
+import { validateNull, validateNumber } from '../useful-functions.js';
 
 const bookNameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
@@ -29,38 +29,50 @@ async function sell(e) {
   const category = categoryInput.value;
   const publisher = publisherInput.value;
   const info = infoInput.value;
-  const price = Number(priceInput.value);
+  const price = priceInput.value;
   const img = new FormData();
   img.append('img', photo.files[0]);
-  console.log(photo.files[0]);
 
-  const arr = [bookName, author, category, publisher, price, info, photo.value];
+  const arr = [bookName, author, publisher, price, info, photo.value];
+  console.log(arr);
 
-  if (validator(arr, priceInput.value)) {
+  function validationCheck(arr) {
+    if (!validateNull(arr)) {
+      return false;
+    }
+
+    if (!validateNumber(price)) {
+      alert('가격에 숫자만 입력해주세요.');
+      return false;
+    }
+
+    return true;
+  }
+
+  if (validationCheck(arr)) {
     try {
       const urlResult = await fetch('/upload/register/', {
         method: 'POST',
         body: img,
       });
-      console.log(urlResult);
-      const imageJson = await urlResult.json();
 
+      const imageJson = await urlResult.json();
       const imageUrl = imageJson.url;
 
-      console.log(price);
       const data = {
         bookName,
         author,
         category,
         publisher,
-        price,
+        price: Number(price),
         info,
         imageUrl,
       };
+
       await Api.post('/product/register', data);
-      alert(`${bookName} 등록이 완료되었습니다.`)
+      alert(`${bookName} 등록이 완료되었습니다.`);
       location.href = '/sellProduct';
-    } catch (e) {
+    } catch (err) {
       console.error(err.stack);
       alert(
         `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`
@@ -71,6 +83,7 @@ async function sell(e) {
 
 async function getAllCategories() {
   const dropDownCategories = await Api.get('/category/list');
+
   dropDownCategories.forEach((category) => {
     const { _id, categoryName } = category;
     const element = `<option value="${categoryName}">${categoryName}</option>`;

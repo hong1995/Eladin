@@ -45,26 +45,25 @@ async function purchase() {
     receiverPostalCode,
   ];
 
-  function validationCheck() {
-    for (const value of arr) {
-      if (!validateNull(value)) break;
-      else {
-        if (!validateNumber(receiverPhoneNumber)) {
-          alert('연락처에 숫자만 입력해주세요.');
-          break;
-        }
-
-        if (!validateNumber(receiverPostalCode)) {
-          alert('우편번호에 숫자만 입력해주세요.');
-          break;
-        }
-      }
-      return true;
+  function validationCheck(arr) {
+    if (!validateNull(arr)) {
+      return false;
     }
-    return false;
+
+    if (!validateNumber(receiverPhoneNumber)) {
+      alert('연락처에 숫자만 입력해주세요.');
+      return false;
+    }
+
+    if (!validateNumber(receiverPostalCode)) {
+      alert('우편번호에 숫자만 입력해주세요.');
+      return false;
+    }
+
+    return true;
   }
 
-  if (validationCheck()) {
+  if (validationCheck(arr)) {
     const user = await Api.get('/api/user');
     const orderList = [];
 
