@@ -1,89 +1,77 @@
 body {
-    margin: 0;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  a {
-    text-decoration: none;
-    color: whitesmoke;
-    cursor: pointer;
-  }
-  
-  .navbar {
-    background-color: #6667ab;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-  }
-  
-  .navbar-logo {
-    line-height: 60px;
-    font-size: 22px;
-    font-weight: bold;
-    color: whitesmoke;
-    cursor: pointer;
-  }
-  
-  .navbar-user > li:not(:last-child) {
-    padding-right: 20px;
-  }
-  
-  .navbar-menu > li {
-    padding: 0 20px;
-  }
-  
-  .navbar-menu > li:not(:last-child) {
-    border-right: 1px solid #8687cc;
-  }
-  
-  .main-container {
-    width: 960px;
-    margin: 50px auto;
-  }
-  
-  .slider {
-    width: 960px;
-    height: 400px;
-    overflow: hidden;
-    border: 1px solid #6667ab3b;
-  }
-  
-  .slider .slides {
-    display: block;
-    width: 1920px;
-  }
-  
-  .slider .slide {
-    float: left;
-    width: 960px;
-  }
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #6667ab;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.navbar-logo {
+  line-height: 60px;
+  font-size: 22px;
+  font-weight: bold;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.navbar-user > li:not(:last-child) {
+  padding-right: 20px;
+}
+
+.navbar-menu > li {
+  padding: 0 20px;
+}
+
+.navbar-menu > li:not(:last-child) {
+  border-right: 1px solid #8687cc;
+}
 
 .main-container {
   width: 960px;
   margin: 50px auto;
 }
 
-.slider {
-  width: 960px;
-  height: 400px;
-  overflow: hidden;
-  border: 1px solid #6667ab3b;
+.title {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.slider .slides {
-  display: block;
-  width: 1920px;
+.new-books-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px 50px;
+  padding: 50px;
+  box-shadow: 0.5px 0.5px 6px 0px #0000003b;
 }
 
-.slider .slide {
-  float: left;
-  width: 960px;
+.book-container {
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  height: 300px;
+}
+
+.book-img {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  box-shadow: 1px 1px 8px 0px #00000096;
 }
