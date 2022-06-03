@@ -5,7 +5,6 @@ import { validateEmail } from '/useful-functions.js';
 const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const submitButton = document.querySelector('#submitButton');
-const kakoLogin = document.querySelector('#kakaoLogin');
 
 addAllElements();
 addAllEvents();

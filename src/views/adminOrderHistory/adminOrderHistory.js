@@ -12,6 +12,7 @@ previous.addEventListener('click', minusPage);
 let currentButtonPageNum = 0;
 let totalPageNum = 0;
 let totalButtonPageNum = 0;
+let currentPage = 1;
 await drawAdminOrderHistory(1);
 
 async function drawAdminOrderHistory(pageNo) {
@@ -24,6 +25,7 @@ async function drawAdminOrderHistory(pageNo) {
     let orderedProduct = ``;
     let totalQuantity = 0;
     let totalPrice = 0;
+    
 
     order.orderList.forEach((order) => {
       const { bookName, quantity, price } = order;
@@ -61,12 +63,12 @@ async function drawAdminOrderHistory(pageNo) {
       const res = await Api.delete(`/order/orders/${orderList[i]._id}`);
       alert('주문이 취소되었습니다.');
 
-      orderItem[i].remove();
+      drawAdminOrderHistory(currentPage);
     });
   });
 
   totalPageNum = totalPage;
-  totalButtonPageNum = Math.floor(totalPageNum / 5);
+  totalButtonPageNum = Math.floor((totalPageNum-1) / 5);
 
   if (currentButtonPageNum === totalButtonPageNum) {
     paginationBtn.forEach((btn) => {
@@ -89,6 +91,7 @@ async function pagination(e) {
     btn.classList.remove('is-current');
 
     if (btn.innerText === pageNumber) {
+      currentPage = pageNumber;
       btn.classList.add('is-current');
     }
   });
@@ -115,10 +118,10 @@ async function plusPage() {
         btn.classList.remove('is-current');
       }
     });
+    currentButton(currentButtonPageNum);
+    currentPage = currentButtonPageNum * 5 + 1
+    drawAdminOrderHistory(currentPage);
   }
-
-  currentButton(currentButtonPageNum);
-  drawAdminOrderHistory(currentButtonPageNum * 5 + 1);
 }
 
 async function minusPage() {
@@ -134,7 +137,10 @@ async function minusPage() {
       }
       btn.style.visibility = 'visible';
     });
+
+    currentButton(currentButtonPageNum);
+    currentPage = currentButtonPageNum * 5 + 1
+    drawAdminOrderHistory(currentPage);
   }
-  currentButton(currentButtonPageNum);
-  drawAdminOrderHistory(currentButtonPageNum * 5 + 1);
+  
 }
