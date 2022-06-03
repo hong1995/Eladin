@@ -59,20 +59,28 @@ a {
 .new-books-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px 50px;
+  gap: 50px;
   padding: 50px;
   box-shadow: 0.5px 0.5px 6px 0px #0000003b;
 }
 
 .book-container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   cursor: pointer;
   width: 100%;
+  height: 400px;
+}
+
+.author {
+  margin-bottom: 0;
 }
 
 .book-img {
-  width: 150px;
-  height: 225px;
+  width: 200px;
+  height: 300px;
   object-fit: cover;
   box-shadow: 1px 1px 8px 0px #00000096;
 }
