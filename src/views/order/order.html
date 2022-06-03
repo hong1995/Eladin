@@ -35,14 +35,8 @@
       <div class="container">
         <!-- header 현재 페이지-->
         <div class="header">
-          <div>
-            <p class="is-size-7">장바구니&nbsp; &gt; &nbsp;</p>
-          </div>
           <div class="cartTitle">
             <p class="title is-4 is-spaced">주문결제</p>
-          </div>
-          <div>
-            <p class="is-size-7">&nbsp; &gt; &nbsp;주문완료</p>
           </div>
         </div>
         <div class="buy">
@@ -81,7 +75,12 @@
                   <label for="receiverAddress1">주소1</label>
                 </div>
                 <div class="fieldForm addressInputBox">
-                  <input class="input" type="text" id="receiverAddress1" placeholder="OO시 OO구 OOO로 OOO(OO동O가)" />
+                  <input
+                    class="input"
+                    type="text"
+                    id="receiverAddress1"
+                    placeholder="OO시 OO구 OOO로 OOO(OO동O가)"
+                  />
                 </div>
               </div>
               <div class="inputBox">
@@ -89,7 +88,12 @@
                   <label for="receiverAddress2">주소2</label>
                 </div>
                 <div class="fieldForm">
-                  <input class="input" type="text" id="receiverAddress2" placeholder="세부주소"/>
+                  <input
+                    class="input"
+                    type="text"
+                    id="receiverAddress2"
+                    placeholder="세부주소"
+                  />
                 </div>
               </div>
               <div class="inputBox">
@@ -97,7 +101,7 @@
                   <label for="receiverPostalCode">우편번호</label>
                 </div>
                 <div class="fieldForm">
-                  <input class="input" type="text" id="receiverPostalCode"/>
+                  <input class="input" type="text" id="receiverPostalCode" />
                 </div>
               </div>
             </form>
@@ -123,7 +127,7 @@
                 </div>
               </div>
               <div class="total">
-                <p>총 결제금액</p>
+                <p id="total-price-text">총 결제금액</p>
                 <p id="total-price">22,000원</p>
               </div>
               <div class="purchase">

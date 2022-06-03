@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 body {
+  font-family: 'Jua', sans-serif;
   color: #4a4a4a;
 }
 
@@ -30,6 +33,11 @@ section {
   padding: 1rem 0 0 0;
 }
 
+p.title,
+p.subtitle {
+  color: #000000a2;
+}
+
 .buy {
   display: flex;
   justify-content: center;
@@ -41,6 +49,7 @@ section {
 /* 배송지정보 박스 */
 .formBox {
   width: 100%;
+  color: #000000a2;
 }
 
 .inputBox {
@@ -62,6 +71,10 @@ section {
   align-items: center;
   width: 80%;
   height: 3rem;
+}
+
+.fieldForm > input {
+  font-family: 'Jua', sans-serif;
 }
 
 .addressInputBox {
@@ -97,6 +110,7 @@ section {
 .orderSummary {
   background-color: #efeffa;
   width: 100%;
+  color: #000000a2;
 }
 
 .orderSummary > .header {
@@ -118,8 +132,10 @@ section {
   padding: 0 1rem 0 1rem;
   font-size: 1rem;
 }
-.total {
-  font: 1rem bold;
+
+#total-price-text,
+#total-price {
+  font-size: 24px;
 }
 
 .purchase {
@@ -133,8 +149,10 @@ section {
   border-color: transparent;
   color: #fff;
   font-size: 0.9rem;
-  font-weight: 800;
-  height: 3rem;
+  height: 50px;
+  line-height: 50px;
   border-radius: 8px;
   cursor: pointer;
+  font-family: 'Jua', sans-serif;
+  font-size: 20px;
 }

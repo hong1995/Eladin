@@ -1,5 +1,9 @@
-const loginNavBar = `<nav class="navbar">
-  <a class="navbar-logo" href="/">BOOKSTORE</a>
+const loginNavBar = `
+<nav class="navbar">
+  <div class="logo-container" onclick="location.href='/'">
+    <img src="/logo.png" class="logo-img">
+    <p class="navbar-logo">엘라딘</p>
+  </div>  
   <ul class="navbar-menu">
     <li><a href="/list">도서목록</a></li>
   </ul>
@@ -9,8 +13,12 @@ const loginNavBar = `<nav class="navbar">
   </ul>
   </nav>`;
 
-const logoutNavBar = `<nav class="navbar">
-<a class="navbar-logo" href="/">BOOKSTORE</a>
+const logoutNavBar = `
+<nav class="navbar">
+<div class="logo-container" onclick="location.href='/'">
+    <img src="/logo.png" class="logo-img">
+    <a class="navbar-logo" href="/">엘라딘</a>
+  </div>
 <ul class="navbar-menu">
   <li><a href="/list">도서목록</a></li>
 </ul>

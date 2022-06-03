@@ -1,47 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 body {
+  font-family: 'Jua', sans-serif;
   margin: 0;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-a {
-  text-decoration: none;
-  color: whitesmoke;
-  cursor: pointer;
-}
-
-.navbar {
-  background-color: #6667ab;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.navbar-logo {
-  line-height: 60px;
-  font-size: 22px;
-  font-weight: bold;
-  color: whitesmoke;
-  cursor: pointer;
-}
-
-.navbar-user > li:not(:last-child) {
-  padding-right: 20px;
-}
-
-.navbar-menu > li {
-  padding: 0 20px;
-}
-
-.navbar-menu > li:not(:last-child) {
-  border-right: 1px solid #8687cc;
+  color: #000000a2;
 }
 
 .main-container {
@@ -72,6 +34,11 @@ a {
   cursor: pointer;
   width: 100%;
   height: 400px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .author {
