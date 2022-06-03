@@ -10,17 +10,23 @@ async function categoryWork(e) {
 
   try {
     if (selectWork.value === 'addCategory') {
-      addCategory();
-      alert('추가됐습니다.');
+
+      const result = await addCategory();
+      alert(`${ result } 카테고리가 추가됐습니다.`);
       location.href = '/adminCategory';
+
     } else if (selectWork.value === 'updateCategory') {
-      updateCategory();
-      alert('수정됐습니다.');
+
+      const result = await updateCategory();
+      alert(`${ result } 카테고리가 수정됐습니다.`);
       location.href = '/adminCategory';
+
     } else {
-      deleteCategory();
-      alert('삭제됐습니다.');
+
+      await deleteCategory();
+      alert(`카테고리가 삭제됐습니다.`);
       location.href = '/adminCategory';
+
     }
   } catch (err) {
     console.log(err);
@@ -29,8 +35,8 @@ async function categoryWork(e) {
 
 async function addCategory() {
   const categoryName = rename.value;
-  console.log(categoryName);
   const result = await Api.post('/category/register', { categoryName });
+  return result.categoryName;
 }
 
 async function updateCategory() {
@@ -39,6 +45,7 @@ async function updateCategory() {
   const result = await Api.postparam('/category/setcategory', categoryId, {
     categoryName,
   });
+  return result.categoryName;
 }
 
 async function deleteCategory() {
@@ -55,8 +62,7 @@ async function deleteCategory() {
     },
     body: bodyData,
   });
-  console.log(res);
-
+  
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
   if (!res.ok) {
     const errorContent = await res.json();

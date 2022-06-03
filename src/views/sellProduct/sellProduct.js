@@ -58,10 +58,9 @@ async function sell(e) {
         info,
         imageUrl,
       };
-      const result = await Api.post('/product/register', data);
-
-      // location.href = '/adminBookList';
-      console.log(result);
+      await Api.post('/product/register', data);
+      alert(`${bookName} 등록이 완료되었습니다.`)
+      location.href = '/sellProduct';
     } catch (e) {
       console.error(err.stack);
       alert(
