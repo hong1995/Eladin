@@ -54,7 +54,7 @@ function attachToContainer(books) {
     const { _id, imageUrl, bookName, author, publisher, price } = book;
 
     const element = `
-      <div class="book-container" onclick="location.href='/detail?${_id}'">
+      <div class="book-container" onclick="location.href='/adminBookDetail?${_id}'">
           <div class="book-info">
               <img src=${imageUrl} class="book-img" alt=${bookName}>
               <p class="name">${bookName}</p>

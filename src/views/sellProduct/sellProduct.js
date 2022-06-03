@@ -8,7 +8,6 @@ const publisherInput = document.querySelector('#publisher');
 const infoInput = document.querySelector('#info');
 const priceInput = document.querySelector('#price');
 const photo = document.querySelector('#photo');
-const file = document.querySelector('.file');
 const fileName = document.querySelector('.file-name');
 const select = document.querySelector('.select');
 const purchaseButton = document.querySelector('#purchaseButton');

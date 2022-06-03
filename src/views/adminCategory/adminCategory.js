@@ -1,9 +1,12 @@
 import * as Api from '/api.js';
+import { validator } from '../useful-functions.js';
 
 const rename = document.querySelector('#rename');
 const continueButton = document.querySelector('#continueButton');
 const select = document.querySelector('.selectCategory');
 const selectWork = document.querySelector('.selectWork');
+
+
 
 async function categoryWork(e) {
   e.preventDefault();
@@ -12,14 +15,18 @@ async function categoryWork(e) {
     if (selectWork.value === 'addCategory') {
 
       const result = await addCategory();
-      alert(`${ result } 카테고리가 추가됐습니다.`);
-      location.href = '/adminCategory';
+      if(result){
+        alert(`${ result } 카테고리가 추가됐습니다.`);
+        location.href = '/adminCategory';
+      }
 
     } else if (selectWork.value === 'updateCategory') {
-
+      
       const result = await updateCategory();
-      alert(`${ result } 카테고리가 수정됐습니다.`);
-      location.href = '/adminCategory';
+      if(result){
+        alert(`${ result } 카테고리가 수정됐습니다.`);
+        location.href = '/adminCategory';
+      }
 
     } else {
 
@@ -29,12 +36,16 @@ async function categoryWork(e) {
 
     }
   } catch (err) {
-    console.log(err);
+    alert(err.message);
   }
 }
 
 async function addCategory() {
   const categoryName = rename.value;
+  if(categoryName === '') {
+    alert('추가할 카테고리 이름이 없습니다.')
+    return false;
+  }
   const result = await Api.post('/category/register', { categoryName });
   return result.categoryName;
 }
@@ -42,6 +53,12 @@ async function addCategory() {
 async function updateCategory() {
   const categoryId = select.value;
   const categoryName = rename.value;
+
+  if(categoryName === '') {
+    alert('수정할 카테고리 이름이 없습니다.')
+    return false;
+  }
+
   const result = await Api.postparam('/category/setcategory', categoryId, {
     categoryName,
   });
@@ -50,17 +67,15 @@ async function updateCategory() {
 
 async function deleteCategory() {
   const categoryId = select.value;
-  const categoryName = rename.value;
   const apiUrl = `/category/deletecategory/${categoryId}`;
-  const bodyData = JSON.stringify({ categoryName });
+  
 
   const res = await fetch(apiUrl, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    body: bodyData,
+    }
   });
   
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
