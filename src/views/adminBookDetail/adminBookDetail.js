@@ -1,5 +1,4 @@
 import * as Api from '../api.js';
-// import { createDB, writeDB } from '../indexedDB.js';
 const receivedId = location.href.split('?')[1];
 
 async function allFunc() {
@@ -32,7 +31,7 @@ async function allFunc() {
 async function deleteProduct() {
   console.log(receivedId);
 
-  const res = await fetch(`/product/deleteProduct/${receivedId}`, {
+  await fetch(`/product/deleteProduct/${receivedId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -40,7 +39,7 @@ async function deleteProduct() {
     },
   });
 
-  alert(`${res.bookName}이 삭제됐습니다.`);
+  alert(`제품이 삭제됐습니다.`);
   location.href = '/adminBookList';
 }
 
@@ -53,10 +52,3 @@ addCartBtn.addEventListener(
   () => (location.href = `/adminBookUpdate?${receivedId}`)
 );
 buyBtn.addEventListener('click', deleteProduct);
-
-// function addDB(e) {
-//   const dbName = e.target.className.split(' ')[0];
-
-//   createDB(dbName);
-//   writeDB(dbName, book);
-// }

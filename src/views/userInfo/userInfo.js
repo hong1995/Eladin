@@ -27,8 +27,8 @@ async function submitUserInfo(e) {
     try {
         console.log(fullName);
         const data = {fullName, password, phoneNumber, address, currentPassword }
-        const result = await Api.patch('/api/update','',data);
-        console.log(result);
+        alert('수정이 완료됐습니다.')
+        await Api.patch('/api/update','',data);
     } catch (e) {
         console.error(err.stack);
         alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
