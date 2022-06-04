@@ -116,7 +116,7 @@ productRouter.get('/category/:categoryName', async (req, res, next) => {
     // req의 params에서 데이터 가져옴
     const { categoryName } = req.params;
 
-    // 카테고리명을 기준으로 Categories DB 조회
+    // 카테고리명을 기준으로 Categories DB조회
     const findCategory = await categoryService.getCategoryByName(categoryName);
     // 조회된 데이터(categoryModel)를 기준으로 Products DB 조회
     const products = await productService.getProductByCategory(findCategory);

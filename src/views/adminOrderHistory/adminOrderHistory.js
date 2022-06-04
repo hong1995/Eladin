@@ -73,7 +73,7 @@ async function drawAdminOrderHistory(pageNo) {
   if (currentButtonPageNum === totalButtonPageNum) {
     paginationBtn.forEach((btn) => {
       if (Number(btn.innerText) > totalPageNum) {
-        btn.style.visibility = 'hidden';
+        btn.style.display = 'none';
       }
     });
   }
@@ -135,7 +135,7 @@ async function minusPage() {
       } else {
         btn.classList.remove('is-current');
       }
-      btn.style.visibility = 'visible';
+      btn.style.display = 'inline-block';
     });
 
     currentButton(currentButtonPageNum);

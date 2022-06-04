@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body {
+  font-family: 'Jua', sans-serif;
+}
+
 .container {
   width: 960px;
   margin: 50px auto;
@@ -9,12 +15,18 @@
   margin: 50px 0;
 }
 
+.title {
+  color: #000000a2;
+}
+
 .orders-top {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
   align-items: center;
   background-color: #6667ab;
   color: whitesmoke;
+  font-size: 20px;
+  height: 50px;
   text-align: center;
   border-radius: 5px;
 }
@@ -25,6 +37,8 @@
   align-items: center;
   border-bottom: 1px solid #6667ab;
   text-align: center;
+  color: #000000a2;
+  font-size: 20px;
 }
 
 .orders-top,
@@ -38,6 +52,8 @@
   width: 100px;
   cursor: pointer;
   margin: 0 auto;
+  height: 40px;
+  line-height: 40px;
 }
 
 .pagination-link {

@@ -1,84 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 body {
-    color: #4a4a4a
+  font-family: 'Jua', sans-serif;
+  color: #4a4a4a;
 }
 
 section {
-    padding: 3rem, 1.5rem;
+  padding: 3rem, 1.5rem;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 960px;
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 960px;
 }
 /* 장바구니 ( 담은 품목들) */
 
 .orderComplete {
-    padding-top: 100px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
 }
-
 
 /* 배송지정보 박스 */
 .orderCompleteBox {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    padding: 3rem 5rem;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 5rem;
 }
 
-.titleBox, .deleteAccountBox {
-    display: flex;
-    justify-content: center;
+.titleBox,
+.deleteAccountBox {
+  display: flex;
+  justify-content: center;
 }
 
-.title{
-    color: #6a5acd;
+.title {
+  color: #6a5acd;
 }
-.fieldLabel{
-    margin-top: 10px
-}
-
-.normalText{
-    color: #363636;
-    font-weight: 700;
+.fieldLabel {
+  margin-top: 10px;
 }
 
-.fieldForm, .select-box {
-    margin: 10px 0 5px 0;
+.normalText {
+  color: #000000a2;
+  font-weight: 700;
 }
 
-.orderButton{
-    width: 100%;
-    border-color: transparent;
-    font-size: 0.9rem;
-    font-weight: 800;
-    height: 2.5rem;
-    border-radius: 4px;
-    cursor: pointer;
+.fieldForm,
+.select-box {
+  margin: 10px 0 5px 0;
+}
+
+.orderButton {
+  width: 100%;
+  border-color: transparent;
+  font-size: 20px;
+  height: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Jua', sans-serif;
 }
 
 select {
-    width: 100%;
-    border-color: #dbdbdb;
-    height: 2.5rem;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 100%;
+  border-color: #dbdbdb;
+  height: 2.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Jua', sans-serif;
+  font-size: 16px;
+  color: #000000a2;
 }
 
 #orderListButton {
-    background-color: #E6E6FA;
-    color: rgba(0, 0, 0, 0.628);
-    margin: 12px 0 4px 0;
+  background-color: #e6e6fa;
+  color: rgba(0, 0, 0, 0.628);
+  margin: 12px 0 4px 0;
 }
 
-#continueButton{
-    background-color: #6a5acd;
-    color: #fff;
+#continueButton {
+  background-color: #6a5acd;
+  color: #fff;
 }

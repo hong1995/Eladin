@@ -18,7 +18,6 @@ const element = `
       <p class="publisher">출판사: ${publisher}</p>
       <p class="price">판매가: ${price}</p>
     </div>
-    <hr>
     <div class="book-introduction">
       <p class="intro-title">책 소개</p>
       <p class="intro-content">${info}</p>
@@ -35,17 +34,21 @@ addCartBtn.addEventListener('click', addDB);
 buyBtn.addEventListener('click', addDB);
 
 async function addDB(e) {
-  const dbName = e.target.className.split(' ')[0];
-
-  await createDB(dbName);
-
-  if (dbName === 'add-cart') {
-    writeDB(dbName, book)
-      .then((res) => alert('장바구니에 추가되었습니다.'))
-      .catch((err) => alert('이미 장바구니에 추가된 상품입니다.'));
+  if (!localStorage.length) {
+    alert('로그인 후 이용해주세요.');
   } else {
-    writeDB(dbName, book);
+    const dbName = e.target.className.split(' ')[0];
 
-    location.href = '/order';
+    await createDB(dbName);
+
+    if (dbName === 'add-cart') {
+      writeDB(dbName, book)
+        .then((res) => alert('장바구니에 추가되었습니다.'))
+        .catch((err) => alert('이미 장바구니에 추가된 상품입니다.'));
+    } else {
+      writeDB(dbName, book);
+
+      location.href = '/order';
+    }
   }
 }

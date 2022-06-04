@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 body {
-  color: #4a4a4a;
+  font-family: 'Jua', sans-serif;
 }
 
 .normalText {
@@ -33,6 +35,11 @@ section {
 
 .cartTitle {
   padding: 1rem 0 0 0;
+}
+
+p.title,
+p.subtitle {
+  color: #4a4a4a;
 }
 
 .menu {

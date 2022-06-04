@@ -1,6 +1,4 @@
-body {
-  margin: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
 
 ul {
   list-style: none;
@@ -18,29 +16,51 @@ a {
 
 .navbar {
   background-color: #6667ab;
-  height: 60px;
+  height: 80px;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  align-items: center;
+  padding: 0 40px;
+  font-family: 'Dongle', sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container:hover {
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 70px;
 }
 
 .navbar-logo {
   line-height: 60px;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 50px;
   color: whitesmoke;
-  cursor: pointer;
+}
+
+.navbar-logo:hover {
+  color: whitesmoke;
 }
 
 .navbar-user > li:not(:last-child) {
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 .navbar-menu > li {
   padding: 0 20px;
   line-height: 60px;
+  font-size: 40px;
 }
 
 .navbar-menu > li:not(:last-child) {
   border-right: 1px solid #8687cc;
+}
+
+.navbar-user {
+  font-size: 40px;
 }
