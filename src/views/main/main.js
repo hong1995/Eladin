@@ -13,7 +13,9 @@ datas.productsList.productList.forEach((data, i) => {
   const element = `
       <div class="book-container" onclick="location.href='/detail?${_id}'">
           <div class="book-info">
-              <img src=${imageUrl} class="book-img" alt=${bookName}>
+            <div class = "imgGallery">          
+            <img src=${imageUrl} class="book-img" alt=${bookName}>
+            </div>
               <p class="name">${bookName}</p>
               <p class="author">${author}</p>
           </div>
@@ -31,15 +33,15 @@ datas.productsList.productList.forEach((data, i) => {
 });
 
 // slide
-var slider = document.querySelector('.slider');
-var slides = slider.querySelector('.slides');
-var slide = slides.querySelectorAll('.slide');
+let slider = document.querySelector('.slider');
+let slides = slider.querySelector('.slides');
+let slide = slides.querySelectorAll('.slide');
 
-var currentSlide = 0;
+let currentSlide = 0;
 
 setInterval(function () {
-  var from = -(1024 * currentSlide);
-  var to = from - 1024;
+  let from = -(1024 * currentSlide);
+  let to = from - 1024;
   slides.animate(
     {
       marginLeft: [from + 'px', to + 'px'],

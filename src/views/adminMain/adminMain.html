@@ -11,6 +11,12 @@
       sizes="16x16"
       href="/elice-rabbit-favicon.png"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+      rel="stylesheet"
+    />
     <!-- bulma css -->
     <link
       rel="stylesheet"
@@ -24,14 +30,23 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="adminMain.css" />
-    <link rel="stylesheet" href="../navBar/NavBar.css" />
+    <link rel="stylesheet" href="../navBar/navBar.css" />
     <script src="../navBar/adminNavBar.js" type="module" defer></script>
     <script src="adminMain.js" type="module" defer></script>
   </head>
   <body>
     <div class="main-container">
-      <p class="title">신간 도서</p>
-      <div class="new-books-container"></div>
+      <p class="container-title"><span class="newText">NEW</span>신간 도서</p>
+      <div class="container">
+        <div class="slider">
+          <ul class="slides">
+            <li class="slide new-books-container1"></li>
+            <li class="slide new-books-container2"></li>
+            <li class="slide new-books-container3"></li>
+            <li class="slide new-books-container4"></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>

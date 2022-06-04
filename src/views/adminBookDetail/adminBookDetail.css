@@ -32,7 +32,7 @@ body {
 
 .title,
 .book-info {
-  color: #000000a2;
+  color: #0a0218d1;
 }
 
 .btn-container {
@@ -52,4 +52,18 @@ body {
   background-color: #6667ab;
   color: whitesmoke;
   margin: 0 20px;
+}
+
+.intro-content {
+  color: #000000a2;
+}
+
+.intro-title {
+  display: flex;
+  background-color: #6667ab;
+  color:whitesmoke;
+  height: 30px;
+  margin: 24px 0 12px 0;
+  justify-content: center;
+  align-items: center;
 }

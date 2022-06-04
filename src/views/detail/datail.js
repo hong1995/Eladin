@@ -18,7 +18,6 @@ const element = `
       <p class="publisher">출판사: ${publisher}</p>
       <p class="price">판매가: ${price}</p>
     </div>
-    <hr>
     <div class="book-introduction">
       <p class="intro-title">책 소개</p>
       <p class="intro-content">${info}</p>

@@ -56,7 +56,9 @@ function attachToContainer(books) {
     const element = `
       <div class="book-container" onclick="location.href='/detail?${_id}'">
           <div class="book-info">
-              <img src=${imageUrl} class="book-img" alt=${bookName}>
+              <div class = "imgGallery">
+                <img src=${imageUrl} class="book-img" alt=${bookName}>
+              </div>
               <p class="name">${bookName}</p>
               <p class="author">저자: ${author}</p>
               <p class="publisher">출판사: ${publisher}</p>
