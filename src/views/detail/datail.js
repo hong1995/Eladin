@@ -5,12 +5,12 @@ const receivedId = location.href.split('?')[1];
 const bookContainer = document.querySelector('.book-container');
 
 const book = await Api.get(`/product/${receivedId}`);
-console.log(book);
+book.quantity = 1;
 
 const { bookName, author, publisher, price, info, imageUrl } = book;
 
 const element = `
-  <img src=${imageUrl} class="book-img" alt=${bookName}>
+  <img src='${imageUrl}' class="book-img" alt=${bookName}>
   <div class="book-info">
     <div>
       <p class="title">${bookName}</p>
@@ -18,7 +18,6 @@ const element = `
       <p class="publisher">출판사: ${publisher}</p>
       <p class="price">판매가: ${price}</p>
     </div>
-    <hr>
     <div class="book-introduction">
       <p class="intro-title">책 소개</p>
       <p class="intro-content">${info}</p>
@@ -34,9 +33,22 @@ const buyBtn = document.querySelector('.buy');
 addCartBtn.addEventListener('click', addDB);
 buyBtn.addEventListener('click', addDB);
 
-function addDB(e) {
-  const dbName = e.target.className.split(' ')[0];
+async function addDB(e) {
+  if (!localStorage.length) {
+    alert('로그인 후 이용해주세요.');
+  } else {
+    const dbName = e.target.className.split(' ')[0];
 
-  createDB(dbName);
-  writeDB(dbName, book);
+    await createDB(dbName);
+
+    if (dbName === 'add-cart') {
+      writeDB(dbName, book)
+        .then((res) => alert('장바구니에 추가되었습니다.'))
+        .catch((err) => alert('이미 장바구니에 추가된 상품입니다.'));
+    } else {
+      writeDB(dbName, book);
+
+      location.href = '/order';
+    }
+  }
 }

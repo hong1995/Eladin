@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Jua', sans-serif;
+}
+
+.container {
+  width: 960px;
+  margin: 100px auto;
+}
+
+.book-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.book-img {
+  width: 300px;
+  height: 450px;
+  margin-right: 50px;
+  object-fit: cover;
+  box-shadow: 2px 2px 8px 0px;
+}
+
+.intro-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.title,
+.book-info {
+  color: #0a0218d1;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn {
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #6667ab;
+  color: whitesmoke;
+  margin: 0 20px;
+}
+
+.intro-content {
+  color: #000000a2;
+}
+
+.intro-title {
+  display: flex;
+  background-color: #6667ab;
+  color:whitesmoke;
+  height: 30px;
+  margin: 24px 0 12px 0;
+  justify-content: center;
+  align-items: center;
+}

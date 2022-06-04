@@ -1,148 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>카트</title>
-        <!-- 아이콘 -->
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/elice-rabbit-favicon.png"
-        />
-        <!-- bulma css -->
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-        />
-        <!-- 폰트 어썸: 아이콘 -->
-        <script
-          defer
-          src="https://kit.fontawesome.com/7630448495.js"
-          crossorigin="anonymous"
-        ></script>
-        <!-- 커스텀 css, js -->
-        <link rel="stylesheet" href="userInfo.css" />
-        <script src="userInfo.js" type="module" defer></script>
-      </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>카트</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="userInfo.css" />
+    <link rel="stylesheet" href="../navBar/navBar.css" />
+    <script src="../navBar/navBar.js" type="module" defer></script>
+    <script src="userInfo.js" type="module" defer></script>
+  </head>
 
-<body>
-    <!-- navbar -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="container mt-3">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-              <img src="../elice-rabbit.png" width="30" height="30" />
-              <span class="has-text-link">카트</span>
-            </a>
-  
-            <a
-              role="button"
-              class="navbar-burger"
-              aria-label="menu"
-              aria-expanded="false"
-              data-target="navbarBasicExample"
-            >
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
-          </div>
-  
-            <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-              <ul id="navbar">
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/register">회원가입</a></li>
-                <li>
-                  <a href="#cart" aria-current="page">
-                    <span class="icon">
-                      <i class="fas fa-cart-shopping"></i>
-                    </span>
-                    <span>쇼핑몰</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    </nav>
+  <body>
     <!-- 장바구니 페이지-->
-     <section>
-        <div class = "container">
-            <!-- header 현재 페이지-->
-            <div class = "header">
-                
-                <div class = cartTitle>
-                    <p class="title is-4 is-spaced">회원정보관리 (elicetest@naver.com)</p>
-                </div>
-                
-            </div>
-            <div class="buy">
-                <!-- 배송지정보 박스 -->
-                <div class = "box formBox">
-                      <div class = "inputBox">
-                          <div class = "fieldLabel">
-                              <label for="fullName" class="normalText">이름</label>
-                          </div>
-                          <div class = "fieldForm">
-                              <input class="input" type="text" id="fullName">
-                          </div>
-                      </div>
-                      <div class = "inputBox">
-                          <div class = "fieldLabel">
-                              <label for="currentPassword" class = "normalText">현재 비밀번호</label>
-                          </div>
-                          <div class = "fieldForm">
-                              <input class="input" type="password" id="currentPassword">
-                          </div>
-                      </div>
-                      <div class = "inputBox">
-                          <div class = "fieldLabel">
-                              <label for="newPassword" class = "normalText">새 비밀번호</label>
-                          </div>
-                          <div class = "fieldForm">
-                              <input class="input" type="password" id="newPassword">
-                          </div>
-                      </div>
-                      <div class = "inputBox">
-                          <div class = "fieldLabel">
-                              <label for="phoneNumber" class = "normalText">전화번호</label>
-                          </div>
-                          <div class = "fieldForm">
-                              <input class="input" type="text" id="phoneNumber">
-                          </div>
-                      </div>
-                      <div class = "inputBox">
-                          <div class = "fieldLabel">
-                              <label for="receiverAddress" class = "normalText">주소</label>
-                          </div>
-                          <div class = "fieldForm addressInputBox">
-                              <input class="input" type="text" id="receiverAddress">
-                              <div class = "find">
-                                  <button class = "findButton">주소찾기</button>
-                              </div>
-                          </div>
-                      </div>
-                      <div class = "inputBox">
-                          <div class = "fieldForm">
-                              <input class="input" id="detailAddress">
-                          </div>
-                      </div>
-                      <div class = "inputBox">
-                          <div class = "fieldForm">
-                              <input class="input" id="restAddress">
-                          </div>
-                      </div>
-                      <div class = "buttonBox">
-                          <button id="editButton">정보 수정하기</button>
-                      </div>
-
-                </div>
-                <!-- 결제정보 -->
-               
-            </div>
+    <section>
+      <div class="container">
+        <!-- header 현재 페이지-->
+        <div class="header">
+          <div class="cartTitle">
+            <p class="title is-4 is-spaced">회원정보 수정</p>
+          </div>
         </div>
-     </section>
-</body>
+        <div class="buy">
+          <!-- 배송지정보 박스 -->
+          <div class="box formBox">
+            <div class="inputBox">
+              <div class="fieldLabel">
+                <label for="fullName" class="normalText">이름</label>
+              </div>
+              <div class="fieldForm">
+                <input class="input" type="text" id="fullName" />
+              </div>
+            </div>
+            <div class="inputBox">
+              <div class="fieldLabel">
+                <label for="currentPassword" class="normalText"
+                  >현재 비밀번호</label
+                >
+              </div>
+              <div class="fieldForm">
+                <input class="input" type="password" id="currentPassword" />
+              </div>
+            </div>
+            <div class="inputBox">
+              <div class="fieldLabel">
+                <label for="newPassword" class="normalText">새 비밀번호</label>
+              </div>
+              <div class="fieldForm">
+                <input class="input" type="password" id="newPassword" />
+              </div>
+            </div>
+            <div class="inputBox">
+              <div class="fieldLabel">
+                <label for="phoneNumber" class="normalText">전화번호</label>
+              </div>
+              <div class="fieldForm">
+                <input class="input" type="text" id="phoneNumber" />
+              </div>
+            </div>
+            <div class="inputBox">
+              <div class="fieldLabel">
+                <label for="receiverAddress" class="normalText">주소</label>
+              </div>
+              <div class="fieldForm addressInputBox">
+                <input
+                  class="input"
+                  type="text"
+                  id="receiverAddress"
+                  placeholder="OO시 OO구 OOO로 OOO(OO동O가)"
+                />
+              </div>
+            </div>
+            <div class="inputBox">
+              <div class="fieldForm">
+                <input
+                  class="input"
+                  id="detailAddress"
+                  placeholder="세부주소"
+                />
+              </div>
+            </div>
+            <div class="inputBox">
+              <div class="fieldForm">
+                <input class="input" id="postalCode" placeholder="우편번호" />
+              </div>
+            </div>
+            <div class="buttonBox">
+              <button id="editButton">정보 수정하기</button>
+            </div>
+          </div>
+          <!-- 결제정보 -->
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

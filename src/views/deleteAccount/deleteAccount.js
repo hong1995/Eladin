@@ -11,11 +11,11 @@ async function deleteUser(e)  {
     try {
         console.log(passwordInput.value);
         const data = passwordInput.value;
-        const result = await Api.delete('/api/del','',{data});
-        alert(result);
-        
-
+        await Api.delete('/api/del','',{data});
+        alert('탈퇴가 완료됐습니다.');
+        localStorage.removeItem('token');
+        location.href = '/';
     } catch (err) {
-        console.log(err);
+        alert(err);
     }
 }

@@ -3,13 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
+    <title>엘라딘</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
       href="/elice-rabbit-favicon.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+      rel="stylesheet"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <!-- 폰트 어썸: 아이콘 -->
     <script
@@ -19,16 +30,22 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="../navBar/navBar.css" />
+    <script src="../navBar/navBar.js" type="module" defer></script>
     <script src="main.js" type="module" defer></script>
-    <script src="./../navBar.js" type="module" defer></script>
   </head>
   <body>
     <div class="main-container">
-      <div class="slider">
-        <ul class="slides">
-          <li class="slide"><img src="./slide1.png" alt="국내도서" /></li>
-          <li class="slide"><img src="./slide2.png" alt="해외도서" /></li>
-        </ul>
+      <p class="container-title"><span class="newText">NEW</span>신간 도서</p>
+      <div class="container">
+        <div class="slider">
+          <ul class="slides">
+            <li class="slide new-books-container1"></li>
+            <li class="slide new-books-container2"></li>
+            <li class="slide new-books-container3"></li>
+            <li class="slide new-books-container4"></li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>

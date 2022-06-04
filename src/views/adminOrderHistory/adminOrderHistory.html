@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-데모</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css 관련 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="adminOrderHistory.css" />
+    <script src="adminOrderHistory.js" type="module" defer></script>
+    <link rel="stylesheet" href="../navBar/navBar.css" />
+    <script src="../navBar/adminNavBar.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+
+    <!-- 주문내역 -->
+    <div class="container">
+      <div class="title">주문조회</div>
+      <hr />
+      <div class="history-container">
+        <div class="orders-top">
+          <div class="top-date">날짜</div>
+          <div class="top-book">주문정보</div>
+          <div class="top-quantity">총 수량</div>
+          <div class="top-status">가격</div>
+          <div class="top-delete-request">상태</div>
+          <div class="top-delete-request">취소</div>
+        </div>
+        <div class="orders-item-container"></div>
+      </div>
+      <div class="pagination-conatiner">
+        <div>
+          <a
+            class="pagination-previous is-disabled"
+            id="previous"
+            title="This is the first page"
+            >Previous</a
+          >
+        </div>
+        <div>
+          <ul class="pagination-list" id="buttonList1">
+            <li>
+              <a
+                class="pagination-link is-current"
+                aria-label="Page 1"
+                aria-current="page"
+                >1</a
+              >
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 2">2</a>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 3">3</a>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 4">4</a>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 5">5</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <a class="pagination-next" id="nextBtn">Next page</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

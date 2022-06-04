@@ -1,15 +1,24 @@
 import * as Api from '../api.js';
-import { getAllDB, clearAllDB } from '../indexedDB.js';
+import { getAllDB } from '../indexedDB.js';
+import { validateNull, validateNumber } from '../useful-functions.js';
 
 // indexedDB에 담아놓은 책들 가져오기
 const books = await getAllDB('buy');
-console.log(books);
 
 // 결제 정보 표시
+const orderCount = document.querySelector('#orderCount');
 const priceText = document.querySelector('#price');
 const totalPriceText = document.querySelector('#total-price');
 
-const booksPrice = books.reduce((acc, cur) => acc + cur.price, 0);
+let count = 0;
+let booksPrice = 0;
+
+books.forEach((book) => {
+  count += book.quantity;
+  booksPrice += book.price * book.quantity;
+});
+
+orderCount.innerText = `${count}개`;
 priceText.innerText = `${booksPrice}원`;
 totalPriceText.innerText = `${booksPrice + 3000}원`;
 
@@ -28,30 +37,63 @@ async function purchase() {
     '#receiverPostalCode'
   ).value;
 
-  const user = await Api.get('/api/user');
-  const orderList = [];
+  const arr = [
+    receiverName,
+    receiverPhoneNumber,
+    receiverAddress1,
+    receiverAddress2,
+    receiverPostalCode,
+  ];
 
-  books.forEach((book) => {
-    const obj = {
-      bookName: book.bookName,
-      quantity: 1,
-      price: book.price,
-    };
+  function validationCheck(arr) {
+    if (!validateNull(arr)) {
+      return false;
+    }
 
-    orderList.push(obj);
-  });
+    if (!validateNumber(receiverPhoneNumber)) {
+      alert('연락처에 숫자만 입력해주세요.');
+      return false;
+    }
 
-  const info = {
-    orderList: orderList,
-    email: user.email,
-    fullName: receiverName,
-    phoneNumber: receiverPhoneNumber,
-    address1: receiverAddress1,
-    address2: receiverAddress2,
-    postalCode: receiverPostalCode,
-  };
+    if (!validateNumber(receiverPostalCode)) {
+      alert('우편번호에 숫자만 입력해주세요.');
+      return false;
+    }
 
-  await Api.post('/order/register', info);
+    return true;
+  }
 
-  location.href = `/orderComplete`;
+  if (validationCheck(arr)) {
+    try{
+      const user = await Api.get('/api/user');
+      const orderList = [];
+
+      books.forEach((book) => {
+        const obj = {
+          bookName: book.bookName,
+          quantity: book.quantity,
+          price: book.price,
+          productId: book._id,
+        };
+
+        orderList.push(obj);
+      });
+
+      const info = {
+        orderList: orderList,
+        email: user.email,
+        fullName: receiverName,
+        phoneNumber: receiverPhoneNumber,
+        address1: receiverAddress1,
+        address2: receiverAddress2,
+        postalCode: receiverPostalCode,
+      };
+      console.log(info);
+      await Api.post('/order/register', info);
+
+      location.href = '/orderComplete';
+    } catch (err) {
+      alert(err.message)
+    }
+  }
 }

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body {
+  font-family: 'Jua', sans-serif;
+}
+
 .container {
   width: 960px;
   margin: 50px auto;
@@ -9,12 +15,17 @@
   margin: 50px 0;
 }
 
+.title {
+  color: #000000a2;
+}
+
 .orders-top {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   align-items: center;
   background-color: #6667ab;
   color: whitesmoke;
+  font-size: 20px;
   height: 50px;
   text-align: center;
   border-radius: 5px;
@@ -26,13 +37,17 @@
   align-items: center;
   border-bottom: 1px solid #6667ab;
   height: 60px;
+  color: #000000a2;
   text-align: center;
+  font-size: 20px;
 }
 
 .delete-btn {
   border: 0.5px solid rgba(0, 0, 0, 0.137);
   border-radius: 5px;
   width: 100px;
+  height: 40px;
+  line-height: 40px;
   cursor: pointer;
   margin: 0 auto;
 }

@@ -27,3 +27,20 @@ export const convertToNumber = (string) => {
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
+export const validateNull = (arr) => {
+  for (const element of arr) {
+    if (!element) {
+      alert('정보를 모두 입력해주세요.');
+      return false;
+    }
+  }
+  return true;
+};
+
+export const validateNumber = (value) => {
+  if (!value.replace(/[^-0-9]/g, '')) {
+    return false;
+  }
+  return true;
+};
