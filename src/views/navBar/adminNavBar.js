@@ -1,8 +1,8 @@
 const logoutNavBar = `
 <nav class="navbar">
-<div class="logo-container" onclick="location.href='/'">
+<div class="logo-container" onclick="location.href='/adminMain'">
     <img src="/logo.png" class="logo-img">
-    <p class="navbar-logo">엘라딘</p>
+    <p class="navbar-logo">엘라딘 - Admin</p>
 </div>
 <ul class="navbar-menu">
   <li><a href="/adminBookList">도서목록</a></li>
