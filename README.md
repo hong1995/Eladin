@@ -1,66 +1,57 @@
-관리자 기능 확인시  
-ID: test@test.com  
-PW: testtest  
-로 로그인 해주세요.
-# 쇼핑몰 웹 서비스 프로젝트
+## 📜 서비스 내용
 
-제품들을 조회하고, 장바구니에 추가하고, 또 주문을 할 수 있는 쇼핑몰 웹 서비스 제작 프로젝트입니다. <br />
-**웹 구현 예시** (링크는 프로젝트 기간에만 유효합니다)
+온라인 책 쇼핑몰
 
-### http://shopping-demo.elicecoding.com/
+## 🛠 기술 스택
 
-<br>
+- HTML5, CSS3, javascript(ES6+), VanillaJS
+- node.js, express.js, mongoDB, moongoose, AWS S3, NginX
 
-** 핵심 기능은 하기입니다. (이외에도 더 있으며, 추가 안내 될 프로젝트 평가기준표에서 구체화될 예정입니다.) <br>
-1. 회원가입, 로그인, 회원정보 수정 등 **유저 정보 관련 CRUD** 
-2. **제품 목록**을 조회 및, **제품 상세 정보**를 조회 가능함. 
-3. 장바구니에 제품을 추가할 수 있으며, **장바구니에서 CRUD** 작업이 가능함.
-4. 장바구니는 서버 DB가 아닌, 프론트 단에서 저장 및 관리됨 (localStorage, indexedDB 등)
-5. 장바구니에서 주문을 진행하며, **주문 완료 후 조회 및 삭제**가 가능함.
+## 👀 서비스 화면
 
-## 주요 사용 기술
+## 📜 서비스 내용
+
+- 온라인 책 쇼핑몰
+
+## 💡 핵심 기능
+
+- 회원가입, 로그인, 회원정보 수정 등 **유저 정보 관련 CRUD**
+- **제품 목록**을 조회 및, **제품 상세 정보**를 조회 가능함.
+- 장바구니에 제품을 추가할 수 있으며, **장바구니에서 CRUD** 작업이 가능함.
+- 장바구니는 서버 DB가 아닌, 프론트 단에서 저장 및 관리됨 (localStorage, indexedDB 등)
+- 장바구니에서 주문을 진행하며, **주문 완료 후 조회 및 삭제**가 가능함.
+- 제품 정보 페이지네이션 가능, 가격순, 최신 등록순으로 sorting 가능함.
+
+## 🛠 ****사용 기술
 
 ### 1. 프론트엔드
 
-- **Vanilla javascript**, html, css (**Bulma css**)
-- Font-awesome 
-- Daum 도로명 주소 api 
-- 이외
+- **Vanilla javascript(**javascript(ES6+)**)**, html, css
 
-### 2. 백엔드 
+### 2. 백엔드
 
-- **Express** (nodemon, babel-node로 실행됩니다.)
+- javascript(ES6+)
+- **node.js**, **Express.js** (nodemon, babel-node로 실행)
 - Mongodb, Mongoose
-- cors
-- 이외
+- AWS S3, Nginx
+- jwt, cors
 
-## 폴더 구조
-- 프론트: `src/views` 폴더 
+## 👩‍👩‍👦‍👦 협업 툴
+
+- git, gitlab, github
+- slack, notion, gather town
+- figma
+
+## 📂 폴더 구조
+
+- 프론트: `src/views` 폴더
 - 백: src/views 이외 폴더 전체
 - 실행: **프론트, 백 동시에, express로 실행**
 
-
-
-## 설치 방법
-
-1. **.env 파일 설정 (MONGODB_URL 환경변수를, 개인 로컬 혹은 Atlas 서버 URL로 설정해야 함)**
-
-2. express 실행
-
-```bash
-# npm 을 쓰는 경우 
-npm install
-npm run start
-
-# yarn 을 쓰는 경우
-yarn
-yarn start
-```
-
-<br>
-
----
-
-본 프로젝트에서 제공하는 모든 코드 등의는 저작권법에 의해 보호받는 ㈜엘리스의 자산이며, 무단 사용 및 도용, 복제 및 배포를 금합니다.
-Copyright 2022 엘리스 Inc. All rights reserved.
-
+| Tool | 사용 이유 |
+| --- | --- |
+| https://www.notion.so/eb71263eb4494e91ad0eac8b587b8f10 | 프로젝트 전체적인 관리와 기록 |
+| https://app.gather.town/invite?token=oOfrxfGrWIDwt4OAuGjUFavZNi_3fwnv | 오프라인 만남을 대체하고 실시간으로 소통 |
+| https://github.com/vegeten/vegeten-shop | 코드 공유 |
+| https://www.figma.com/file/O4Zgf6H4iNtGNLQ4ZlOxg9/10%EC%A1%B0?node-id=0%3A1 | 와이어프레임 제작 |
+| slack | github와 연동하여 merge request, issue 작성 시에 바로 알림을 받아서 빠르게 피드백하기 위한 용도 |
